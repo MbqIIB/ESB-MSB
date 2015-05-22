@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>123</req_id>
+		<req_app>TAX</req_app>
+		<srv>CBS006</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>12345678</req_time>
+	</Header>
+	<HostMessageSending>
+		<channel>NSNN001</channel>
+		<message></message>
+	</HostMessageSending>
+</Data>

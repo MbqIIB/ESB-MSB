@@ -1,0 +1,27 @@
+#Tue Jan 15 11:22:04 GMT+07:00 2013
+encoding//seatechit/msbgateway/proxy/as400gw/AS400_PortType.java=UTF-8
+encoding//seatechit/msbgateway/proxy/otpgen/OtpCalculator.java=UTF-8
+encoding//seatechit/msbgateway/proxy/as400gw/AS400_ServiceLocator.java=UTF-8
+encoding//seatechit/msbgateway/proxy/caldiscount/CalculatediscountServiceLocator.java=UTF-8
+encoding//seatechit/msbgateway/proxy/calfee/FeeRes.java=UTF-8
+encoding//seatechit/msbgateway/proxy/calfee/CalculatefeeService.java=UTF-8
+eclipse.preferences.version=1
+encoding//seatechit/msbgateway/proxy/caldiscount/DiscountRequest.java=UTF-8
+encoding/<project>=UTF-8
+encoding//seatechit/msbgateway/proxy/otpgen/PreexistingEntityException.java=UTF-8
+encoding//seatechit/msbgateway/proxy/as400gw/AS400HttpBindingStub.java=UTF-8
+encoding//seatechit/msbgateway/proxy/otpgen/OtpCalculatorPortBindingStub.java=UTF-8
+encoding//seatechit/msbgateway/proxy/as400gw/Messages.java=UTF-8
+encoding//seatechit/msbgateway/proxy/caldiscount/DiscountRes.java=UTF-8
+encoding//seatechit/msbgateway/proxy/otpgen/OtpCalculatorService.java=UTF-8
+encoding//seatechit/msbgateway/proxy/calfee/CalculatefeeServiceLocator.java=UTF-8
+encoding//seatechit/msbgateway/proxy/calfee/CalculatefeePortBindingStub.java=UTF-8
+encoding//seatechit/msbgateway/proxy/calfee/Calculatefee.java=UTF-8
+encoding//seatechit/msbgateway/proxy/caldiscount/Calculatediscount.java=UTF-8
+encoding//seatechit/msbgateway/proxy/calfee/FeeRequest.java=UTF-8
+encoding//seatechit/msbgateway/proxy/caldiscount/CalculatediscountService.java=UTF-8
+encoding//seatechit/msbgateway/proxy/as400gw/AS400_Service.java=UTF-8
+encoding//seatechit/msbgateway/proxy/otpgen/OtpCalculatorServiceLocator.java=UTF-8
+encoding//seatechit/msbgateway/proxy/caldiscount/CalculatediscountPortBindingStub.java=UTF-8
+encoding//seatechit/msbgateway/proxy/otpgen/Exception.java=UTF-8
+encoding//seatechit/msbgateway/proxy/caldiscount/DiscountReqProvider.java=UTF-8

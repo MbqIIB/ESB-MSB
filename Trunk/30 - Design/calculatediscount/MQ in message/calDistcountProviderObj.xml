@@ -1,0 +1,27 @@
+<Data>
+  <Header>    
+	<req_id>1234</req_id>
+    <req_app>123abc</req_app>    
+    <srv>DSC004</srv>
+	<srv_app>DSC</srv_app>   
+    <req_time>2012-10-22 11:56:15.1234</req_time>  
+  </Header>
+  <Body>
+<calDistcountProviderObj>
+  <discountParamsProvider>
+    <amount></amount>
+    <banktype></banktype>
+    <branchCode></branchCode>
+    <businessType></businessType>
+    <channel></channel>
+    <currencyCode></currencyCode>
+    <customerType></customerType>
+    <discountCode></discountCode>
+    <micNumber></micNumber>
+    <officeCode></officeCode>
+    <serviceCode></serviceCode>
+    <transID></transID>
+  </discountParamsProvider>
+</calDistcountProviderObj>
+  </Body>
+</Data>

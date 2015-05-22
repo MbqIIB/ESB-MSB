@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS010</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<transferFromCASAToCASA>
+			<channel>SMSBK01</channel>
+			<branchCode>110</branchCode>
+			<creditAccount>11001010944067</creditAccount>
+			<creditAmount>100000</creditAmount>
+			<creditCurrency>VND</creditCurrency>
+			<creditRate>10000000</creditRate>
+			<debitAccount>11001010000105</debitAccount>
+			<debitAmount>100000</debitAmount>
+			<debitCurrency>VND</debitCurrency>
+			<debitRate>10000000</debitRate>
+			<manager>TT110001</manager>
+			<description></description>
+			<sequence>1112111</sequence>
+			<teller>TT110001</teller>
+			<transDate>180612</transDate>
+			<transCode>1321</transCode>
+			<vatFee>0</vatFee>
+			<serviceFee>0</serviceFee>
+		</transferFromCASAToCASA>
+	</Body>
+</Data>
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+  <Header>  
+	<res_id></res_id>
+	<req_id></req_id>
+    <req_app></req_app>    
+    <srv></srv>
+    <req_time></req_time>    
+  </Header>
+  <Body>
+	<sendSMSArr>
+		<return>
+			<internalSMSRes>
+				<responseCode></responseCode>
+				<seqId></seqId>
+				<signatute></signatute>
+				<transCode></transCode>
+			</internalSMSRes>
+		</return>
+	</sendSMSArr>
+  </Body>
+</Data>

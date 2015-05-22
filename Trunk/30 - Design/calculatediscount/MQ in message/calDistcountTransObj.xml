@@ -1,0 +1,34 @@
+<Data>
+  <Header>    
+	<req_id>1234</req_id>
+    <req_app>123abc</req_app>    
+    <srv>DSC003</srv>
+	<srv_app>DSC</srv_app>   
+    <req_time>2012-10-22 11:56:15.1234</req_time>  
+  </Header>
+  <Body>
+<calDistcountTransObj>
+  <discountParams>
+    <amount></amount>
+    <bankType></bankType>
+    <branchCode></branchCode>
+    <businessType></businessType>
+    <channel></channel>
+    <currencyCode></currencyCode>
+    <customerType></customerType>
+    <discountCode></discountCode>
+    <fromAcc></fromAcc>
+    <fromOrgBranchCode></fromOrgBranchCode>
+    <micNumber></micNumber>
+    <officeCode></officeCode>
+    <productType></productType>
+    <serviceCode></serviceCode>
+    <toAcc></toAcc>
+    <toBranchCode></toBranchCode>
+    <toOrgBranchCode></toOrgBranchCode>
+    <transID></transID>
+    <transType></transType>
+  </discountParams>
+</calDistcountTransObj>
+  </Body>
+</Data>

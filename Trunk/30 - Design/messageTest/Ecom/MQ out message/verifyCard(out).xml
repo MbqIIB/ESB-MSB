@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<res_id></res_id>
+		<req_id></req_id>
+		<req_app></req_app>
+		<srv></srv>
+		<req_time></req_time>
+	</Header>
+	<Body>
+		<verifyCard>
+			<return>
+				<ecomVerrifyRes>
+					<addInfor></addInfor>
+					<authorizationCode></authorizationCode>
+					<cardName></cardName>
+					<cardNumber></cardNumber>
+					<currencyCode></currencyCode>
+					<MAC></MAC>
+					<MTID></MTID>
+					<merchantID></merchantID>
+					<merchantType></merchantType>
+					<processingCode></processingCode>
+					<providerID></providerID>
+					<responseCode></responseCode>
+					<serviceCode></serviceCode>
+					<transactionAmount></transactionAmount>
+					<transactionDateTime></transactionDateTime>
+					<transactionID></transactionID>
+				</ecomVerrifyRes>
+			</return>
+		</verifyCard>
+	</Body>
+</Data>

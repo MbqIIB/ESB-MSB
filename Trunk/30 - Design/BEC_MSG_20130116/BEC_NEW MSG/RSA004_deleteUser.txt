@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<message>
+	<head>
+		<field name="version">100</field>
+		<field name="message_type">1</field>
+		<field name="message_sn">20121009170719144772</field>
+		<field name="sender_id">IBS</field>
+		<field name="sender_tran_sn">20121009170718940771</field>
+		<field name="send_date">20121009</field>
+		<field name="send_time">050719</field>
+		<field name="tran_code">RSA004</field>
+		<field name="tran_service_code">RSA004</field>
+		<field name="receiver_id">CBS</field>
+		<field name="receiver_tran_sn">20121009170718940771</field>
+		<field name="resp_date">20121009</field>
+		<field name="resp_time">170955</field>
+		<field name="resp_code">0</field>
+		<field name="resp_msg">System Ok</field>
+	</head>
+	<body>
+		<field name="userId">03105010910273</field>		
+	</body>
+</message>		

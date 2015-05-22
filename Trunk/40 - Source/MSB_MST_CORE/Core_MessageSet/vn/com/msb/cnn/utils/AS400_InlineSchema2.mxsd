@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://utils.cnn.msb.com.vn" xmlns:ns1="http://utils.cnn.msb.com.vn" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soapenv11="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenv12="http://www.w3.org/2003/05/soap-envelope" xmlns:tns="http://accounts.cnn.msb.com.vn" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://accounts.cnn.msb.com.vn" schemaLocation="../accounts/AS400_InlineSchema1.mxsd"/>
+            <xsd:complexType name="Messages">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="arrString" nillable="true" type="tns:ArrayOfString"/>
+<xsd:element minOccurs="0" name="description" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="errCode" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+        </xsd:schema>

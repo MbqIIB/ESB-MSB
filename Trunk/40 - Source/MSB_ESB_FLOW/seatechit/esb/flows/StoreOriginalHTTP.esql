@@ -1,0 +1,54 @@
+
+
+
+
+
+
+
+
+
+
+BROKER SCHEMA seatechit.esb.flows
+
+
+CREATE COMPUTE MODULE StoreOriginalHTTP_StoreHTTPContext
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		--Store MQMD
+		--SET OutputRoot.MQMD.CorrelId = InputRoot.MQMD.MsgId; --InputLocalEnvironment.WrittenDestination.MQ.DestinationData.MsgId;
+		-- Build message to store HTTP context
+		--SET OutputRoot.XMLNS.Header.HTTP.RequestIdentifier = InputLocalEnvironment.Destination.HTTP.RequestIdentifier;
+
+		SET OutputRoot.Properties.MessageSet = InputRoot.Properties.MessageSet;
+		SET OutputRoot.Properties.MessageType = 'Envelope';
+		SET OutputRoot.Properties.MessageFormat = 'XML1';
+		-- Create the MQMD and set the CorrelId
+		-- The CorrelId needs to be set to the MsgId of the message sent
+		-- to the legacy application. When the reply from the legacy
+		-- application is received, we will MQGet from the store
+		-- queue with correlid equal to the correlid of the legacy reply
+
+		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.WrittenDestination.MQ.DestinationData.msgId;
+		-- Build message to store HTTP context
+		--DECLARE idt CHARACTER InputLocalEnvironment.Destination.HTTP.RequestIdentifier;
+		SET OutputRoot.XMLNSC.Header.HTTP.RequestIdentifier = InputLocalEnvironment.Destination.HTTP.RequestIdentifier; --CAST(InputLocalEnvironment.Destination.HTTP.RequestIdentifier AS CHARACTER);
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

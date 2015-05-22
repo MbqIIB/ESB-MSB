@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:complexType name="header_type">
+		<xs:sequence>
+			<xs:element name="req_id" type="xs:int" />
+			<xs:element name="req_app" type="xs:string" />
+			<xs:element name="srv" type="xs:string" />
+			<xs:element name="srv_app" type="xs:string" />
+			<xs:element name="req_time" type="xs:string" />
+			<xs:element name="rcv_time" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="checkOTP_type">
+		<xs:sequence>
+			<xs:element name="userId" type="xs:string" />
+			<xs:element name="otp" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="deleteUser_type">
+		<xs:sequence>
+			<xs:element name="userId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Unassign_type">
+		<xs:sequence>
+			<xs:element name="sn" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Assign_type">
+		<xs:sequence>
+			<xs:element name="userId" type="xs:string" />
+			<xs:element name="sn" type="xs:string" />
+			<xs:element name="pin" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CreateUser_type">
+		<xs:sequence>
+			<xs:element name="userId" type="xs:string" />
+			<xs:element name="pwd" type="xs:string" />
+			<xs:element name="fname" type="xs:string" />
+			<xs:element name="lname" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="body_type">
+		<xs:sequence>
+			<xs:element name="CreateUser" type="CreateUser_type"
+				minOccurs="0" />
+			<xs:element name="Assign" type="Assign_type" minOccurs="0" />
+			<xs:element name="Unassign" type="Unassign_type"
+				minOccurs="0" />
+			<xs:element name="deleteUser" type="deleteUser_type"
+				minOccurs="0" />
+			<xs:element name="checkOTP" type="checkOTP_type"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="Data">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Header" type="header_type" />
+				<xs:element name="Body" type="body_type" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

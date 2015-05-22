@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS009</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<createFDReceipt>
+			<channel></channel>
+			<teller></teller>
+			<branchCode></branchCode>
+			<journalSeq></journalSeq>
+			<transDate></transDate>
+			<fdGroupAccount></fdGroupAccount>
+			<depositAmt></depositAmt>
+			<effectiveDate></effectiveDate>
+			<fdReceipt></fdReceipt>
+			<rate></rate>
+			<intPaymentToAcctno></intPaymentToAcctno>
+			<printTranferToAcctno></printTranferToAcctno>
+			<currency></currency>
+			<productCode></productCode>
+			<autoRenew></autoRenew>
+			<intPaymentMode></intPaymentMode>
+			<fdType></fdType>
+			<remark></remark>
+		</createFDReceipt>
+	</Body>
+</Data>
+

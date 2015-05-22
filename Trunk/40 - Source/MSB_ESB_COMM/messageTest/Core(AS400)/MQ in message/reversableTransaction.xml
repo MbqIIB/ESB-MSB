@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS023</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<reversableTransaction>
+			<channel>SMSBK01</channel>
+			<teller>TT110001</teller>
+			<manager>TT110001</manager>
+			<branchCode>110</branchCode>
+			<strFromAccount>11001010000105</strFromAccount>
+			<strToAccount>11001010944067</strToAccount>
+			<transDate>020712</transDate>
+			<strDescription>reverse</strDescription>
+			<strTranferAmount>100000</strTranferAmount>
+			<strJournalSeq>12345</strJournalSeq>
+			<orgJournalSeq>1112111</orgJournalSeq>
+			<strTransCode>1321</strTransCode>
+		</reversableTransaction>
+	</Body>
+</Data>
+

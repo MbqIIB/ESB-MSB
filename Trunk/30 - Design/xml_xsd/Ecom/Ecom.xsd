@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.w3schools.com" 
+xmlns="http://www.w3schools.com" 
+elementFormDefault="qualified">
+<xs:complexType name="header_type">
+  <xs:sequence>
+    <xs:element name="req_id" type="xs:int"/>
+    <xs:element name="req_app" type="xs:string"/>
+	<xs:element name="srv" type="xs:int"/>
+    <xs:element name="srv_app" type="xs:string"/>
+    <xs:element name="req_time" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="verifyCard_type">
+  <xs:sequence>
+    <xs:element name="MTID" type="xs:string"/>
+	<xs:element name="cardNumber" type="xs:string"/>
+	<xs:element name="cardName" type="xs:string"/>
+	<xs:element name="processingCode" type="xs:string"/>
+	<xs:element name="serviceCode" type="xs:string"/>
+	<xs:element name="transactionAmount" type="xs:string"/>
+	<xs:element name="currencyCode" type="xs:string"/>
+	<xs:element name="transactionDateTime" type="xs:string"/>
+	<xs:element name="trasanctionID" type="xs:string"/>
+	<xs:element name="merchantType" type="xs:string"/>
+	<xs:element name="merchantID" type="xs:string"/>
+	<xs:element name="providerID" type="xs:string"/>
+	<xs:element name="addInfor" type="xs:string"/>
+	<xs:element name="MAC" type="xs:string"/>   	    
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="settlement_type">
+  <xs:sequence>
+    <xs:element name="MTID" type="xs:string"/>
+	<xs:element name="cardNumber" type="xs:string"/>
+	<xs:element name="cardName" type="xs:string"/>
+	<xs:element name="processingCode" type="xs:string"/>
+	<xs:element name="serviceCode" type="xs:string"/>
+	<xs:element name="transactionAmount" type="xs:string"/>
+	<xs:element name="transactionDateTime" type="xs:string"/>
+	<xs:element name="trasanctionID" type="xs:string"/>
+	<xs:element name="merchantType" type="xs:string"/>
+	<xs:element name="merchantID" type="xs:string"/>
+	<xs:element name="providerID" type="xs:string"/>
+	<xs:element name="addInfor" type="xs:string"/>
+	<xs:element name="MAC" type="xs:string"/>   	    
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkOTP_type">
+  <xs:sequence>
+    <xs:element name="MTID" type="xs:string"/>
+	<xs:element name="cardNumber" type="xs:string"/>
+	<xs:element name="cardName" type="xs:string"/>
+	<xs:element name="processingCode" type="xs:string"/>
+	<xs:element name="serviceCode" type="xs:string"/>
+	<xs:element name="transactionAmount" type="xs:string"/>
+	<xs:element name="transactionDateTime" type="xs:string"/>
+	<xs:element name="trasanctionID" type="xs:string"/>
+	<xs:element name="merchantType" type="xs:string"/>
+	<xs:element name="merchantID" type="xs:string"/>
+	<xs:element name="providerID" type="xs:string"/>
+	<xs:element name="OTP" type="xs:string"/>
+	<xs:element name="addInfor" type="xs:string"/>
+	<xs:element name="MAC" type="xs:string"/>   	    
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="body_type">
+  <xs:sequence>
+    <xs:element name="verifyCard" type="verifyCard_type" minOccurs="0"/>
+	<xs:element name="settlement" type="settlement_type" minOccurs="0"/>
+	<xs:element name="checkOTP" type="checkOTP_type" minOccurs="0"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:element name="Data">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="Header" type="header_type"/>      
+	  <xs:element name="Body" type="body_type"/>      
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+</xs:schema>

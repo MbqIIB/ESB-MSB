@@ -1,0 +1,30 @@
+<Data>
+  <Header>    
+	<req_id>reqApp+ddMMyyyyHHmmssSSS</req_id>
+    <req_app>reqApp</req_app>    
+    <srv>CBS052</srv>
+	<srv_app>CBS</srv_app>    
+    <req_time>new Date()</req_time>  
+  </Header>
+  <Body>
+	<chargeCollection>
+		<channel></channel>
+		<teller></teller>
+		<branchCode></branchCode>
+		<transDate></transDate>
+		<sequence></sequence>
+		<glAccount></glAccount>
+		<totalNetCharges></totalNetCharges>
+		<baseCurrency></baseCurrency>
+		<glCurrency></glCurrency>
+		<customerCurrency></customerCurrency>
+		<accountNumber></accountNumber>
+		<drTotalNetCharge></drTotalNetCharge>
+		<totalCharge></totalCharge>
+		<vat></vat>
+		<remark></remark>
+		<transcode></transcode>
+	</chargeCollection>
+  </Body>
+</Data>
+

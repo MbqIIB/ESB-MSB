@@ -1,0 +1,35 @@
+<Data>
+  <Header>    
+	<req_id>1234</req_id>
+    <req_app>app</req_app>    
+    <srv>IBS003</srv>
+	<srv_app>IBS</srv_app>    
+    <req_time>2012-10-22 11:56:15.1234</req_time>  
+  </Header>
+  <Body>
+	<registerService>
+		<userInfo>			
+				<cifNo></cifNo>
+				<email></email>
+				<gender></gender>
+				<groupId></groupId>
+				<mobile></mobile>
+				<openMbs></openMbs>
+				<securityType></securityType>
+				<userName></userName>
+			
+		</userInfo>
+		<tokenNo></tokenNo>
+		<tellerId></tellerId>
+		<sentDate></sentDate>
+		<appReg></appReg>
+		<brandCode></brandCode>
+		<acctNoList>
+			<RelatedAccountWS>
+				<acctNo></acctNo>
+				<alias></alias>
+			</RelatedAccountWS>
+		</acctNoList>
+	</registerService>
+  </Body>
+</Data>

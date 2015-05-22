@@ -1,0 +1,23 @@
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS038</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<reversableOL2Transaction>
+			<out>
+				<Messages>
+					<arrString>
+						*SOKI|10.0.0.1|00054|009600||0213|000314|0005|*DSP|ABCS|*LINX|BBHTLRTE|00|/0000000|00000000000|00|STDATDSPV5DSPV5001IQ|BBHTLMONEYFNC||5401841212251753215264||0000|0010|0010|TT110001|localhost|8277|0|||137|*HAND|DQTMPRTE|10.0.0.1|38215|DSPO7020Q|000000000|175321|T9999|12360|*EOM|65|F1|OTA|
+						<MSB> TRAN KHAC HIEU
+					</arrString>
+					<description>System Ok</description>
+					<errCode>0</errCode>
+				</Messages>
+			</out>
+		</reversableOL2Transaction>
+	</Body>
+</Data>

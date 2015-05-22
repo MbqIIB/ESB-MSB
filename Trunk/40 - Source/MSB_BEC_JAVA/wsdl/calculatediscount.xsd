@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. 
+	RI's version is JAX-WS RI 2.2-hudson-740-. -->
+<xs:schema xmlns:tns="http://caldiscount.msb.com.vn/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0"
+	targetNamespace="http://caldiscount.msb.com.vn/">
+
+	<xs:element name="calDistcountProvider" type="tns:calDistcountProvider" />
+
+	<xs:element name="calDistcountProviderObj" type="tns:calDistcountProviderObj" />
+
+	<xs:element name="calDistcountProviderObjResponse" type="tns:calDistcountProviderObjResponse" />
+
+	<xs:element name="calDistcountProviderResponse" type="tns:calDistcountProviderResponse" />
+
+	<xs:element name="calDistcountTrans" type="tns:calDistcountTrans" />
+
+	<xs:element name="calDistcountTransObj" type="tns:calDistcountTransObj" />
+
+	<xs:element name="calDistcountTransObjResponse" type="tns:calDistcountTransObjResponse" />
+
+	<xs:element name="calDistcountTransResponse" type="tns:calDistcountTransResponse" />
+
+	<xs:complexType name="calDistcountProviderObj">
+		<xs:sequence>
+			<xs:element name="discountParamsProvider" type="tns:discountReqProvider"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="discountReqProvider">
+		<xs:sequence>
+			<xs:element name="amount" type="xs:string" minOccurs="0" />
+			<xs:element name="banktype" type="xs:string" minOccurs="0" />
+			<xs:element name="branchCode" type="xs:string" minOccurs="0" />
+			<xs:element name="businessType" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="channel" type="xs:string" minOccurs="0" />
+			<xs:element name="currencyCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="customerType" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="discountCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="micNumber" type="xs:string" minOccurs="0" />
+			<xs:element name="officeCode" type="xs:string" minOccurs="0" />
+			<xs:element name="serviceCode" type="xs:string" minOccurs="0" />
+			<xs:element name="transID" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="calDistcountProviderObjResponse">
+		<xs:sequence>
+			<xs:element name="return" type="tns:discountRes"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="discountRes">
+		<xs:sequence>
+			<xs:element name="amount" type="xs:string" minOccurs="0" />
+			<xs:element name="currencyCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="description" type="xs:string" minOccurs="0" />
+			<xs:element name="discountAmount" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="discoutCode" type="xs:string" minOccurs="0" />
+			<xs:element name="responseCode" type="xs:string"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="calDistcountTrans">
+		<xs:sequence>
+			<xs:element name="discountCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="transID" type="xs:string" minOccurs="0" />
+			<xs:element name="serviceCode" type="xs:string" minOccurs="0" />
+			<xs:element name="branchCode" type="xs:string" minOccurs="0" />
+			<xs:element name="toBranchCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="transType" type="xs:string" minOccurs="0" />
+			<xs:element name="fromAcc" type="xs:string" minOccurs="0" />
+			<xs:element name="toAcc" type="xs:string" minOccurs="0" />
+			<xs:element name="fromOrgBranchCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="toOrgBranchCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="amount" type="xs:string" minOccurs="0" />
+			<xs:element name="currencyCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="customerType" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="businessType" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="officeCode" type="xs:string" minOccurs="0" />
+			<xs:element name="productType" type="xs:string" minOccurs="0" />
+			<xs:element name="micNumber" type="xs:string" minOccurs="0" />
+			<xs:element name="channel" type="xs:string" minOccurs="0" />
+			<xs:element name="bankType" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="calDistcountTransResponse">
+		<xs:sequence>
+			<xs:element name="return" type="tns:discountRes"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="calDistcountTransObj">
+		<xs:sequence>
+			<xs:element name="discountParams" type="tns:discountRequest"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="discountRequest">
+		<xs:sequence>
+			<xs:element name="amount" type="xs:string" minOccurs="0" />
+			<xs:element name="bankType" type="xs:string" minOccurs="0" />
+			<xs:element name="branchCode" type="xs:string" minOccurs="0" />
+			<xs:element name="businessType" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="channel" type="xs:string" minOccurs="0" />
+			<xs:element name="currencyCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="customerType" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="discountCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="fromAcc" type="xs:string" minOccurs="0" />
+			<xs:element name="fromOrgBranchCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="micNumber" type="xs:string" minOccurs="0" />
+			<xs:element name="officeCode" type="xs:string" minOccurs="0" />
+			<xs:element name="productType" type="xs:string" minOccurs="0" />
+			<xs:element name="serviceCode" type="xs:string" minOccurs="0" />
+			<xs:element name="toAcc" type="xs:string" minOccurs="0" />
+			<xs:element name="toBranchCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="toOrgBranchCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="transID" type="xs:string" minOccurs="0" />
+			<xs:element name="transType" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="calDistcountTransObjResponse">
+		<xs:sequence>
+			<xs:element name="return" type="tns:discountRes"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="calDistcountProvider">
+		<xs:sequence>
+			<xs:element name="discountCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="transID" type="xs:string" minOccurs="0" />
+			<xs:element name="serviceCode" type="xs:string" minOccurs="0" />
+			<xs:element name="branchCode" type="xs:string" minOccurs="0" />
+			<xs:element name="amount" type="xs:string" minOccurs="0" />
+			<xs:element name="currencyCode" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="customerType" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="businessType" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="officeCode" type="xs:string" minOccurs="0" />
+			<xs:element name="micNumber" type="xs:string" minOccurs="0" />
+			<xs:element name="channel" type="xs:string" minOccurs="0" />
+			<xs:element name="bankType" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="calDistcountProviderResponse">
+		<xs:sequence>
+			<xs:element name="return" type="tns:discountRes"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

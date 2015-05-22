@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS005</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<linkMasterCard>
+			<channel></channel>
+			<teller></teller>
+			<bankCode></bankCode>
+			<accountTag></accountTag>
+			<accountType></accountType>
+			<usage></usage>
+			<currency></currency>
+			<branchTag></branchTag>
+			<cifNumber></cifNumber>
+			<idNumber></idNumber>
+			<idType></idType>
+			<name></name>
+			<address></address>
+			<product></product>
+			<annualFee></annualFee>
+			<vip></vip>
+			<addressLine2></addressLine2>
+			<addressLine3></addressLine3>
+			<addressLine4></addressLine4>
+		</linkMasterCard>
+	</Body>
+</Data>
+

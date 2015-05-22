@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.w3schools.com" 
+xmlns="http://www.w3schools.com" 
+elementFormDefault="qualified">
+<xs:complexType name="header_type">
+  <xs:sequence>
+    <xs:element name="req_id" type="xs:int"/>
+    <xs:element name="req_app" type="xs:string"/>
+	<xs:element name="srv" type="xs:int"/>
+    <xs:element name="srv_app" type="xs:string"/>
+    <xs:element name="req_time" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="queryBilling_type">
+  <xs:sequence>
+    <xs:element name="msgType" type="xs:string"/>
+	<xs:element name="sequenceId" type="xs:string"/>
+	<xs:element name="customerCode" type="xs:string"/>
+	<xs:element name="processingCode" type="xs:string"/>
+	<xs:element name="requestTime" type="xs:string"/>
+	<xs:element name="payProviderCode" type="xs:string"/>
+	<xs:element name="sender" type="xs:string"/>
+	<xs:element name="description" type="xs:string"/>
+	<xs:element name="providerCode" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="payBilling_type">
+  <xs:sequence>
+    <xs:element name="msgType" type="xs:string"/>
+	<xs:element name="sequenceId" type="xs:string"/>
+	<xs:element name="customerCode" type="xs:string"/>
+	<xs:element name="processingCode" type="xs:string"/>
+	<xs:element name="requestTime" type="xs:string"/>
+	<xs:element name="amount" type="xs:double"/>
+	<xs:element name="amountDiscounted" type="xs:double"/>
+	<xs:element name="settlementDate" type="xs:string"/>
+	<xs:element name="payProviderCode" type="xs:string"/>
+	<xs:element name="sender" type="xs:string"/>
+	<xs:element name="accountNumber" type="xs:string"/>
+	<xs:element name="cifNumber" type="xs:string"/>
+	<xs:element name="description" type="xs:string"/>
+	<xs:element name="providerCode" type="xs:string"/>
+	<xs:element name="branch" type="xs:string"/>
+	<xs:element name="fromid" type="xs:string"/>
+	<xs:element name="fromName" type="xs:string"/>
+	<xs:element name="billCode" type="xs:string"/>
+	<xs:element name="ccycd" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="payBillingField_type">
+  <xs:sequence>
+    <xs:element name="branch" type="xs:string"/>
+	<xs:element name="fromid" type="xs:string"/>
+	<xs:element name="fromName" type="xs:string"/>
+	<xs:element name="msgType" type="xs:string"/>
+	<xs:element name="sequenceId" type="xs:string"/>
+	<xs:element name="customerCode" type="xs:string"/>
+	<xs:element name="processingCode" type="xs:string"/>
+	<xs:element name="requestTime" type="xs:string"/>
+	<xs:element name="amount" type="xs:string"/>
+	<xs:element name="amountDiscounted" type="xs:string"/>
+	<xs:element name="settlementDate" type="xs:string"/>
+	<xs:element name="payProviderCode" type="xs:string"/>
+	<xs:element name="sender" type="xs:string"/>
+	<xs:element name="description" type="xs:string"/>
+	<xs:element name="accountNumber" type="xs:string"/>
+	<xs:element name="cifNumber" type="xs:string"/>
+	<xs:element name="providerCode" type="xs:string"/>
+	<xs:element name="billCode" type="xs:string"/>
+	<xs:element name="ccycd" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="body_type">
+  <xs:sequence>
+    <xs:element name="queryBilling" type="queryBilling_type" minOccurs="0"/>
+	<xs:element name="payBilling" type="payBilling_type" minOccurs="0"/>
+	<xs:element name="payBillingField" type="payBillingField_type" minOccurs="0"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:element name="Data">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="Header" type="header_type"/>      
+	  <xs:element name="Body" type="body_type"/>      
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+</xs:schema>

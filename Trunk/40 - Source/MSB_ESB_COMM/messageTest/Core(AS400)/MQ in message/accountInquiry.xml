@@ -1,0 +1,18 @@
+<Data>
+<Header>
+	<req_id>20130328104233944005</req_id>
+	<req_app>IB</req_app>
+	<srv>RSA003</srv>
+	<srv_app>RSA</srv_app>
+	<req_time>2333333333</req_time>
+</Header>
+	<Body>
+		<CreateUser>
+			<userId>0002102964661491</userId>
+			<pwd>apiadmin_123</pwd>
+			<fname>sn_maker</fname>
+			<lname>sn_maker</lname>
+			<tknSN>000210296466</tknSN>
+		</CreateUser>
+	</Body>
+</Data>

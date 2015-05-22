@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. -->
+<xs:schema xmlns:tns="http://calfee.msb.com.vn/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://calfee.msb.com.vn/">
+
+<xs:element name="calFee" type="tns:calFee"/>
+
+<xs:element name="calFeeObj" type="tns:calFeeObj"/>
+
+<xs:element name="calFeeObjResponse" type="tns:calFeeObjResponse"/>
+
+<xs:element name="calFeeResponse" type="tns:calFeeResponse"/>
+
+<xs:complexType name="calFee">
+<xs:sequence>
+<xs:element name="feeCode" type="xs:string" minOccurs="0"/>
+<xs:element name="transID" type="xs:string" minOccurs="0"/>
+<xs:element name="branchCode" type="xs:string" minOccurs="0"/>
+<xs:element name="toBranchCode" type="xs:string" minOccurs="0"/>
+<xs:element name="transType" type="xs:string" minOccurs="0"/>
+<xs:element name="fromAcc" type="xs:string" minOccurs="0"/>
+<xs:element name="toAcc" type="xs:string" minOccurs="0"/>
+<xs:element name="fromOrgBranchCode" type="xs:string" minOccurs="0"/>
+<xs:element name="toOrgBranchCode" type="xs:string" minOccurs="0"/>
+<xs:element name="amount" type="xs:string" minOccurs="0"/>
+<xs:element name="currencyCode" type="xs:string" minOccurs="0"/>
+<xs:element name="customerType" type="xs:string" minOccurs="0"/>
+<xs:element name="productType" type="xs:string" minOccurs="0"/>
+<xs:element name="businessType" type="xs:string" minOccurs="0"/>
+<xs:element name="officeCode" type="xs:string" minOccurs="0"/>
+<xs:element name="micNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="channel" type="xs:string" minOccurs="0"/>
+<xs:element name="bankType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="calFeeResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:feeRes" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="feeRes">
+<xs:sequence>
+<xs:element name="amount" type="xs:string" minOccurs="0"/>
+<xs:element name="currencyCode" type="xs:string" minOccurs="0"/>
+<xs:element name="description" type="xs:string" minOccurs="0"/>
+<xs:element name="feeAmount" type="xs:string" minOccurs="0"/>
+<xs:element name="feeCode" type="xs:string" minOccurs="0"/>
+<xs:element name="responseCode" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="calFeeObj">
+<xs:sequence>
+<xs:element name="feeParams" type="tns:feeRequest" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="feeRequest">
+<xs:sequence>
+<xs:element name="amount" type="xs:string" minOccurs="0"/>
+<xs:element name="bankType" type="xs:string" minOccurs="0"/>
+<xs:element name="branchCode" type="xs:string" minOccurs="0"/>
+<xs:element name="businessType" type="xs:string" minOccurs="0"/>
+<xs:element name="channel" type="xs:string" minOccurs="0"/>
+<xs:element name="currencyCode" type="xs:string" minOccurs="0"/>
+<xs:element name="customerType" type="xs:string" minOccurs="0"/>
+<xs:element name="feeCode" type="xs:string" minOccurs="0"/>
+<xs:element name="fromAcc" type="xs:string" minOccurs="0"/>
+<xs:element name="fromOrgBranchCode" type="xs:string" minOccurs="0"/>
+<xs:element name="micNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="officeCode" type="xs:string" minOccurs="0"/>
+<xs:element name="productType" type="xs:string" minOccurs="0"/>
+<xs:element name="toAcc" type="xs:string" minOccurs="0"/>
+<xs:element name="toBranchCode" type="xs:string" minOccurs="0"/>
+<xs:element name="toOrgBranchCode" type="xs:string" minOccurs="0"/>
+<xs:element name="transID" type="xs:string" minOccurs="0"/>
+<xs:element name="transType" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="calFeeObjResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:feeRes" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

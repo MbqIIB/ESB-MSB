@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.w3schools.com" xmlns="http://www.w3schools.com"
+	elementFormDefault="qualified">
+	<xs:complexType name="header_type">
+		<xs:sequence>
+			<xs:element name="req_id" type="xs:int" />
+			<xs:element name="req_app" type="xs:string" />
+			<xs:element name="srv" type="xs:int" />
+			<xs:element name="srv_app" type="xs:string" />
+			<xs:element name="req_time" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SMSRequest_type">
+		<xs:sequence>
+			<xs:element name="content" type="xs:string" />
+			<xs:element name="numberGW" type="xs:string" />
+			<xs:element name="phoneNumber" type="xs:string" />
+			<xs:element name="sequence" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="putSMS_type">
+		<xs:sequence>
+			<xs:element name="SMSRequest" type="SMSRequest_type" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="regSMSBanking_type">
+		<xs:sequence>
+			<xs:element name="cifNumber" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+			<xs:element name="serviceType" type="xs:string" />
+			<xs:element name="alert" type="xs:string" />
+			<xs:element name="phoneNumber" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="appReg" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="body_type">
+		<xs:sequence>
+			<xs:element name="putSMS" type="putSMS_type" minOccurs="0" />
+			<xs:element name="regSMSBanking" type="regSMSBanking_type"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="Data">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Header" type="header_type" />
+				<xs:element name="Body" type="body_type" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

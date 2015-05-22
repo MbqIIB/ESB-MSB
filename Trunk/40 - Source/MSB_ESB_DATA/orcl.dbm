@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--xtools2_universal_type_manager-->
+<xmi:XMI xmlns:datamodelversion="http://www.ibm.com/com.ibm.datatools.core/model/data/1.1.0.0" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:OracleModel="http:///com/ibm/db/models/oracle/oracle.ecore" xmlns:SQLConstraints="http:///org/eclipse/datatools/modelbase/sql/constraints.ecore" xmlns:SQLDataTypes="http:///org/eclipse/datatools/modelbase/sql/datatypes.ecore" xmlns:SQLExpressions="http:///org/eclipse/datatools/modelbase/sql/expressions.ecore" xmlns:SQLSchema="http:///org/eclipse/datatools/modelbase/sql/schema.ecore" xmlns:SQLStatements="http:///org/eclipse/datatools/modelbase/sql/statements.ecore" xmlns:SQLTables="http:///org/eclipse/datatools/modelbase/sql/tables.ecore">
+  <OracleModel:OracleDatabase xmi:id="_qbz4AY11EeKAA5odGI_Frw" name="esb" vendor="Oracle" version="11" schemas="_qe8EgI11EeKAA5odGI_Frw">
+    <eAnnotations xmi:id="_qbz4Ao11EeKAA5odGI_Frw" source="ConnectionURI">
+      <details xmi:id="_qbz4A411EeKAA5odGI_Frw" key="ConnectionKey" value="esb"/>
+    </eAnnotations>
+  </OracleModel:OracleDatabase>
+  <SQLSchema:Schema xmi:id="_qe8EgI11EeKAA5odGI_Frw" name="MSB_ESB" triggers="_qe8EgY11EeKAA5odGI_Frw" indices="_qfF1vY11EeKAA5odGI_Frw _qfF15o11EeKAA5odGI_Frw _qfF16Y11EeKAA5odGI_Frw _qfF2A411EeKAA5odGI_Frw _qfF2Fo11EeKAA5odGI_Frw _qfO_cI11EeKAA5odGI_Frw _qfO_c411EeKAA5odGI_Frw _qfO_qY11EeKAA5odGI_Frw _qfF2EI11EeKAA5odGI_Frw _qfF2E411EeKAA5odGI_Frw _qe8EqI11EeKAA5odGI_Frw _qfF1gI11EeKAA5odGI_Frw _qfO_q411EeKAA5odGI_Frw _qfO_ro11EeKAA5odGI_Frw _qfO_0I11EeKAA5odGI_Frw _qfO_0o11EeKAA5odGI_Frw" tables="_qfO_4o11EeKAA5odGI_Frw _qfO_6o11EeKAA5odGI_Frw _qfO_8o11EeKAA5odGI_Frw _qfF1wI11EeKAA5odGI_Frw _qfF17I11EeKAA5odGI_Frw _qfF2GY11EeKAA5odGI_Frw _qfO__I11EeKAA5odGI_Frw _qfF1g411EeKAA5odGI_Frw _qfO_dY11EeKAA5odGI_Frw _qfF2Bo11EeKAA5odGI_Frw _qe8EhI11EeKAA5odGI_Frw _qfF1oo11EeKAA5odGI_Frw _qfPACI11EeKAA5odGI_Frw _qfPAGo11EeKAA5odGI_Frw _qfPAJo11EeKAA5odGI_Frw _qfPAOo11EeKAA5odGI_Frw _qfO_sI11EeKAA5odGI_Frw _qfO_1Y11EeKAA5odGI_Frw" sequences="_qfYwcI11EeKAA5odGI_Frw _qfYwc411EeKAA5odGI_Frw _qfYwdo11EeKAA5odGI_Frw _qfYweY11EeKAA5odGI_Frw _qfYwfI11EeKAA5odGI_Frw _qfYwf411EeKAA5odGI_Frw _qfYwgo11EeKAA5odGI_Frw _qfYwhY11EeKAA5odGI_Frw _qfYwiI11EeKAA5odGI_Frw _qfYwi411EeKAA5odGI_Frw _qfYwjo11EeKAA5odGI_Frw _qfYwkY11EeKAA5odGI_Frw _qfihcI11EeKAA5odGI_Frw" database="_qbz4AY11EeKAA5odGI_Frw"/>
+  <SQLTables:Trigger xmi:id="_qe8EgY11EeKAA5odGI_Frw" name="PWD_TRG" schema="_qe8EgI11EeKAA5odGI_Frw" subjectTable="_qe8EhI11EeKAA5odGI_Frw" triggerColumn="_qe8EnY11EeKAA5odGI_Frw" actionGranularity="ROW" actionTime="BEFORE" updateType="true" insertType="true" oldRow="OLD" newRow="NEW">
+    <dependencies xmi:id="_qe8Ego11EeKAA5odGI_Frw" targetEnd="_qe8EhI11EeKAA5odGI_Frw"/>
+    <actionStatement xsi:type="SQLStatements:SQLStatementDefault" xmi:id="_qe8Eg411EeKAA5odGI_Frw" SQL="begin&#xA;:new.pwd:=esb_util.pwd_encrypt(:new.id,:new.pwd);&#xA;end;"/>
+  </SQLTables:Trigger>
+  <OracleModel:OracleTable xmi:id="_qe8EhI11EeKAA5odGI_Frw" name="ESB_NSD" description="DS nguoi dung" schema="_qe8EgI11EeKAA5odGI_Frw" triggers="_qe8EgY11EeKAA5odGI_Frw" index="_qe8EqI11EeKAA5odGI_Frw _qfF1gI11EeKAA5odGI_Frw" referencingForeignKeys="_qfF1mo11EeKAA5odGI_Frw _qfF1tY11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qe8EhY11EeKAA5odGI_Frw" name="ID" description="PK" nullable="false">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qe8Eho11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qe8Eh411EeKAA5odGI_Frw" name="TEN_NSD" description="Ten NSD">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qe8EiI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="100"/>
+    </columns>
+    <columns xmi:id="_qe8EiY11EeKAA5odGI_Frw" name="CHUC_DANH" description="Chuc danh cua NSD">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qe8Eio11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="100"/>
+    </columns>
+    <columns xmi:id="_qe8Ei411EeKAA5odGI_Frw" name="MA_NSD" description="Ma NSD, su dung de Logon">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qe8EjI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="50"/>
+    </columns>
+    <columns xmi:id="_qe8EjY11EeKAA5odGI_Frw" name="TRANG_THAI" description="Trang thai cua NSD, 01-Active, 02-Khoa, 03-ngung hoat dong">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qe8Ejo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="2"/>
+    </columns>
+    <columns xmi:id="_qe8Ej411EeKAA5odGI_Frw" name="NGAY_TAO" description="Ngay tao">
+      <containedType xsi:type="SQLDataTypes:DateDataType" xmi:id="_qe8EkI11EeKAA5odGI_Frw" name="DATE" primitiveType="DATE"/>
+    </columns>
+    <columns xmi:id="_qe8EkY11EeKAA5odGI_Frw" name="NGUOI_TAO" description="Khoa ngoai cua esb.esb_nsd">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qe8Eko11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qe8Ek411EeKAA5odGI_Frw" name="IP_TRUYCAP" description="IP dang truy cap">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qe8ElI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <columns xmi:id="_qe8ElY11EeKAA5odGI_Frw" name="SESSION_ID" description="Session ID">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qe8Elo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="100"/>
+    </columns>
+    <columns xmi:id="_qe8El411EeKAA5odGI_Frw" name="TGIAN_TRUYCAP" description="Thoi diem truy cap gan nhat">
+      <containedType xsi:type="SQLDataTypes:DateDataType" xmi:id="_qe8EmI11EeKAA5odGI_Frw" name="DATE" primitiveType="DATE"/>
+    </columns>
+    <columns xmi:id="_qe8EmY11EeKAA5odGI_Frw" name="EMAIL" description="Email nguoi dung">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qe8Emo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="50">
+        <eAnnotations xmi:id="_qe8Em411EeKAA5odGI_Frw" source="LENGTH_SEMANTIC">
+          <details xmi:id="_qe8EnI11EeKAA5odGI_Frw" key="LENGTH_SEMANTIC_TYPE" value="CHAR"/>
+        </eAnnotations>
+      </containedType>
+    </columns>
+    <columns xmi:id="_qe8EnY11EeKAA5odGI_Frw" name="PWD" description="Mat khau nguoi dung">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qe8Eno11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="100">
+        <eAnnotations xmi:id="_qe8En411EeKAA5odGI_Frw" source="LENGTH_SEMANTIC">
+          <details xmi:id="_qe8EoI11EeKAA5odGI_Frw" key="LENGTH_SEMANTIC_TYPE" value="CHAR"/>
+        </eAnnotations>
+      </containedType>
+    </columns>
+    <columns xmi:id="_qe8EoY11EeKAA5odGI_Frw" name="SO_DTHOAI" description="So dien thoai nguoi dung">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qe8Eoo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="11">
+        <eAnnotations xmi:id="_qe8Eo411EeKAA5odGI_Frw" source="LENGTH_SEMANTIC">
+          <details xmi:id="_qe8EpI11EeKAA5odGI_Frw" key="LENGTH_SEMANTIC_TYPE" value="CHAR"/>
+        </eAnnotations>
+      </containedType>
+    </columns>
+    <constraints xsi:type="SQLConstraints:PrimaryKey" xmi:id="_qe8EpY11EeKAA5odGI_Frw" name="NSD_PK" members="_qe8EhY11EeKAA5odGI_Frw" ForeignKey="_qfF1mo11EeKAA5odGI_Frw _qfF1tY11EeKAA5odGI_Frw"/>
+    <constraints xsi:type="SQLConstraints:UniqueConstraint" xmi:id="_qe8Epo11EeKAA5odGI_Frw" name="MA_NSD_UK" members="_qe8Ei411EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qe8Ep411EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleIndex xmi:id="_qe8EqI11EeKAA5odGI_Frw" name="NSD_PK" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" table="_qe8EhI11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255">
+    <members xmi:id="_qe8EqY11EeKAA5odGI_Frw" column="_qe8EhY11EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qe8Eqo11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleIndex xmi:id="_qfF1gI11EeKAA5odGI_Frw" name="MA_NSD_UK" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" table="_qe8EhI11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255">
+    <members xmi:id="_qfF1gY11EeKAA5odGI_Frw" column="_qe8Ei411EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfF1go11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleTable xmi:id="_qfF1g411EeKAA5odGI_Frw" name="ESB_LSU_TRUYCAP" schema="_qe8EgI11EeKAA5odGI_Frw" index="_qfO_cI11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfF1hI11EeKAA5odGI_Frw" name="ID" nullable="false">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF1hY11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfF1ho11EeKAA5odGI_Frw" name="NSD_ID" description="Khoa ngoai bang SP_NSD">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF1h411EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfF1iI11EeKAA5odGI_Frw" name="CNANG_ID" description="Khoa ngoai bang SP_CHUCNANG">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF1iY11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfF1io11EeKAA5odGI_Frw" name="IP_TCAP" description="IP client truy cap">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF1i411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="15"/>
+    </columns>
+    <columns xmi:id="_qfF1jI11EeKAA5odGI_Frw" name="TGIAN_TCAP" description="Thoi diem truy cap chuc nang">
+      <containedType xsi:type="SQLDataTypes:DateDataType" xmi:id="_qfF1jY11EeKAA5odGI_Frw" name="DATE" primitiveType="DATE"/>
+    </columns>
+    <columns xmi:id="_qfF1jo11EeKAA5odGI_Frw" name="MOTA">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF1j411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="200"/>
+    </columns>
+    <constraints xsi:type="SQLConstraints:CheckConstraint" xmi:id="_qfF1kI11EeKAA5odGI_Frw" name="SYS_C0011101">
+      <searchCondition xsi:type="SQLExpressions:SearchConditionDefault" xmi:id="_qfF1kY11EeKAA5odGI_Frw" SQL="&quot;ID&quot; IS NOT NULL"/>
+    </constraints>
+    <constraints xsi:type="SQLConstraints:PrimaryKey" xmi:id="_qfF1ko11EeKAA5odGI_Frw" name="ESB_LSU_TRUYCAP_PK" members="_qfF1hI11EeKAA5odGI_Frw"/>
+    <constraints xsi:type="SQLConstraints:ForeignKey" xmi:id="_qfF1k411EeKAA5odGI_Frw" name="SP_LSU_TRUY_CAP_FK2" members="_qfF1iI11EeKAA5odGI_Frw" uniqueConstraint="_qfF12411EeKAA5odGI_Frw" referencedTable="_qfF1wI11EeKAA5odGI_Frw">
+      <eAnnotations xmi:id="_qfF1lI11EeKAA5odGI_Frw" source="FK_MODELING_RELATIONSHIP">
+        <details xmi:id="_qfF1lY11EeKAA5odGI_Frw" key="FK_IS_IDENTIFYING_RELATIONSHIP" value="false"/>
+        <details xmi:id="_qfF1lo11EeKAA5odGI_Frw" key="FK_CHILD_MULTIPLICITY" value="*"/>
+        <details xmi:id="_qfF1l411EeKAA5odGI_Frw" key="FK_CHILD_ROLE_NAME" value=""/>
+        <details xmi:id="_qfF1mI11EeKAA5odGI_Frw" key="FK_PARENT_MULTIPLICITY" value="0..1"/>
+        <details xmi:id="_qfF1mY11EeKAA5odGI_Frw" key="FK_PARENT_ROLE_NAME" value=""/>
+      </eAnnotations>
+    </constraints>
+    <constraints xsi:type="SQLConstraints:ForeignKey" xmi:id="_qfF1mo11EeKAA5odGI_Frw" name="SP_LSU_TRUY_CAP_FK1" members="_qfF1ho11EeKAA5odGI_Frw" uniqueConstraint="_qe8EpY11EeKAA5odGI_Frw" referencedTable="_qe8EhI11EeKAA5odGI_Frw">
+      <eAnnotations xmi:id="_qfF1m411EeKAA5odGI_Frw" source="FK_MODELING_RELATIONSHIP">
+        <details xmi:id="_qfF1nI11EeKAA5odGI_Frw" key="FK_IS_IDENTIFYING_RELATIONSHIP" value="false"/>
+        <details xmi:id="_qfF1nY11EeKAA5odGI_Frw" key="FK_CHILD_MULTIPLICITY" value="*"/>
+        <details xmi:id="_qfF1no11EeKAA5odGI_Frw" key="FK_CHILD_ROLE_NAME" value=""/>
+        <details xmi:id="_qfF1n411EeKAA5odGI_Frw" key="FK_PARENT_MULTIPLICITY" value="0..1"/>
+        <details xmi:id="_qfF1oI11EeKAA5odGI_Frw" key="FK_PARENT_ROLE_NAME" value=""/>
+      </eAnnotations>
+    </constraints>
+    <properties xmi:id="_qfF1oY11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleTable xmi:id="_qfF1oo11EeKAA5odGI_Frw" name="ESB_NSD_NHOM" description="Thong tin nguoi dung thuoc nhom nao" schema="_qe8EgI11EeKAA5odGI_Frw" index="_qfO_q411EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfF1o411EeKAA5odGI_Frw" name="ID" description="PK" nullable="false">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF1pI11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfF1pY11EeKAA5odGI_Frw" name="NSD_ID" description="FK tham chieu toi SP_NSD.ID">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF1po11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfF1p411EeKAA5odGI_Frw" name="NHOM_ID" description="FK tham chieu toi SP_NHOM_NSD.ID">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF1qI11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfF1qY11EeKAA5odGI_Frw" name="CREATED_DATE" description="Ngay phan quyen">
+      <containedType xsi:type="SQLDataTypes:DateDataType" xmi:id="_qfF1qo11EeKAA5odGI_Frw" name="DATE" primitiveType="DATE"/>
+    </columns>
+    <columns xmi:id="_qfF1q411EeKAA5odGI_Frw" name="CREATED_BY" description="FK tham chieu toi SP_NSD.ID">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF1rI11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <constraints xsi:type="SQLConstraints:PrimaryKey" xmi:id="_qfF1rY11EeKAA5odGI_Frw" name="ND_NHOM" members="_qfF1o411EeKAA5odGI_Frw"/>
+    <constraints xsi:type="SQLConstraints:ForeignKey" xmi:id="_qfF1ro11EeKAA5odGI_Frw" name="NSD_NHOM_FK2" members="_qfF1p411EeKAA5odGI_Frw" uniqueConstraint="_qfF2DY11EeKAA5odGI_Frw" referencedTable="_qfF2Bo11EeKAA5odGI_Frw">
+      <eAnnotations xmi:id="_qfF1r411EeKAA5odGI_Frw" source="FK_MODELING_RELATIONSHIP">
+        <details xmi:id="_qfF1sI11EeKAA5odGI_Frw" key="FK_IS_IDENTIFYING_RELATIONSHIP" value="false"/>
+        <details xmi:id="_qfF1sY11EeKAA5odGI_Frw" key="FK_CHILD_MULTIPLICITY" value="*"/>
+        <details xmi:id="_qfF1so11EeKAA5odGI_Frw" key="FK_CHILD_ROLE_NAME" value=""/>
+        <details xmi:id="_qfF1s411EeKAA5odGI_Frw" key="FK_PARENT_MULTIPLICITY" value="0..1"/>
+        <details xmi:id="_qfF1tI11EeKAA5odGI_Frw" key="FK_PARENT_ROLE_NAME" value=""/>
+      </eAnnotations>
+    </constraints>
+    <constraints xsi:type="SQLConstraints:ForeignKey" xmi:id="_qfF1tY11EeKAA5odGI_Frw" name="NSD_NHOM_FK1" members="_qfF1pY11EeKAA5odGI_Frw" uniqueConstraint="_qe8EpY11EeKAA5odGI_Frw" referencedTable="_qe8EhI11EeKAA5odGI_Frw">
+      <eAnnotations xmi:id="_qfF1to11EeKAA5odGI_Frw" source="FK_MODELING_RELATIONSHIP">
+        <details xmi:id="_qfF1t411EeKAA5odGI_Frw" key="FK_IS_IDENTIFYING_RELATIONSHIP" value="false"/>
+        <details xmi:id="_qfF1uI11EeKAA5odGI_Frw" key="FK_CHILD_MULTIPLICITY" value="*"/>
+        <details xmi:id="_qfF1uY11EeKAA5odGI_Frw" key="FK_CHILD_ROLE_NAME" value=""/>
+        <details xmi:id="_qfF1uo11EeKAA5odGI_Frw" key="FK_PARENT_MULTIPLICITY" value="0..1"/>
+        <details xmi:id="_qfF1u411EeKAA5odGI_Frw" key="FK_PARENT_ROLE_NAME" value=""/>
+      </eAnnotations>
+    </constraints>
+    <properties xmi:id="_qfF1vI11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleIndex xmi:id="_qfF1vY11EeKAA5odGI_Frw" name="CNANG_PK" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" table="_qfF1wI11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255">
+    <members xmi:id="_qfF1vo11EeKAA5odGI_Frw" column="_qfF1wY11EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfF1v411EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleTable xmi:id="_qfF1wI11EeKAA5odGI_Frw" name="ESB_CHUCNANG" description="Thong tin cac chuc nang trong he thong" schema="_qe8EgI11EeKAA5odGI_Frw" index="_qfF1vY11EeKAA5odGI_Frw _qfF15o11EeKAA5odGI_Frw _qfF16Y11EeKAA5odGI_Frw" referencingForeignKeys="_qfF13o11EeKAA5odGI_Frw _qfF1-411EeKAA5odGI_Frw _qfF1k411EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfF1wY11EeKAA5odGI_Frw" name="ID" description="PK" nullable="false">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF1wo11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfF1w411EeKAA5odGI_Frw" name="CNANG_CHA" description="FK tham chieu CP_CHUCNANG.ID">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF1xI11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfF1xY11EeKAA5odGI_Frw" name="TEN_CNANG" description="Ten chuc nang">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF1xo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="50"/>
+    </columns>
+    <columns xmi:id="_qfF1x411EeKAA5odGI_Frw" name="MO_TA" description="Mo ta chuc nang">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF1yI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="150"/>
+    </columns>
+    <columns xmi:id="_qfF1yY11EeKAA5odGI_Frw" name="TEN_ACTION" description="Ten action tuong ung voi chuc nang">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF1yo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="100"/>
+    </columns>
+    <columns xmi:id="_qfF1y411EeKAA5odGI_Frw" name="HIEN_THI" description="Co hien thi tren menu hay khong. Y - Co, N - Khong" defaultValue="N">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF1zI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING"/>
+    </columns>
+    <columns xmi:id="_qfF1zY11EeKAA5odGI_Frw" name="SAP_XEP" description="Thu tu sap xep">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF1zo11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfF1z411EeKAA5odGI_Frw" name="TRANG_THAI" description="Trang thai chuc nang. Y - Dang su dung, N - Khong su dung" defaultValue="Y">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF10I11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING"/>
+    </columns>
+    <columns xmi:id="_qfF10Y11EeKAA5odGI_Frw" name="MA_CNANG" description="Ma chuc nang" nullable="false">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF10o11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="5"/>
+    </columns>
+    <columns xmi:id="_qfF10411EeKAA5odGI_Frw" name="LOAI_CNANG" description="T: them moi; S: sua; X: xoa; D: duyet">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF11I11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING"/>
+    </columns>
+    <columns xmi:id="_qfF11Y11EeKAA5odGI_Frw" name="KY_HIEU_CNANG" description="Ky hieu chuc nang" nullable="false">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF11o11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="50"/>
+    </columns>
+    <constraints xsi:type="SQLConstraints:CheckConstraint" xmi:id="_qfF11411EeKAA5odGI_Frw" name="SYS_C0011095">
+      <searchCondition xsi:type="SQLExpressions:SearchConditionDefault" xmi:id="_qfF12I11EeKAA5odGI_Frw" SQL="&quot;MA_CNANG&quot; IS NOT NULL"/>
+    </constraints>
+    <constraints xsi:type="SQLConstraints:CheckConstraint" xmi:id="_qfF12Y11EeKAA5odGI_Frw" name="SYS_C0011096">
+      <searchCondition xsi:type="SQLExpressions:SearchConditionDefault" xmi:id="_qfF12o11EeKAA5odGI_Frw" SQL="&quot;KY_HIEU_CNANG&quot; IS NOT NULL"/>
+    </constraints>
+    <constraints xsi:type="SQLConstraints:PrimaryKey" xmi:id="_qfF12411EeKAA5odGI_Frw" name="CNANG_PK" members="_qfF1wY11EeKAA5odGI_Frw" ForeignKey="_qfF13o11EeKAA5odGI_Frw _qfF1-411EeKAA5odGI_Frw _qfF1k411EeKAA5odGI_Frw"/>
+    <constraints xsi:type="SQLConstraints:UniqueConstraint" xmi:id="_qfF13I11EeKAA5odGI_Frw" name="CNANG_MA_UK" members="_qfF10Y11EeKAA5odGI_Frw"/>
+    <constraints xsi:type="SQLConstraints:UniqueConstraint" xmi:id="_qfF13Y11EeKAA5odGI_Frw" name="CNANG_KYHIEU_UK" members="_qfF11Y11EeKAA5odGI_Frw"/>
+    <constraints xsi:type="SQLConstraints:ForeignKey" xmi:id="_qfF13o11EeKAA5odGI_Frw" name="CNANG_FK" members="_qfF1w411EeKAA5odGI_Frw" uniqueConstraint="_qfF12411EeKAA5odGI_Frw" referencedTable="_qfF1wI11EeKAA5odGI_Frw">
+      <eAnnotations xmi:id="_qfF13411EeKAA5odGI_Frw" source="FK_MODELING_RELATIONSHIP">
+        <details xmi:id="_qfF14I11EeKAA5odGI_Frw" key="FK_IS_IDENTIFYING_RELATIONSHIP" value="false"/>
+        <details xmi:id="_qfF14Y11EeKAA5odGI_Frw" key="FK_CHILD_MULTIPLICITY" value="*"/>
+        <details xmi:id="_qfF14o11EeKAA5odGI_Frw" key="FK_CHILD_ROLE_NAME" value=""/>
+        <details xmi:id="_qfF14411EeKAA5odGI_Frw" key="FK_PARENT_MULTIPLICITY" value="0..1"/>
+        <details xmi:id="_qfF15I11EeKAA5odGI_Frw" key="FK_PARENT_ROLE_NAME" value=""/>
+      </eAnnotations>
+    </constraints>
+    <properties xmi:id="_qfF15Y11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleIndex xmi:id="_qfF15o11EeKAA5odGI_Frw" name="CNANG_MA_UK" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" table="_qfF1wI11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255">
+    <members xmi:id="_qfF15411EeKAA5odGI_Frw" column="_qfF10Y11EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfF16I11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleIndex xmi:id="_qfF16Y11EeKAA5odGI_Frw" name="CNANG_KYHIEU_UK" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" table="_qfF1wI11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255">
+    <members xmi:id="_qfF16o11EeKAA5odGI_Frw" column="_qfF11Y11EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfF16411EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleTable xmi:id="_qfF17I11EeKAA5odGI_Frw" name="ESB_CNANG_NHOM" description="Thong tin nhom nguoi dung duoc phep su dung chuc nang nao" schema="_qe8EgI11EeKAA5odGI_Frw" index="_qfF2A411EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfF17Y11EeKAA5odGI_Frw" name="ID" description="PK" nullable="false">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF17o11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfF17411EeKAA5odGI_Frw" name="CNANG_ID" description="FK tham chieu toi SP_CHUCNANG.ID">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF18I11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfF18Y11EeKAA5odGI_Frw" name="NHOM_ID" description="FK tham chieu toi SP_NHOM_NSD.ID">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF18o11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <constraints xsi:type="SQLConstraints:PrimaryKey" xmi:id="_qfF18411EeKAA5odGI_Frw" name="CNANG_NHOM_PK" members="_qfF17Y11EeKAA5odGI_Frw"/>
+    <constraints xsi:type="SQLConstraints:ForeignKey" xmi:id="_qfF19I11EeKAA5odGI_Frw" name="CNANG_NHOM_FK2" members="_qfF18Y11EeKAA5odGI_Frw" uniqueConstraint="_qfF2DY11EeKAA5odGI_Frw" referencedTable="_qfF2Bo11EeKAA5odGI_Frw">
+      <eAnnotations xmi:id="_qfF19Y11EeKAA5odGI_Frw" source="FK_MODELING_RELATIONSHIP">
+        <details xmi:id="_qfF19o11EeKAA5odGI_Frw" key="FK_IS_IDENTIFYING_RELATIONSHIP" value="false"/>
+        <details xmi:id="_qfF19411EeKAA5odGI_Frw" key="FK_CHILD_MULTIPLICITY" value="*"/>
+        <details xmi:id="_qfF1-I11EeKAA5odGI_Frw" key="FK_CHILD_ROLE_NAME" value=""/>
+        <details xmi:id="_qfF1-Y11EeKAA5odGI_Frw" key="FK_PARENT_MULTIPLICITY" value="0..1"/>
+        <details xmi:id="_qfF1-o11EeKAA5odGI_Frw" key="FK_PARENT_ROLE_NAME" value=""/>
+      </eAnnotations>
+    </constraints>
+    <constraints xsi:type="SQLConstraints:ForeignKey" xmi:id="_qfF1-411EeKAA5odGI_Frw" name="CNANG_NHOM_FK1" members="_qfF17411EeKAA5odGI_Frw" uniqueConstraint="_qfF12411EeKAA5odGI_Frw" referencedTable="_qfF1wI11EeKAA5odGI_Frw">
+      <eAnnotations xmi:id="_qfF1_I11EeKAA5odGI_Frw" source="FK_MODELING_RELATIONSHIP">
+        <details xmi:id="_qfF1_Y11EeKAA5odGI_Frw" key="FK_IS_IDENTIFYING_RELATIONSHIP" value="false"/>
+        <details xmi:id="_qfF1_o11EeKAA5odGI_Frw" key="FK_CHILD_MULTIPLICITY" value="*"/>
+        <details xmi:id="_qfF1_411EeKAA5odGI_Frw" key="FK_CHILD_ROLE_NAME" value=""/>
+        <details xmi:id="_qfF2AI11EeKAA5odGI_Frw" key="FK_PARENT_MULTIPLICITY" value="0..1"/>
+        <details xmi:id="_qfF2AY11EeKAA5odGI_Frw" key="FK_PARENT_ROLE_NAME" value=""/>
+      </eAnnotations>
+    </constraints>
+    <properties xmi:id="_qfF2Ao11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleIndex xmi:id="_qfF2A411EeKAA5odGI_Frw" name="CNANG_NHOM_PK" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" table="_qfF17I11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255">
+    <members xmi:id="_qfF2BI11EeKAA5odGI_Frw" column="_qfF17Y11EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfF2BY11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleTable xmi:id="_qfF2Bo11EeKAA5odGI_Frw" name="ESB_NHOM_NSD" description="DS cac nhom nguoi dung" schema="_qe8EgI11EeKAA5odGI_Frw" index="_qfF2EI11EeKAA5odGI_Frw _qfF2E411EeKAA5odGI_Frw" referencingForeignKeys="_qfF19I11EeKAA5odGI_Frw _qfF1ro11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfF2B411EeKAA5odGI_Frw" name="ID" description="PK" nullable="false">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF2CI11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfF2CY11EeKAA5odGI_Frw" name="TEN_NHOM" description="Ten nhom NSD">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF2Co11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="50"/>
+    </columns>
+    <columns xmi:id="_qfF2C411EeKAA5odGI_Frw" name="LOAI_NHOM" description="Phan loai nhom NSD">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF2DI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <constraints xsi:type="SQLConstraints:PrimaryKey" xmi:id="_qfF2DY11EeKAA5odGI_Frw" name="NHOM_NSD" members="_qfF2B411EeKAA5odGI_Frw" ForeignKey="_qfF19I11EeKAA5odGI_Frw _qfF1ro11EeKAA5odGI_Frw"/>
+    <constraints xsi:type="SQLConstraints:UniqueConstraint" xmi:id="_qfF2Do11EeKAA5odGI_Frw" name="NHOM_NSD_U" members="_qfF2CY11EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfF2D411EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleIndex xmi:id="_qfF2EI11EeKAA5odGI_Frw" name="NHOM_NSD" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" table="_qfF2Bo11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255">
+    <members xmi:id="_qfF2EY11EeKAA5odGI_Frw" column="_qfF2B411EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfF2Eo11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleIndex xmi:id="_qfF2E411EeKAA5odGI_Frw" name="NHOM_NSD_U" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" table="_qfF2Bo11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255">
+    <members xmi:id="_qfF2FI11EeKAA5odGI_Frw" column="_qfF2CY11EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfF2FY11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleIndex xmi:id="_qfF2Fo11EeKAA5odGI_Frw" name="ERRDEF_PK" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" table="_qfF2GY11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255">
+    <members xmi:id="_qfF2F411EeKAA5odGI_Frw" column="_qfF2Go11EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfF2GI11EeKAA5odGI_Frw" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleTable xmi:id="_qfF2GY11EeKAA5odGI_Frw" name="ESB_ERRDEF" schema="_qe8EgI11EeKAA5odGI_Frw" index="_qfF2Fo11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfF2Go11EeKAA5odGI_Frw" name="AUTOID" description="So tu tang" nullable="false">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfF2G411EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfF2HI11EeKAA5odGI_Frw" name="SRC_ERR_NUM" description="Ma loi tra ve tu chuong trinh duoc goi" nullable="false">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF2HY11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="50"/>
+    </columns>
+    <columns xmi:id="_qfF2Ho11EeKAA5odGI_Frw" name="SRC_ERR_DESC" description="Mo ta loi tra ve tu chuong trinh duoc goi">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF2H411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="250"/>
+    </columns>
+    <columns xmi:id="_qfF2II11EeKAA5odGI_Frw" name="DES_ERR_NUM" description="Ma loi tra ve cho chuong trinh goi den ESB" nullable="false">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF2IY11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="50"/>
+    </columns>
+    <columns xmi:id="_qfF2Io11EeKAA5odGI_Frw" name="DES_ERR_DESC" description="Mo ta loi tra ve cho chuong trinh goi den ESB">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfF2I411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="250"/>
+    </columns>
+    <constraints xsi:type="SQLConstraints:CheckConstraint" xmi:id="_qfF2JI11EeKAA5odGI_Frw" name="SYS_C0011387">
+      <searchCondition xsi:type="SQLExpressions:SearchConditionDefault" xmi:id="_qfF2JY11EeKAA5odGI_Frw" SQL="&quot;AUTOID&quot; IS NOT NULL"/>
+    </constraints>
+    <constraints xsi:type="SQLConstraints:CheckConstraint" xmi:id="_qfF2Jo11EeKAA5odGI_Frw" name="SYS_C0011388">
+      <searchCondition xsi:type="SQLExpressions:SearchConditionDefault" xmi:id="_qfF2J411EeKAA5odGI_Frw" SQL="&quot;SRC_ERR_NUM&quot; IS NOT NULL"/>
+    </constraints>
+    <constraints xsi:type="SQLConstraints:CheckConstraint" xmi:id="_qfF2KI11EeKAA5odGI_Frw" name="SYS_C0011389">
+      <searchCondition xsi:type="SQLExpressions:SearchConditionDefault" xmi:id="_qfF2KY11EeKAA5odGI_Frw" SQL="&quot;DES_ERR_NUM&quot; IS NOT NULL"/>
+    </constraints>
+    <constraints xsi:type="SQLConstraints:PrimaryKey" xmi:id="_qfF2Ko11EeKAA5odGI_Frw" name="ERRDEF_PK" members="_qfF2Go11EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfF2K411EeKAA5odGI_Frw" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleIndex xmi:id="_qfO_cI11EeKAA5odGI_Frw" name="ESB_LSU_TRUYCAP_PK" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" table="_qfF1g411EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255">
+    <members xmi:id="_qfO_cY11EeKAA5odGI_Frw" column="_qfF1hI11EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfO_co11EeKAA5odGI_Frw" initialExtent="131072" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleIndex xmi:id="_qfO_c411EeKAA5odGI_Frw" name="SYS_IL0000075879C00014$$" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" systemGenerated="true" table="_qfO_dY11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255" parallel="true" degreeOfParallelism="0">
+    <properties xmi:id="_qfO_dI11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleTable xmi:id="_qfO_dY11EeKAA5odGI_Frw" name="ESB_MSGLOG" schema="_qe8EgI11EeKAA5odGI_Frw" index="_qfO_c411EeKAA5odGI_Frw _qfO_qY11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfO_do11EeKAA5odGI_Frw" name="MESSAGE_SN">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_d411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="1000"/>
+    </columns>
+    <columns xmi:id="_qfO_eI11EeKAA5odGI_Frw" name="TRAN_CODE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_eY11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="1000"/>
+    </columns>
+    <columns xmi:id="_qfO_eo11EeKAA5odGI_Frw" name="SENDER_ID">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_e411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="1000"/>
+    </columns>
+    <columns xmi:id="_qfO_fI11EeKAA5odGI_Frw" name="TRAN_SN">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_fY11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="1000"/>
+    </columns>
+    <columns xmi:id="_qfO_fo11EeKAA5odGI_Frw" name="TRAN_DATE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_f411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_gI11EeKAA5odGI_Frw" name="RECEIVE_DATE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_gY11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_go11EeKAA5odGI_Frw" name="RECEIVE_TIME">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_g411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="8"/>
+    </columns>
+    <columns xmi:id="_qfO_hI11EeKAA5odGI_Frw" name="REQ_DATE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_hY11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <columns xmi:id="_qfO_ho11EeKAA5odGI_Frw" name="REQ_TIME">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_h411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <columns xmi:id="_qfO_iI11EeKAA5odGI_Frw" name="RSP_DATE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_iY11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <columns xmi:id="_qfO_io11EeKAA5odGI_Frw" name="RSP_TIME">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_i411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <columns xmi:id="_qfO_jI11EeKAA5odGI_Frw" name="RESP_CODE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_jY11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <columns xmi:id="_qfO_jo11EeKAA5odGI_Frw" name="RESP_MSG">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_j411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="200"/>
+    </columns>
+    <columns xmi:id="_qfO_kI11EeKAA5odGI_Frw" name="IN_MESSAGE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_kY11EeKAA5odGI_Frw" name="CLOB" primitiveType="CHARACTER_LARGE_OBJECT"/>
+    </columns>
+    <columns xmi:id="_qfO_ko11EeKAA5odGI_Frw" name="OUT_MESSAGE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_k411EeKAA5odGI_Frw" name="CLOB" primitiveType="CHARACTER_LARGE_OBJECT"/>
+    </columns>
+    <columns xmi:id="_qfO_lI11EeKAA5odGI_Frw" name="TELLER_ID">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_lY11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_lo11EeKAA5odGI_Frw" name="APPROVER_ID">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_l411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_mI11EeKAA5odGI_Frw" name="REF_APP_ID">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_mY11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_mo11EeKAA5odGI_Frw" name="REF_SERVICE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_m411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_nI11EeKAA5odGI_Frw" name="REF_CHANNEL">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_nY11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_no11EeKAA5odGI_Frw" name="REF_PORT">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_n411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_oI11EeKAA5odGI_Frw" name="REF_TRAN_CODE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_oY11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_oo11EeKAA5odGI_Frw" name="REF_CIF_ACCT">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_o411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <columns xmi:id="_qfO_pI11EeKAA5odGI_Frw" name="REF_AMT">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_pY11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <columns xmi:id="_qfO_po11EeKAA5odGI_Frw" name="HISTORY_DATE">
+      <containedType xsi:type="SQLDataTypes:DateDataType" xmi:id="_qfO_p411EeKAA5odGI_Frw" name="DATE" primitiveType="DATE"/>
+    </columns>
+    <properties xmi:id="_qfO_qI11EeKAA5odGI_Frw" initialExtent="393216" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleIndex xmi:id="_qfO_qY11EeKAA5odGI_Frw" name="SYS_IL0000075879C00015$$" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" systemGenerated="true" table="_qfO_dY11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255" parallel="true" degreeOfParallelism="0">
+    <properties xmi:id="_qfO_qo11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleIndex xmi:id="_qfO_q411EeKAA5odGI_Frw" name="ND_NHOM" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" table="_qfF1oo11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255">
+    <members xmi:id="_qfO_rI11EeKAA5odGI_Frw" column="_qfF1o411EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfO_rY11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleIndex xmi:id="_qfO_ro11EeKAA5odGI_Frw" name="SYS_IL0000075896C00013$$" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" systemGenerated="true" table="_qfO_sI11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255" parallel="true" degreeOfParallelism="0">
+    <properties xmi:id="_qfO_r411EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleTable xmi:id="_qfO_sI11EeKAA5odGI_Frw" name="ESB_TLLOG" schema="_qe8EgI11EeKAA5odGI_Frw" index="_qfO_ro11EeKAA5odGI_Frw _qfO_0I11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfO_sY11EeKAA5odGI_Frw" name="MESSAGE_SN" description="So sn cua message">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_so11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="1000"/>
+    </columns>
+    <columns xmi:id="_qfO_s411EeKAA5odGI_Frw" name="TRAN_CODE" description="Ma giao dich">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_tI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="1000"/>
+    </columns>
+    <columns xmi:id="_qfO_tY11EeKAA5odGI_Frw" name="SENDER_ID" description="Ma ung dung gui">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_to11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="1000"/>
+    </columns>
+    <columns xmi:id="_qfO_t411EeKAA5odGI_Frw" name="REQ_DATE" description="Ngay gui">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_uI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <columns xmi:id="_qfO_uY11EeKAA5odGI_Frw" name="REQ_TIME" description="Gio gui">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_uo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <columns xmi:id="_qfO_u411EeKAA5odGI_Frw" name="RECEIVER_ID" description="Ma ung dung nhan">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_vI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_vY11EeKAA5odGI_Frw" name="RECEIVE_DATE" description="Ngay nhan">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_vo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_v411EeKAA5odGI_Frw" name="RECEIVE_TIME" description="Gio nhan">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_wI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_wY11EeKAA5odGI_Frw" name="RESP_DATE" description="Ngay phan hoi">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_wo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_w411EeKAA5odGI_Frw" name="RESP_TIME" description="Gio phan hoi">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_xI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_xY11EeKAA5odGI_Frw" name="RESP_CODE" description="Ma loi tra ve">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_xo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <columns xmi:id="_qfO_x411EeKAA5odGI_Frw" name="RESP_MSG" description="Mo ta loi tra ve">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_yI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="250"/>
+    </columns>
+    <columns xmi:id="_qfO_yY11EeKAA5odGI_Frw" name="IN_XML_MSG" description="Message input">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_yo11EeKAA5odGI_Frw" name="CLOB" primitiveType="CHARACTER_LARGE_OBJECT"/>
+    </columns>
+    <columns xmi:id="_qfO_y411EeKAA5odGI_Frw" name="OUT_XML_MSG" description="Message output">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_zI11EeKAA5odGI_Frw" name="CLOB" primitiveType="CHARACTER_LARGE_OBJECT"/>
+    </columns>
+    <columns xmi:id="_qfO_zY11EeKAA5odGI_Frw" name="HISTORY_DATE">
+      <containedType xsi:type="SQLDataTypes:DateDataType" xmi:id="_qfO_zo11EeKAA5odGI_Frw" name="DATE" primitiveType="DATE"/>
+    </columns>
+    <properties xmi:id="_qfO_z411EeKAA5odGI_Frw" initialExtent="327680" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleIndex xmi:id="_qfO_0I11EeKAA5odGI_Frw" name="SYS_IL0000075896C00014$$" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" systemGenerated="true" table="_qfO_sI11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255" parallel="true" degreeOfParallelism="0">
+    <properties xmi:id="_qfO_0Y11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleIndex xmi:id="_qfO_0o11EeKAA5odGI_Frw" name="TRANS_PK" Schema="_qe8EgI11EeKAA5odGI_Frw" fillFactor="10" unique="true" table="_qfO_1Y11EeKAA5odGI_Frw" PCTFree="10" initTrans="2" maxTrans="255">
+    <members xmi:id="_qfO_0411EeKAA5odGI_Frw" column="_qfO_1o11EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfO_1I11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleIndex>
+  <OracleModel:OracleTable xmi:id="_qfO_1Y11EeKAA5odGI_Frw" name="ESB_TRANS" schema="_qe8EgI11EeKAA5odGI_Frw" index="_qfO_0o11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfO_1o11EeKAA5odGI_Frw" name="TRAN_CODE" description="Ma giao dich" nullable="false">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_1411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_2I11EeKAA5odGI_Frw" name="TRAN_NAME" description="Ten,mo ta ung dung">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_2Y11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="200"/>
+    </columns>
+    <columns xmi:id="_qfO_2o11EeKAA5odGI_Frw" name="TRAN_TYPE" description="Loai giao dich">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_2411EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="3"/>
+    </columns>
+    <columns xmi:id="_qfO_3I11EeKAA5odGI_Frw" name="APP_ID" description="Ung dung goi">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_3Y11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="5"/>
+    </columns>
+    <constraints xsi:type="SQLConstraints:CheckConstraint" xmi:id="_qfO_3o11EeKAA5odGI_Frw" name="SYS_C0011109">
+      <searchCondition xsi:type="SQLExpressions:SearchConditionDefault" xmi:id="_qfO_3411EeKAA5odGI_Frw" SQL="&quot;TRAN_CODE&quot; IS NOT NULL"/>
+    </constraints>
+    <constraints xsi:type="SQLConstraints:PrimaryKey" xmi:id="_qfO_4I11EeKAA5odGI_Frw" name="TRANS_PK" members="_qfO_1o11EeKAA5odGI_Frw"/>
+    <properties xmi:id="_qfO_4Y11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleTable xmi:id="_qfO_4o11EeKAA5odGI_Frw" name="ESB_APP" schema="_qe8EgI11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfO_4411EeKAA5odGI_Frw" name="APP_ID" description="Ma ung dung" nullable="false">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_5I11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="5"/>
+    </columns>
+    <columns xmi:id="_qfO_5Y11EeKAA5odGI_Frw" name="APP_NAME" description="Ten(mo ta) ung dung">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_5o11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="200"/>
+    </columns>
+    <constraints xsi:type="SQLConstraints:CheckConstraint" xmi:id="_qfO_5411EeKAA5odGI_Frw" name="SYS_C0011093">
+      <searchCondition xsi:type="SQLExpressions:SearchConditionDefault" xmi:id="_qfO_6I11EeKAA5odGI_Frw" SQL="&quot;APP_ID&quot; IS NOT NULL"/>
+    </constraints>
+    <properties xmi:id="_qfO_6Y11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleTable xmi:id="_qfO_6o11EeKAA5odGI_Frw" name="ESB_APP_ERROR" schema="_qe8EgI11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfO_6411EeKAA5odGI_Frw" name="ERROR_ID" nullable="false">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_7I11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_7Y11EeKAA5odGI_Frw" name="ERROR_CONTENTS">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_7o11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="500"/>
+    </columns>
+    <constraints xsi:type="SQLConstraints:CheckConstraint" xmi:id="_qfO_7411EeKAA5odGI_Frw" name="SYS_C0011094">
+      <searchCondition xsi:type="SQLExpressions:SearchConditionDefault" xmi:id="_qfO_8I11EeKAA5odGI_Frw" SQL="&quot;ERROR_ID&quot; IS NOT NULL"/>
+    </constraints>
+    <properties xmi:id="_qfO_8Y11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleTable xmi:id="_qfO_8o11EeKAA5odGI_Frw" name="ESB_CHANNEL" schema="_qe8EgI11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfO_8411EeKAA5odGI_Frw" name="CHANNEL_ID">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_9I11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfO_9Y11EeKAA5odGI_Frw" name="CHANNEL_NAME">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_9o11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="100"/>
+    </columns>
+    <columns xmi:id="_qfO_9411EeKAA5odGI_Frw" name="REF_PORT">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfO_-I11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC" precision="30"/>
+    </columns>
+    <columns xmi:id="_qfO_-Y11EeKAA5odGI_Frw" name="STATUS">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO_-o11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING"/>
+    </columns>
+    <properties xmi:id="_qfO_-411EeKAA5odGI_Frw" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleTable xmi:id="_qfO__I11EeKAA5odGI_Frw" name="ESB_ERRLOG" schema="_qe8EgI11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfO__Y11EeKAA5odGI_Frw" name="AUTO_ID">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfO__o11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <columns xmi:id="_qfO__411EeKAA5odGI_Frw" name="LOG_DATE" description="Ngay ghi log loi">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAAI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <columns xmi:id="_qfPAAY11EeKAA5odGI_Frw" name="ERR_CODE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAAo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="5"/>
+    </columns>
+    <columns xmi:id="_qfPAA411EeKAA5odGI_Frw" name="ERR_MSG" description="Mo ta loi">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPABI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="250"/>
+    </columns>
+    <columns xmi:id="_qfPABY11EeKAA5odGI_Frw" name="MESSAGE_SN">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPABo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="20"/>
+    </columns>
+    <properties xmi:id="_qfPAB411EeKAA5odGI_Frw" initialExtent="1879048192" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleTable xmi:id="_qfPACI11EeKAA5odGI_Frw" name="ESB_PARAM" schema="_qe8EgI11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfPACY11EeKAA5odGI_Frw" name="AUTO_ID">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfPACo11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfPAC411EeKAA5odGI_Frw" name="GRP_NAME" description="Nhom tham so">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPADI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="5"/>
+    </columns>
+    <columns xmi:id="_qfPADY11EeKAA5odGI_Frw" name="P_NAME" description="Ten tham so">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPADo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="150"/>
+    </columns>
+    <columns xmi:id="_qfPAD411EeKAA5odGI_Frw" name="P_VALUE" description="Gia tri tham so">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAEI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="200"/>
+    </columns>
+    <columns xmi:id="_qfPAEY11EeKAA5odGI_Frw" name="PARAM1" description="Tham so 1">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAEo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="100"/>
+    </columns>
+    <columns xmi:id="_qfPAE411EeKAA5odGI_Frw" name="PARAM2" description="Tham so 2">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAFI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="100"/>
+    </columns>
+    <columns xmi:id="_qfPAFY11EeKAA5odGI_Frw" name="P_DESC" description="Mo ta tham so">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAFo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="300"/>
+    </columns>
+    <columns xmi:id="_qfPAF411EeKAA5odGI_Frw" name="LSTORD" description="Thu tu hien thi">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfPAGI11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <properties xmi:id="_qfPAGY11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleTable xmi:id="_qfPAGo11EeKAA5odGI_Frw" name="ESB_ROUTING" schema="_qe8EgI11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfPAG411EeKAA5odGI_Frw" name="TRAN_CODE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAHI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="5"/>
+    </columns>
+    <columns xmi:id="_qfPAHY11EeKAA5odGI_Frw" name="SENDER_ID" description="Ma ung dung goi">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAHo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="5"/>
+    </columns>
+    <columns xmi:id="_qfPAH411EeKAA5odGI_Frw" name="RECEIVER_ID" description="Ma ung dung bi goi">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAII11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="5"/>
+    </columns>
+    <columns xmi:id="_qfPAIY11EeKAA5odGI_Frw" name="QMGR_NAME" description="Ten queue manager se duoc routing den">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAIo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="50"/>
+    </columns>
+    <columns xmi:id="_qfPAI411EeKAA5odGI_Frw" name="QUEUE_NAME" description="Ten queue se duoc routing den">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAJI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="200"/>
+    </columns>
+    <properties xmi:id="_qfPAJY11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleTable xmi:id="_qfPAJo11EeKAA5odGI_Frw" name="ESB_SEQMGR" schema="_qe8EgI11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfPAJ411EeKAA5odGI_Frw" name="AUTOID">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfPAKI11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfPAKY11EeKAA5odGI_Frw" name="VERSION">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAKo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="5"/>
+    </columns>
+    <columns xmi:id="_qfPAK411EeKAA5odGI_Frw" name="PARAM1">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPALI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="30"/>
+    </columns>
+    <columns xmi:id="_qfPALY11EeKAA5odGI_Frw" name="PARAM2">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPALo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="30"/>
+    </columns>
+    <columns xmi:id="_qfPAL411EeKAA5odGI_Frw" name="SEQ_LIMIT">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfPAMI11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfPAMY11EeKAA5odGI_Frw" name="SEQ_NUMBER">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfPAMo11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <columns xmi:id="_qfPAM411EeKAA5odGI_Frw" name="BRANCH_CODE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPANI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="5"/>
+    </columns>
+    <columns xmi:id="_qfPANY11EeKAA5odGI_Frw" name="GROUP_CODE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPANo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="5"/>
+    </columns>
+    <columns xmi:id="_qfPAN411EeKAA5odGI_Frw" name="CCY_CODE">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAOI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="3"/>
+    </columns>
+    <properties xmi:id="_qfPAOY11EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <OracleModel:OracleTable xmi:id="_qfPAOo11EeKAA5odGI_Frw" name="ESB_SERVICE_URL" schema="_qe8EgI11EeKAA5odGI_Frw" PCTFree="10" initTrans="1" maxTrans="255">
+    <columns xmi:id="_qfPAO411EeKAA5odGI_Frw" name="SERVICE_ID" description="Ma dich vu" nullable="false">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAPI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="10"/>
+    </columns>
+    <columns xmi:id="_qfPAPY11EeKAA5odGI_Frw" name="SERVICE_TYPE" description="Loai dich vu">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAPo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="5"/>
+    </columns>
+    <columns xmi:id="_qfPAP411EeKAA5odGI_Frw" name="SERVICE_NAME" description="Mo ta dich vuj">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAQI11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="250"/>
+    </columns>
+    <columns xmi:id="_qfPAQY11EeKAA5odGI_Frw" name="SERVICE_URL" description="Chuoi ket noi">
+      <containedType xsi:type="SQLDataTypes:CharacterStringDataType" xmi:id="_qfPAQo11EeKAA5odGI_Frw" name="VARCHAR2" primitiveType="CHARACTER_VARYING" length="300"/>
+    </columns>
+    <columns xmi:id="_qfPAQ411EeKAA5odGI_Frw" name="SERVICE_TIMEOUT">
+      <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfPARI11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    </columns>
+    <constraints xsi:type="SQLConstraints:CheckConstraint" xmi:id="_qfPARY11EeKAA5odGI_Frw" name="SYS_C0011108">
+      <searchCondition xsi:type="SQLExpressions:SearchConditionDefault" xmi:id="_qfPARo11EeKAA5odGI_Frw" SQL="&quot;SERVICE_ID&quot; IS NOT NULL"/>
+    </constraints>
+    <properties xmi:id="_qfPAR411EeKAA5odGI_Frw" initialExtent="65536" nextExtent="1048576" minimumExtents="1" maximumExtents="2147483645" bufferpool="DEFAULT"/>
+  </OracleModel:OracleTable>
+  <SQLSchema:Sequence xmi:id="_qfYwcI11EeKAA5odGI_Frw" name="CONTEXT_LOG_SEQ" schema="_qe8EgI11EeKAA5odGI_Frw">
+    <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfYwcY11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    <identity xmi:id="_qfYwco11EeKAA5odGI_Frw" generationType="ALWAYS_GENERATED" startValue="36882" increment="1" minimum="0" maximum="999999999999"/>
+  </SQLSchema:Sequence>
+  <SQLSchema:Sequence xmi:id="_qfYwc411EeKAA5odGI_Frw" name="ESB_CHUCNANG_SEQ" schema="_qe8EgI11EeKAA5odGI_Frw">
+    <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfYwdI11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    <identity xmi:id="_qfYwdY11EeKAA5odGI_Frw" generationType="ALWAYS_GENERATED" startValue="1" increment="1" minimum="0" maximum="999999999999"/>
+  </SQLSchema:Sequence>
+  <SQLSchema:Sequence xmi:id="_qfYwdo11EeKAA5odGI_Frw" name="ESB_CNANG_NHOM_SEQ" schema="_qe8EgI11EeKAA5odGI_Frw">
+    <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfYwd411EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    <identity xmi:id="_qfYweI11EeKAA5odGI_Frw" generationType="ALWAYS_GENERATED" startValue="646" increment="1" minimum="0" maximum="999999999999"/>
+  </SQLSchema:Sequence>
+  <SQLSchema:Sequence xmi:id="_qfYweY11EeKAA5odGI_Frw" name="ESB_LSU_TRUYCAP_SEQ" schema="_qe8EgI11EeKAA5odGI_Frw">
+    <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfYweo11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    <identity xmi:id="_qfYwe411EeKAA5odGI_Frw" generationType="ALWAYS_GENERATED" startValue="2937" increment="1" minimum="0" maximum="999999999999"/>
+  </SQLSchema:Sequence>
+  <SQLSchema:Sequence xmi:id="_qfYwfI11EeKAA5odGI_Frw" name="ESB_NHOM_NSD_SEQ" schema="_qe8EgI11EeKAA5odGI_Frw">
+    <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfYwfY11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    <identity xmi:id="_qfYwfo11EeKAA5odGI_Frw" generationType="ALWAYS_GENERATED" startValue="41" increment="1" minimum="0" maximum="999999999999"/>
+  </SQLSchema:Sequence>
+  <SQLSchema:Sequence xmi:id="_qfYwf411EeKAA5odGI_Frw" name="ESB_NSD_LSU_SEQ" schema="_qe8EgI11EeKAA5odGI_Frw">
+    <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfYwgI11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    <identity xmi:id="_qfYwgY11EeKAA5odGI_Frw" generationType="ALWAYS_GENERATED" startValue="21" increment="1" minimum="0" maximum="999999999999"/>
+  </SQLSchema:Sequence>
+  <SQLSchema:Sequence xmi:id="_qfYwgo11EeKAA5odGI_Frw" name="ESB_NSD_NHOM_SEQ" schema="_qe8EgI11EeKAA5odGI_Frw">
+    <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfYwg411EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    <identity xmi:id="_qfYwhI11EeKAA5odGI_Frw" generationType="ALWAYS_GENERATED" startValue="430" increment="1" minimum="0" maximum="9999999999999999999999999999"/>
+  </SQLSchema:Sequence>
+  <SQLSchema:Sequence xmi:id="_qfYwhY11EeKAA5odGI_Frw" name="ESB_NSD_SEQ" schema="_qe8EgI11EeKAA5odGI_Frw">
+    <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfYwho11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    <identity xmi:id="_qfYwh411EeKAA5odGI_Frw" generationType="ALWAYS_GENERATED" startValue="488" increment="1" minimum="0" maximum="999999999999"/>
+  </SQLSchema:Sequence>
+  <SQLSchema:Sequence xmi:id="_qfYwiI11EeKAA5odGI_Frw" name="ESB_ROUTING_SEQ" schema="_qe8EgI11EeKAA5odGI_Frw">
+    <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfYwiY11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    <identity xmi:id="_qfYwio11EeKAA5odGI_Frw" generationType="ALWAYS_GENERATED" startValue="241" increment="1" minimum="1" maximum="9999999999999999999999999999"/>
+  </SQLSchema:Sequence>
+  <SQLSchema:Sequence xmi:id="_qfYwi411EeKAA5odGI_Frw" name="ESB_SEQMGR_SEQ" schema="_qe8EgI11EeKAA5odGI_Frw">
+    <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfYwjI11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    <identity xmi:id="_qfYwjY11EeKAA5odGI_Frw" generationType="ALWAYS_GENERATED" startValue="0" increment="1" minimum="0" maximum="999999999999999"/>
+  </SQLSchema:Sequence>
+  <SQLSchema:Sequence xmi:id="_qfYwjo11EeKAA5odGI_Frw" name="ESB_TRANS_PARAM_SEQ" schema="_qe8EgI11EeKAA5odGI_Frw">
+    <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfYwj411EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    <identity xmi:id="_qfYwkI11EeKAA5odGI_Frw" generationType="ALWAYS_GENERATED" startValue="81" increment="1" minimum="0" maximum="999999999999"/>
+  </SQLSchema:Sequence>
+  <SQLSchema:Sequence xmi:id="_qfYwkY11EeKAA5odGI_Frw" name="ESB_TRAN_PARAM" schema="_qe8EgI11EeKAA5odGI_Frw">
+    <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfYwko11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    <identity xmi:id="_qfYwk411EeKAA5odGI_Frw" generationType="ALWAYS_GENERATED" startValue="221" increment="1" minimum="1" maximum="9999999999999999999999999999"/>
+  </SQLSchema:Sequence>
+  <SQLSchema:Sequence xmi:id="_qfihcI11EeKAA5odGI_Frw" name="SEQ_ERRLOG" schema="_qe8EgI11EeKAA5odGI_Frw">
+    <containedType xsi:type="SQLDataTypes:FixedPrecisionDataType" xmi:id="_qfihcY11EeKAA5odGI_Frw" name="NUMBER" primitiveType="NUMERIC"/>
+    <identity xmi:id="_qfihco11EeKAA5odGI_Frw" generationType="ALWAYS_GENERATED" startValue="203" increment="1" minimum="1" maximum="9999999999999999999999999999"/>
+  </SQLSchema:Sequence>
+</xmi:XMI>

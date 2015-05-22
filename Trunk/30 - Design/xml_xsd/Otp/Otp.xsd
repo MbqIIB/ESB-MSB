@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.w3schools.com" 
+xmlns="http://www.w3schools.com" 
+elementFormDefault="qualified">
+<xs:complexType name="header_type">
+  <xs:sequence>
+    <xs:element name="req_id" type="xs:int"/>
+    <xs:element name="req_app" type="xs:string"/>
+	<xs:element name="srv" type="xs:int"/>
+    <xs:element name="srv_app" type="xs:string"/>
+    <xs:element name="req_time" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkOtp_type">
+  <xs:sequence>
+    <xs:element name="transactionID" type="xs:string"/>    
+	<xs:element name="otpTransactionId" type="xs:long"/>
+	<xs:element name="iValueTime" type="xs:int"/>
+	<xs:element name="sOtp" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOtp_type">
+  <xs:sequence>
+    <xs:element name="transactionID" type="xs:string"/>    
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="body_type">
+  <xs:sequence>
+    <xs:element name="checkOtp" type="checkOtp_type" minOccurs="0"/>
+	<xs:element name="getOtp" type="getOtp_type" minOccurs="0"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:element name="Data">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="Header" type="header_type"/>      
+	  <xs:element name="Body" type="body_type"/>      
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+</xs:schema>

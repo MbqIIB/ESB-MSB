@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<res_id></res_id>
+		<req_id></req_id>
+		<req_app></req_app>
+		<srv></srv>
+		<req_time></req_time>
+	</Header>
+	<Body>
+		<createPassCodeLength>
+			<return></return>
+		</createPassCodeLength>
+	</Body>
+</Data>

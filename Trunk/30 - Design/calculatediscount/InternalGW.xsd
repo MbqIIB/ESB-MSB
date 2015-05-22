@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.w3schools.com" 
+xmlns="http://www.w3schools.com" 
+elementFormDefault="qualified">
+<xs:complexType name="header_type">
+  <xs:sequence>
+    <xs:element name="req_id" type="xs:int"/>
+    <xs:element name="req_app" type="xs:string"/>
+	<xs:element name="srv" type="xs:int"/>
+    <xs:element name="srv_app" type="xs:string"/>
+    <xs:element name="req_time" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendSMS_type">
+  <xs:sequence>
+    <xs:element name="sequence_id" type="xs:string"/>
+	<xs:element name="supply_id" type="xs:string"/>
+	<xs:element name="mobile_number" type="xs:string" maxOccurs="unbounded"/>
+	<xs:element name="content" type="xs:string"/>
+	<xs:element name="datetime" type="xs:string"/>
+	<xs:element name="priority" type="xs:int"/>
+	<xs:element name="app_sender" type="xs:string"/>    	    
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InternalSMSReq_type">
+  <xs:sequence>
+    <xs:element name="sequence_id" type="xs:string"/>
+	<xs:element name="supply_id" type="xs:string"/>
+	<xs:element name="mobile_number" type="xs:string" maxOccurs="unbounded"/>
+	<xs:element name="content" type="xs:string"/>
+	<xs:element name="datetime" type="xs:string"/>
+	<xs:element name="priority" type="xs:int"/>
+	<xs:element name="sender" type="xs:string"/>   	    
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendSMSObj_type">
+  <xs:sequence>
+    <xs:element name="arg0" type="InternalSMSReq_type"/>  	    
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendSMSArr_type">
+  <xs:sequence>
+    <xs:element name="sequence_id" type="xs:string"/>
+	<xs:element name="supply_id" type="xs:string"/>
+	<xs:element name="mobile_number" type="xs:string" maxOccurs="unbounded"/>
+	<xs:element name="content" type="xs:string" maxOccurs="unbounded"/>
+	<xs:element name="datetime" type="xs:string"/>
+	<xs:element name="priority" type="xs:int"/>
+	<xs:element name="app_sender" type="xs:string"/>    	    
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="body_type">
+  <xs:sequence>
+    <xs:element name="sendSMS" type="sendSMS_type" minOccurs="0"/> 
+	<xs:element name="sendSMSObj" type="sendSMSObj_type" minOccurs="0"/>
+	<xs:element name="sendSMSArr" type="sendSMSArr_type" minOccurs="0"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:element name="Data">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="Header" type="header_type"/>      
+	  <xs:element name="Body" type="body_type"/>      
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+</xs:schema>

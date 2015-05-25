@@ -1,0 +1,21 @@
+2012-08-02 17:15:23,562 [main] ERROR CurrencyDAOImpl:46 - Error source:seatechit.msbgateway.dbaccess.dao.impl.CurrencyDAOImpl.getConnection()
+Error message:java.sql.SQLException: No suitable driver
+
+2012-08-02 17:15:23,593 [main] ERROR ServiceInfoDAOImpl:46 - Error source:seatechit.msbgateway.dbaccess.dao.impl.ServiceInfoDAOImpl.getConnection()
+Error message:java.sql.SQLException: No suitable driver
+
+2012-08-02 17:15:23,656 [main] ERROR SysParamDAOImpl:46 - Error source:seatechit.msbgateway.dbaccess.dao.impl.SysParamDAOImpl.getConnection()
+Error message:java.sql.SQLException: No suitable driver
+
+2012-08-02 17:15:23,656 [main] ERROR HostTranCodeInfoDAOImpl:46 - Error source:seatechit.msbgateway.dbaccess.dao.impl.HostTranCodeInfoDAOImpl.getConnection()
+Error message:java.sql.SQLException: No suitable driver
+
+2012-08-02 17:15:23,671 [main] ERROR ChannelInfoDAOImpl:46 - Error source:seatechit.msbgateway.dbaccess.dao.impl.ChannelInfoDAOImpl.getConnection()
+Error message:java.sql.SQLException: No suitable driver
+
+2012-08-02 17:15:23,671 [main] ERROR BankStaffInfoDAOImpl:46 - Error source:seatechit.msbgateway.dbaccess.dao.impl.BankStaffInfoDAOImpl.getConnection()
+Error message:java.sql.SQLException: No suitable driver
+
+2013-04-12 19:27:44,625 [main] ERROR SIBSConsumer:3255 - Error source:seatechit.msbgateway.consumer.SIBSConsumer.settlementFDAccount()
+Error message:java.lang.NullPointerException
+

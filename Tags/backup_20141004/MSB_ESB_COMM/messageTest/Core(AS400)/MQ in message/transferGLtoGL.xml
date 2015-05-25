@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS027</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<transferGLtoGL>
+			<channel>SMSBK01</channel>
+			<refID>1111222</refID>
+			<debitGLBranch>110</debitGLBranch>
+			<debitGLAccount>280898009</debitGLAccount>
+			<creditGLBranch>110</creditGLBranch>
+			<creditGLAccount>280701001</creditGLAccount>
+			<amount>34000000</amount>
+			<currency>VND</currency>
+			<comments>kienvt</comments>
+			<teller>TT110001</teller>
+			<manager>TT110001</manager>
+			<hostDate>020712</hostDate>
+			<!-- add them -->
+			<reconcileGL>N</reconcileGL>
+			<transactionOffice>00000</transactionOffice>
+			<customerTypeCode>00000</customerTypeCode>
+			<account></account>
+			<businessDeptCode>04000</businessDeptCode>
+			<branchCode5>00011</branchCode5>
+		</transferGLtoGL>
+	</Body>
+</Data>
+

@@ -1,0 +1,54 @@
+
+
+1.tao moi excution group
+
+2.offline EB
+
+3.stop flow esb
+
+4.deploy flow esb moi
+
+5.them instance
+
+6.online EB
+
+7.test chuyen khoan
+
+8.test sms
+
+
+set jvm max heap: 3147483648
+
+dsc:10
+
+EGW:10
+
+FEE:10
+
+IBS:10
+
+IGW:20
+
+LOGGING:10
+
+OTP:20
+
+Requestmain:10
+
+Responsemain:20
+
+RSAAdapter:10
+
+sgw:20
+
+SML:10
+
+SMS:20
+
+TCPAdapter:10
+
+TCPOUT:30
+
+TRCout:10
+
+TSU:10

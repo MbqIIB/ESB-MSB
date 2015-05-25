@@ -1,0 +1,22 @@
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS037</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<createCA>
+			<out>
+				<Messages>
+					<arrString>*SOKI|10.0.2.46|00053|009600||0213|001083|0005|*DSP|ABCS|*LINX|BBHTLRTE|00|/0000000|00000000000|00|STDATDSPV5DSPV5001IQ|BBHTLMONEYFNC||5401841212251526375010||0000|0010|0010|TT110001|VC|1000|0|||906|*HAND|DQTMPRTE|10.0.2.46|38125|DSPO7020Q|000000000|152637|T9999|12360|*EOM|4|B2|1|Y|437|D2|A|212868|1|1|hn|hn||123|||N|||000000000|VN|0000000|0000000||||||185|D5|LE
+						ANH TUAN|B7755333|P|N||CAM1||20290|HN|M|20280|202|DX|LE ANH
+						TUAN|B7755333|MP|0985590197|||||A003</arrString>
+					<description>System Ok</description>
+					<errCode>0</errCode>
+				</Messages>
+			</out>
+		</createCA>
+	</Body>
+</Data>

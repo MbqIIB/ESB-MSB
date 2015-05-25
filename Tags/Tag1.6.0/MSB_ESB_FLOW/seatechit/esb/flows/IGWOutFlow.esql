@@ -1,0 +1,207 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BROKER SCHEMA seatechit.esb.flows
+
+CREATE COMPUTE MODULE IGWOutFlow_PreProcess
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		DECLARE q0 NAMESPACE 'http://gateway.msb.com.vn/';
+		DECLARE srv CHARACTER InputRoot.XMLNSC.Data.Header.srv;
+
+
+		DECLARE curr_time CHAR CURRENT_TIME;
+		DECLARE curr_date CHAR CURRENT_DATE;
+
+		SET OutputLocalEnvironment.XMLNS.Messages.Request.Data = (SELECT * FROM InputRoot.XMLNSC.Data);
+		SET OutputLocalEnvironment.XMLNS.Messages.Response.Data.Header = (SELECT * FROM InputRoot.XMLNSC.Data.Header);
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.tllog.rcv_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.tllog.rcv_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.rcv_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.rcv_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.req_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.req_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+
+		SET OutputRoot.MQMD.Encoding = 546;
+		SET OutputRoot.MQMD.CodedCharSetId = 1208;
+		SET Environment.MQMD = InputRoot.MQMD;
+
+		SET OutputRoot.Properties.MessageType = 'Envelope';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:q0='http://gateway.msb.com.vn/';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsd='http://www.w3.org/2001/XMLSchema';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance';
+
+		CASE srv
+		WHEN 'IGW001' THEN
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMS = InputRoot.XMLNSC.Data.Body.sendSMS;
+			/*
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMS.sequence_id = InputRoot.XMLNS.Data.Body.sendSMS.sequence_id;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMS.supply_id = InputRoot.XMLNS.Data.Body.sendSMS.supply_id;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMS.mobile_number = InputRoot.XMLNS.Data.Body.sendSMS.mobile_number;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMS.content = InputRoot.XMLNS.Data.Body.sendSMS.content;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMS.datetime = InputRoot.XMLNS.Data.Body.sendSMS.datetime;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMS.priority = InputRoot.XMLNS.Data.Body.sendSMS.priority;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMS.app_sender = InputRoot.XMLNS.Data.Body.sendSMS.app_sender;
+			*/
+			WHEN 'IGW002' THEN
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSObj.arg0 = InputRoot.XMLNSC.Data.Body.sendSMSObj.arg0;
+			/*
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSObj.arg0.sequence_id = InputRoot.XMLNS.Data.Body.sendSMSObj.arg0.sequence_id;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSObj.arg0.supply_id = InputRoot.XMLNS.Data.Body.sendSMSObj.arg0.supply_id;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSObj.arg0.mobile_number = InputRoot.XMLNS.Data.Body.sendSMSObj.arg0.mobile_number;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSObj.arg0.content = InputRoot.XMLNS.Data.Body.sendSMSObj.arg0.content;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSObj.arg0.datetime = InputRoot.XMLNS.Data.Body.sendSMSObj.arg0.datetime;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSObj.arg0.priority = InputRoot.XMLNS.Data.Body.sendSMSObj.arg0.priority;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSObj.arg0.sender = InputRoot.XMLNS.Data.Body.sendSMSObj.arg0.sender;
+			*/
+			ELSE
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSArr = InputRoot.XMLNSC.Data.Body.sendSMSArr;
+			/*
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSArr.sequence_id = InputRoot.XMLNS.Data.Body.sendSMSArr.sequence_id;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSArr.supply_id = InputRoot.XMLNS.Data.Body.sendSMSArr.supply_id;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSArr.mobile_number = InputRoot.XMLNS.Data.Body.sendSMSArr.mobile_number;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSArr.content = InputRoot.XMLNS.Data.Body.sendSMSArr.content;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSArr.datetime = InputRoot.XMLNS.Data.Body.sendSMSArr.datetime;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSArr.priority = InputRoot.XMLNS.Data.Body.sendSMSArr.priority;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:sendSMSArr.app_sender = InputRoot.XMLNS.Data.Body.sendSMSArr.app_sender;
+			*/
+			END CASE;
+			--Kienvt: 20130409: Add them phan routing cho IB va SMS
+			--Filter: AND a.service_type=req_app
+
+			DECLARE req_app CHARACTER InputRoot.XMLNSC.Data.Header.req_app;
+			/*CASE srv
+			WHEN 'IGW001' THEN
+			SET OutputLocalEnvironment.XMLNS.url_list[]=
+			(
+			SELECT a.service_url
+			FROM CacheServiceURLTable.ServiceInfoData[] as a
+			WHERE a.service_id=srv
+			AND a.service_type=req_app
+			);
+			ELSE
+			SET OutputLocalEnvironment.XMLNS.url_list[]=
+			(
+			SELECT a.service_url
+			FROM CacheServiceURLTable.ServiceInfoData[] as a
+			WHERE a.service_id=srv
+			);
+			END CASE;*/
+
+			SET OutputLocalEnvironment.XMLNS.url_list[]=
+			(
+			SELECT a.service_url,a.service_timeout
+			FROM CacheServiceURLTable.ServiceInfoData[] as a
+			WHERE a.service_id=srv
+			AND a.service_type=req_app
+			);
+			--Neu ko tim thay thi lay gia tri default
+			IF CARDINALITY (OutputLocalEnvironment.XMLNS.url_list[])<= 0 THEN
+				SET OutputLocalEnvironment.XMLNS.url_list[]=
+				(
+				SELECT a.service_url,a.service_timeout
+				FROM CacheServiceURLTable.ServiceInfoData[] as a
+				WHERE a.service_id=srv
+				);
+			END IF;
+
+			SET OutputLocalEnvironment.Destination.HTTP.RequestLine.Method = 'POST';
+			SET OutputLocalEnvironment.Destination.HTTP.RequestURL = OutputLocalEnvironment.XMLNS.url_list.service_url;
+			--end Kienvt:20130409
+			--Kienvt: 2013-05-04 add them timeout
+			SET OutputLocalEnvironment.Destination.HTTP.Timeout = OutputLocalEnvironment.XMLNS.url_list.service_timeout;
+			--end 2013-05-04
+
+			RETURN TRUE;
+		END;
+
+		CREATE PROCEDURE CopyMessageHeaders() BEGIN
+			DECLARE I INTEGER 1;
+			DECLARE J INTEGER;
+			SET J = CARDINALITY(InputRoot.*[]);
+			WHILE I < J DO
+				SET OutputRoot.*[I] = InputRoot.*[I];
+				SET I = I + 1;
+			END WHILE;
+		END;
+
+		CREATE PROCEDURE CopyEntireMessage() BEGIN
+			SET OutputRoot = InputRoot;
+		END;
+	END MODULE;
+	/**
+	*
+	*
+	*
+	*/
+
+	CREATE COMPUTE MODULE IGWOutFlow_PostProcess
+		CREATE FUNCTION Main() RETURNS BOOLEAN
+		BEGIN
+			-- CALL CopyMessageHeaders();
+			-- CALL CopyEntireMessage();
+			CREATE NEXTSIBLING OF OutputRoot.Properties DOMAIN 'MQMD';
+			SET OutputRoot.MQMD = Environment.MQMD;
+			DECLARE ns2 NAMESPACE 'http://gateway.msb.com.vn/';
+			DECLARE psrv CHARACTER InputLocalEnvironment.XMLNS.Messages.Request.Data.Header.srv;
+
+			DECLARE curr_time CHAR CURRENT_TIME;
+			DECLARE curr_date CHAR CURRENT_DATE;
+
+			SET OutputRoot.XMLNS.Messages = InputLocalEnvironment.XMLNS.Messages;
+			SET OutputRoot.XMLNS.Messages.Control.msglog.rsp_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+			SET OutputRoot.XMLNS.Messages.Control.msglog.rsp_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+
+			CASE psrv
+			WHEN 'IGW001' THEN
+				DECLARE preturn CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:sendSMSResponse.return.responseCode;
+
+				SET OutputRoot.XMLNS.Messages.Response.Data.Body.sendSMS.out.responseCode=preturn;
+			WHEN 'IGW002' THEN
+				DECLARE preturn CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:sendSMSObjResponse.return.responseCode;
+
+				SET OutputRoot.XMLNS.Messages.Response.Data.Body.sendSMSObj.out.responseCode=preturn;
+			ELSE
+				DECLARE preturn CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:sendSMSArrResponse.return.responseCode;
+
+				SET OutputRoot.XMLNS.Messages.Response.Data.Body.sendSMSArr.out.responseCode=preturn;
+			END CASE;
+
+
+			RETURN TRUE;
+		END;
+
+		CREATE PROCEDURE CopyMessageHeaders() BEGIN
+			DECLARE I INTEGER 1;
+			DECLARE J INTEGER;
+			SET J = CARDINALITY(InputRoot.*[]);
+			WHILE I < J DO
+				SET OutputRoot.*[I] = InputRoot.*[I];
+				SET I = I + 1;
+			END WHILE;
+		END;
+
+		CREATE PROCEDURE CopyEntireMessage() BEGIN
+			SET OutputRoot = InputRoot;
+		END;
+	END MODULE;

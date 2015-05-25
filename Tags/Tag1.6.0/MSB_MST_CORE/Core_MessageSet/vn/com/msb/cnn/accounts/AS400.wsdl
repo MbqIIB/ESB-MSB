@@ -1,0 +1,1204 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions targetNamespace="http://accounts.cnn.msb.com.vn" xmlns:ns1="http://utils.cnn.msb.com.vn" xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding" xmlns:tns="http://accounts.cnn.msb.com.vn" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedMXSD location="AS400_InlineSchema1.mxsd"/>
+        <generatedMXSD location="..\utils\AS400_InlineSchema2.mxsd"/>
+        <binding hasEncoding="false" imported="true" name="AS400HttpBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+<xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://accounts.cnn.msb.com.vn" xmlns:soapenv11="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenv12="http://www.w3.org/2003/05/soap-envelope">
+            <xsd:import namespace="http://utils.cnn.msb.com.vn" schemaLocation="../utils/AS400_InlineSchema2.mxsd"/>
+            <xsd:include schemaLocation="AS400_InlineSchema1.mxsd"/>
+    </xsd:schema>
+<xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://utils.cnn.msb.com.vn" xmlns:soapenv11="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenv12="http://www.w3.org/2003/05/soap-envelope">
+            <xsd:import namespace="http://accounts.cnn.msb.com.vn" schemaLocation="AS400_InlineSchema1.mxsd"/>
+            <xsd:include schemaLocation="../utils/AS400_InlineSchema2.mxsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="accountInquiryResponse">
+    <wsdl:part element="tns:accountInquiryResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transferFromWUToCAResponse">
+    <wsdl:part element="tns:transferFromWUToCAResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="lockUpdateE_ContactResponse">
+    <wsdl:part element="tns:lockUpdateE_ContactResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="joinCARequest">
+    <wsdl:part element="tns:joinCA" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAccountRequest">
+    <wsdl:part element="tns:getAccount" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchCustomerByIdResponse">
+    <wsdl:part element="tns:searchCustomerByIdResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="lockUpdateE_ContactRequest">
+    <wsdl:part element="tns:lockUpdateE_Contact" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ddMasterInquiryRequest">
+    <wsdl:part element="tns:ddMasterInquiry" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addE_ContactRequest">
+    <wsdl:part element="tns:addE_Contact" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateE_ContactResponse">
+    <wsdl:part element="tns:updateE_ContactResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transferGLtoGLRequest">
+    <wsdl:part element="tns:transferGLtoGL" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="miniStatementResponse">
+    <wsdl:part element="tns:miniStatementResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="lockTransferAccountFromCifToAnotherResponse">
+    <wsdl:part element="tns:lockTransferAccountFromCifToAnotherResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="creditAdviceRequest">
+    <wsdl:part element="tns:creditAdvice" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createCifMainternanceMessageResponse">
+    <wsdl:part element="tns:createCifMainternanceMessageResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchCustomerByIdRequest">
+    <wsdl:part element="tns:searchCustomerById" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchAccountMoreByCifResponse">
+    <wsdl:part element="tns:searchAccountMoreByCifResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="lockTransferAccountFromCifToAnotherRequest">
+    <wsdl:part element="tns:lockTransferAccountFromCifToAnother" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loanAccountInquiryRequest">
+    <wsdl:part element="tns:loanAccountInquiry" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transferGLtoGLResponse">
+    <wsdl:part element="tns:transferGLtoGLResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getInformationByIDForIBSRegistrationRequest">
+    <wsdl:part element="tns:getInformationByIDForIBSRegistration" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createCAResponse">
+    <wsdl:part element="tns:createCAResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateMainternanceNewCAResponse">
+    <wsdl:part element="tns:updateMainternanceNewCAResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="miniStatementRequest">
+    <wsdl:part element="tns:miniStatement" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transferAccountFromCifToAnotherResponse">
+    <wsdl:part element="tns:transferAccountFromCifToAnotherResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reversableOL2TransactionRequest">
+    <wsdl:part element="tns:reversableOL2Transaction" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchAccountByCifResponse">
+    <wsdl:part element="tns:searchAccountByCifResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transferFromCASAToGLRequest">
+    <wsdl:part element="tns:transferFromCASAToGL" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchAccountByCifRequest">
+    <wsdl:part element="tns:searchAccountByCif" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchE_ContactByCifRequest">
+    <wsdl:part element="tns:searchE_ContactByCif" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="lockUpdateMainternanceCARequest">
+    <wsdl:part element="tns:lockUpdateMainternanceCA" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeCardServiceRequest">
+    <wsdl:part element="tns:changeCardService" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="debitAdviceResponse">
+    <wsdl:part element="tns:debitAdviceResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cardActivationRequest">
+    <wsdl:part element="tns:cardActivation" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reversableTransactionRequest">
+    <wsdl:part element="tns:reversableTransaction" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createCARequest">
+    <wsdl:part element="tns:createCA" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="creditAdviceResponse">
+    <wsdl:part element="tns:creditAdviceResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createCifMainternanceMessageRequest">
+    <wsdl:part element="tns:createCifMainternanceMessage" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateMainternanceNewCARequest">
+    <wsdl:part element="tns:updateMainternanceNewCA" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createAddCifGroupMainternanceMessageRequest">
+    <wsdl:part element="tns:createAddCifGroupMainternanceMessage" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reActiveCardRequest">
+    <wsdl:part element="tns:reActiveCard" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="accountInquiryRequest">
+    <wsdl:part element="tns:accountInquiry" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cardActivationResponse">
+    <wsdl:part element="tns:cardActivationResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateMainternanceCARequest">
+    <wsdl:part element="tns:updateMainternanceCA" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchE_ContactByCifResponse">
+    <wsdl:part element="tns:searchE_ContactByCifResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="markHotCardResponse">
+    <wsdl:part element="tns:markHotCardResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transferAccountFromCifToAnotherRequest">
+    <wsdl:part element="tns:transferAccountFromCifToAnother" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="linkMasterCardResponse">
+    <wsdl:part element="tns:linkMasterCardResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getFDReceiptAccountResponse">
+    <wsdl:part element="tns:getFDReceiptAccountResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createSAResponse">
+    <wsdl:part element="tns:createSAResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateE_ContactRequest">
+    <wsdl:part element="tns:updateE_Contact" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="lockUpdateMainternanceCAResponse">
+    <wsdl:part element="tns:lockUpdateMainternanceCAResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateMainternanceCAResponse">
+    <wsdl:part element="tns:updateMainternanceCAResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getFDReceiptAccountRequest">
+    <wsdl:part element="tns:getFDReceiptAccount" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchCustomerInformationByIDRequest">
+    <wsdl:part element="tns:searchCustomerInformationByID" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="linkMasterCardRequest">
+    <wsdl:part element="tns:linkMasterCard" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addE_ContactResponse">
+    <wsdl:part element="tns:addE_ContactResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="debitAdviceRequest">
+    <wsdl:part element="tns:debitAdvice" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transferFromWUToCARequest">
+    <wsdl:part element="tns:transferFromWUToCA" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reversableTransactionResponse">
+    <wsdl:part element="tns:reversableTransactionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TFMessageSendingResponse">
+    <wsdl:part element="tns:TFMessageSendingResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchCustomerInformationByIDResponse">
+    <wsdl:part element="tns:searchCustomerInformationByIDResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TFMessageSendingRequest">
+    <wsdl:part element="tns:TFMessageSending" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createFDReceiptRequest">
+    <wsdl:part element="tns:createFDReceipt" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="joinCAResponse">
+    <wsdl:part element="tns:joinCAResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="markHotCardRequest">
+    <wsdl:part element="tns:markHotCard" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createFDResponse">
+    <wsdl:part element="tns:createFDResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transferFromCASAToGLResponse">
+    <wsdl:part element="tns:transferFromCASAToGLResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createFDReceiptResponse">
+    <wsdl:part element="tns:createFDReceiptResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createUnHoldMessageResponse">
+    <wsdl:part element="tns:createUnHoldMessageResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getInformationByIDForIBSRegistrationResponse">
+    <wsdl:part element="tns:getInformationByIDForIBSRegistrationResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchAccountMoreByCifRequest">
+    <wsdl:part element="tns:searchAccountMoreByCif" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reversableOL2TransactionResponse">
+    <wsdl:part element="tns:reversableOL2TransactionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getInformationByCIFForIBSRegistrationRequest">
+    <wsdl:part element="tns:getInformationByCIFForIBSRegistration" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createUnHoldMessageRequest">
+    <wsdl:part element="tns:createUnHoldMessage" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="linkCardRequest">
+    <wsdl:part element="tns:linkCard" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createHoldMessageRequest">
+    <wsdl:part element="tns:createHoldMessage" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transferFromCASAToCASAResponse">
+    <wsdl:part element="tns:transferFromCASAToCASAResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="transferFromCASAToCASARequest">
+    <wsdl:part element="tns:transferFromCASAToCASA" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="linkCardResponse">
+    <wsdl:part element="tns:linkCardResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ddMasterInquiryResponse">
+    <wsdl:part element="tns:ddMasterInquiryResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createAddCifGroupMainternanceMessageResponse">
+    <wsdl:part element="tns:createAddCifGroupMainternanceMessageResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createSARequest">
+    <wsdl:part element="tns:createSA" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createHoldMessageResponse">
+    <wsdl:part element="tns:createHoldMessageResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAccountResponse">
+    <wsdl:part element="tns:getAccountResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createCifResponse">
+    <wsdl:part element="tns:createCifResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="joinSARequest">
+    <wsdl:part element="tns:joinSA" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createLockForUnHoldMessageResponse">
+    <wsdl:part element="tns:createLockForUnHoldMessageResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchCustomerByCifRequest">
+    <wsdl:part element="tns:searchCustomerByCif" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HostMessageSendingRequest">
+    <wsdl:part element="tns:HostMessageSending" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HostMessageSendingResponse">
+    <wsdl:part element="tns:HostMessageSendingResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeCardServiceResponse">
+    <wsdl:part element="tns:changeCardServiceResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getInformationByCIFForIBSRegistrationResponse">
+    <wsdl:part element="tns:getInformationByCIFForIBSRegistrationResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="lockUpdateMainternanceNewCARequest">
+    <wsdl:part element="tns:lockUpdateMainternanceNewCA" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reActiveCardResponse">
+    <wsdl:part element="tns:reActiveCardResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createFDRequest">
+    <wsdl:part element="tns:createFD" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createLockForUnHoldMessageRequest">
+    <wsdl:part element="tns:createLockForUnHoldMessage" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchCustomerByCifResponse">
+    <wsdl:part element="tns:searchCustomerByCifResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loanAccountInquiryResponse">
+    <wsdl:part element="tns:loanAccountInquiryResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createCifRequest">
+    <wsdl:part element="tns:createCif" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="joinSAResponse">
+    <wsdl:part element="tns:joinSAResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="lockUpdateMainternanceNewCAResponse">
+    <wsdl:part element="tns:lockUpdateMainternanceNewCAResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="AS400">
+    <wsdl:operation name="createHoldMessage">
+      <wsdl:input message="tns:createHoldMessageRequest" name="createHoldMessageRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createHoldMessageResponse" name="createHoldMessageResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createFD">
+      <wsdl:input message="tns:createFDRequest" name="createFDRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createFDResponse" name="createFDResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lockUpdateMainternanceCA">
+      <wsdl:input message="tns:lockUpdateMainternanceCARequest" name="lockUpdateMainternanceCARequest">
+    </wsdl:input>
+      <wsdl:output message="tns:lockUpdateMainternanceCAResponse" name="lockUpdateMainternanceCAResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="debitAdvice">
+      <wsdl:input message="tns:debitAdviceRequest" name="debitAdviceRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:debitAdviceResponse" name="debitAdviceResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HostMessageSending">
+      <wsdl:input message="tns:HostMessageSendingRequest" name="HostMessageSendingRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:HostMessageSendingResponse" name="HostMessageSendingResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="linkMasterCard">
+      <wsdl:input message="tns:linkMasterCardRequest" name="linkMasterCardRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:linkMasterCardResponse" name="linkMasterCardResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lockUpdateE_Contact">
+      <wsdl:input message="tns:lockUpdateE_ContactRequest" name="lockUpdateE_ContactRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:lockUpdateE_ContactResponse" name="lockUpdateE_ContactResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeCardService">
+      <wsdl:input message="tns:changeCardServiceRequest" name="changeCardServiceRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:changeCardServiceResponse" name="changeCardServiceResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createFDReceipt">
+      <wsdl:input message="tns:createFDReceiptRequest" name="createFDReceiptRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createFDReceiptResponse" name="createFDReceiptResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferFromCASAToCASA">
+      <wsdl:input message="tns:transferFromCASAToCASARequest" name="transferFromCASAToCASARequest">
+    </wsdl:input>
+      <wsdl:output message="tns:transferFromCASAToCASAResponse" name="transferFromCASAToCASAResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createCifMainternanceMessage">
+      <wsdl:input message="tns:createCifMainternanceMessageRequest" name="createCifMainternanceMessageRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createCifMainternanceMessageResponse" name="createCifMainternanceMessageResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lockTransferAccountFromCifToAnother">
+      <wsdl:input message="tns:lockTransferAccountFromCifToAnotherRequest" name="lockTransferAccountFromCifToAnotherRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:lockTransferAccountFromCifToAnotherResponse" name="lockTransferAccountFromCifToAnotherResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createSA">
+      <wsdl:input message="tns:createSARequest" name="createSARequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createSAResponse" name="createSAResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TFMessageSending">
+      <wsdl:input message="tns:TFMessageSendingRequest" name="TFMessageSendingRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:TFMessageSendingResponse" name="TFMessageSendingResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="joinSA">
+      <wsdl:input message="tns:joinSARequest" name="joinSARequest">
+    </wsdl:input>
+      <wsdl:output message="tns:joinSAResponse" name="joinSAResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="joinCA">
+      <wsdl:input message="tns:joinCARequest" name="joinCARequest">
+    </wsdl:input>
+      <wsdl:output message="tns:joinCAResponse" name="joinCAResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="accountInquiry">
+      <wsdl:input message="tns:accountInquiryRequest" name="accountInquiryRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:accountInquiryResponse" name="accountInquiryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createAddCifGroupMainternanceMessage">
+      <wsdl:input message="tns:createAddCifGroupMainternanceMessageRequest" name="createAddCifGroupMainternanceMessageRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createAddCifGroupMainternanceMessageResponse" name="createAddCifGroupMainternanceMessageResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="markHotCard">
+      <wsdl:input message="tns:markHotCardRequest" name="markHotCardRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:markHotCardResponse" name="markHotCardResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInformationByIDForIBSRegistration">
+      <wsdl:input message="tns:getInformationByIDForIBSRegistrationRequest" name="getInformationByIDForIBSRegistrationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getInformationByIDForIBSRegistrationResponse" name="getInformationByIDForIBSRegistrationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchCustomerById">
+      <wsdl:input message="tns:searchCustomerByIdRequest" name="searchCustomerByIdRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:searchCustomerByIdResponse" name="searchCustomerByIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="creditAdvice">
+      <wsdl:input message="tns:creditAdviceRequest" name="creditAdviceRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:creditAdviceResponse" name="creditAdviceResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="linkCard">
+      <wsdl:input message="tns:linkCardRequest" name="linkCardRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:linkCardResponse" name="linkCardResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reActiveCard">
+      <wsdl:input message="tns:reActiveCardRequest" name="reActiveCardRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:reActiveCardResponse" name="reActiveCardResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reversableTransaction">
+      <wsdl:input message="tns:reversableTransactionRequest" name="reversableTransactionRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:reversableTransactionResponse" name="reversableTransactionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ddMasterInquiry">
+      <wsdl:input message="tns:ddMasterInquiryRequest" name="ddMasterInquiryRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ddMasterInquiryResponse" name="ddMasterInquiryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchAccountMoreByCif">
+      <wsdl:input message="tns:searchAccountMoreByCifRequest" name="searchAccountMoreByCifRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:searchAccountMoreByCifResponse" name="searchAccountMoreByCifResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loanAccountInquiry">
+      <wsdl:input message="tns:loanAccountInquiryRequest" name="loanAccountInquiryRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:loanAccountInquiryResponse" name="loanAccountInquiryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferGLtoGL">
+      <wsdl:input message="tns:transferGLtoGLRequest" name="transferGLtoGLRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:transferGLtoGLResponse" name="transferGLtoGLResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferFromCASAToGL">
+      <wsdl:input message="tns:transferFromCASAToGLRequest" name="transferFromCASAToGLRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:transferFromCASAToGLResponse" name="transferFromCASAToGLResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateE_Contact">
+      <wsdl:input message="tns:updateE_ContactRequest" name="updateE_ContactRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:updateE_ContactResponse" name="updateE_ContactResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateMainternanceCA">
+      <wsdl:input message="tns:updateMainternanceCARequest" name="updateMainternanceCARequest">
+    </wsdl:input>
+      <wsdl:output message="tns:updateMainternanceCAResponse" name="updateMainternanceCAResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInformationByCIFForIBSRegistration">
+      <wsdl:input message="tns:getInformationByCIFForIBSRegistrationRequest" name="getInformationByCIFForIBSRegistrationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getInformationByCIFForIBSRegistrationResponse" name="getInformationByCIFForIBSRegistrationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createUnHoldMessage">
+      <wsdl:input message="tns:createUnHoldMessageRequest" name="createUnHoldMessageRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createUnHoldMessageResponse" name="createUnHoldMessageResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferFromWUToCA">
+      <wsdl:input message="tns:transferFromWUToCARequest" name="transferFromWUToCARequest">
+    </wsdl:input>
+      <wsdl:output message="tns:transferFromWUToCAResponse" name="transferFromWUToCAResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="miniStatement">
+      <wsdl:input message="tns:miniStatementRequest" name="miniStatementRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:miniStatementResponse" name="miniStatementResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchCustomerByCif">
+      <wsdl:input message="tns:searchCustomerByCifRequest" name="searchCustomerByCifRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:searchCustomerByCifResponse" name="searchCustomerByCifResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addE_Contact">
+      <wsdl:input message="tns:addE_ContactRequest" name="addE_ContactRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:addE_ContactResponse" name="addE_ContactResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createCA">
+      <wsdl:input message="tns:createCARequest" name="createCARequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createCAResponse" name="createCAResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reversableOL2Transaction">
+      <wsdl:input message="tns:reversableOL2TransactionRequest" name="reversableOL2TransactionRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:reversableOL2TransactionResponse" name="reversableOL2TransactionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAccount">
+      <wsdl:input message="tns:getAccountRequest" name="getAccountRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getAccountResponse" name="getAccountResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateMainternanceNewCA">
+      <wsdl:input message="tns:updateMainternanceNewCARequest" name="updateMainternanceNewCARequest">
+    </wsdl:input>
+      <wsdl:output message="tns:updateMainternanceNewCAResponse" name="updateMainternanceNewCAResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferAccountFromCifToAnother">
+      <wsdl:input message="tns:transferAccountFromCifToAnotherRequest" name="transferAccountFromCifToAnotherRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:transferAccountFromCifToAnotherResponse" name="transferAccountFromCifToAnotherResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cardActivation">
+      <wsdl:input message="tns:cardActivationRequest" name="cardActivationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:cardActivationResponse" name="cardActivationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchAccountByCif">
+      <wsdl:input message="tns:searchAccountByCifRequest" name="searchAccountByCifRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:searchAccountByCifResponse" name="searchAccountByCifResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createCif">
+      <wsdl:input message="tns:createCifRequest" name="createCifRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createCifResponse" name="createCifResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lockUpdateMainternanceNewCA">
+      <wsdl:input message="tns:lockUpdateMainternanceNewCARequest" name="lockUpdateMainternanceNewCARequest">
+    </wsdl:input>
+      <wsdl:output message="tns:lockUpdateMainternanceNewCAResponse" name="lockUpdateMainternanceNewCAResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createLockForUnHoldMessage">
+      <wsdl:input message="tns:createLockForUnHoldMessageRequest" name="createLockForUnHoldMessageRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createLockForUnHoldMessageResponse" name="createLockForUnHoldMessageResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchE_ContactByCif">
+      <wsdl:input message="tns:searchE_ContactByCifRequest" name="searchE_ContactByCifRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:searchE_ContactByCifResponse" name="searchE_ContactByCifResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchCustomerInformationByID">
+      <wsdl:input message="tns:searchCustomerInformationByIDRequest" name="searchCustomerInformationByIDRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:searchCustomerInformationByIDResponse" name="searchCustomerInformationByIDResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFDReceiptAccount">
+      <wsdl:input message="tns:getFDReceiptAccountRequest" name="getFDReceiptAccountRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getFDReceiptAccountResponse" name="getFDReceiptAccountResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AS400HttpBinding" type="tns:AS400">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createHoldMessage">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="createHoldMessageRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createHoldMessageResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createFD">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="createFDRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createFDResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lockUpdateMainternanceCA">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="lockUpdateMainternanceCARequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="lockUpdateMainternanceCAResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="debitAdvice">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="debitAdviceRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="debitAdviceResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HostMessageSending">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="HostMessageSendingRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="HostMessageSendingResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="linkMasterCard">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="linkMasterCardRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="linkMasterCardResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lockUpdateE_Contact">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="lockUpdateE_ContactRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="lockUpdateE_ContactResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeCardService">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="changeCardServiceRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="changeCardServiceResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createFDReceipt">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="createFDReceiptRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createFDReceiptResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferFromCASAToCASA">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="transferFromCASAToCASARequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="transferFromCASAToCASAResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createCifMainternanceMessage">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="createCifMainternanceMessageRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createCifMainternanceMessageResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lockTransferAccountFromCifToAnother">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="lockTransferAccountFromCifToAnotherRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="lockTransferAccountFromCifToAnotherResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createSA">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="createSARequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createSAResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TFMessageSending">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="TFMessageSendingRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="TFMessageSendingResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="joinSA">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="joinSARequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="joinSAResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="joinCA">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="joinCARequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="joinCAResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="accountInquiry">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="accountInquiryRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="accountInquiryResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createAddCifGroupMainternanceMessage">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="createAddCifGroupMainternanceMessageRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createAddCifGroupMainternanceMessageResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="markHotCard">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="markHotCardRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="markHotCardResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInformationByIDForIBSRegistration">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getInformationByIDForIBSRegistrationRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getInformationByIDForIBSRegistrationResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchCustomerById">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="searchCustomerByIdRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchCustomerByIdResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="creditAdvice">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="creditAdviceRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="creditAdviceResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="linkCard">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="linkCardRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="linkCardResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reActiveCard">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="reActiveCardRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="reActiveCardResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reversableTransaction">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="reversableTransactionRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="reversableTransactionResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ddMasterInquiry">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="ddMasterInquiryRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ddMasterInquiryResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchAccountMoreByCif">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="searchAccountMoreByCifRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchAccountMoreByCifResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loanAccountInquiry">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="loanAccountInquiryRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="loanAccountInquiryResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferGLtoGL">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="transferGLtoGLRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="transferGLtoGLResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferFromCASAToGL">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="transferFromCASAToGLRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="transferFromCASAToGLResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateE_Contact">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="updateE_ContactRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateE_ContactResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateMainternanceCA">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="updateMainternanceCARequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateMainternanceCAResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInformationByCIFForIBSRegistration">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getInformationByCIFForIBSRegistrationRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getInformationByCIFForIBSRegistrationResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createUnHoldMessage">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="createUnHoldMessageRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createUnHoldMessageResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferFromWUToCA">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="transferFromWUToCARequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="transferFromWUToCAResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="miniStatement">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="miniStatementRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="miniStatementResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchCustomerByCif">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="searchCustomerByCifRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchCustomerByCifResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addE_Contact">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="addE_ContactRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addE_ContactResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createCA">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="createCARequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createCAResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reversableOL2Transaction">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="reversableOL2TransactionRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="reversableOL2TransactionResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAccount">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getAccountRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAccountResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateMainternanceNewCA">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="updateMainternanceNewCARequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateMainternanceNewCAResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferAccountFromCifToAnother">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="transferAccountFromCifToAnotherRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="transferAccountFromCifToAnotherResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cardActivation">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="cardActivationRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cardActivationResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchAccountByCif">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="searchAccountByCifRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchAccountByCifResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createCif">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="createCifRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createCifResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lockUpdateMainternanceNewCA">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="lockUpdateMainternanceNewCARequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="lockUpdateMainternanceNewCAResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createLockForUnHoldMessage">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="createLockForUnHoldMessageRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createLockForUnHoldMessageResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchE_ContactByCif">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="searchE_ContactByCifRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchE_ContactByCifResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchCustomerInformationByID">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="searchCustomerInformationByIDRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchCustomerInformationByIDResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFDReceiptAccount">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getFDReceiptAccountRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getFDReceiptAccountResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AS400">
+    <wsdl:port binding="tns:AS400HttpBinding" name="AS400HttpPort">
+      <wsdlsoap:address location="http://10.0.2.46:7080/OneConnectServices/services/AS400"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

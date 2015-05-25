@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS050</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<createAddCifGroupMainternanceMessage>
+			<channel>SMSBK01</channel>
+			<teller>TT110001</teller>
+			<branchCode>11</branchCode>
+			<cifCorp>11</cifCorp>
+			<seq>11</seq>
+			<cifEmp>11</cifEmp>
+			<relationalEmpLev>11</relationalEmpLev>
+			<relationalType>11</relationalType>
+			<relationalCorpLev>11</relationalCorpLev>
+		</createAddCifGroupMainternanceMessage>
+	</Body>
+</Data>

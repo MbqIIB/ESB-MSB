@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS029</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<updateE_Contact>
+			<channel>SMSBK01</channel>
+			<teller>TT110001</teller>
+			<bankCode></bankCode>
+			<cifNumber>212868</cifNumber>
+			<sequenceNo>3</sequenceNo>
+			<eContactType>EM</eContactType>
+			<newEcontact>kienvt@seatechit.com.vn</newEcontact>
+		</updateE_Contact>
+	</Body>
+</Data>
+

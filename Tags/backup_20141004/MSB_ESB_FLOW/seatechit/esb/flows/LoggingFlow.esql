@@ -1,0 +1,134 @@
+
+
+
+
+BROKER SCHEMA seatechit.esb.flows
+
+CREATE COMPUTE MODULE LoggingFlow_WriteLog
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+		DECLARE SQLState1 CHARACTER;
+		DECLARE SQLErrorText1 CHARACTER;
+		DECLARE SQLCode1 INTEGER;
+		DECLARE SQLNativeError1 INTEGER;
+
+		DECLARE headerRef REFERENCE TO InputRoot.XMLNSC.Messages.Request.Data.Header;
+		DECLARE tllogRef REFERENCE TO InputRoot.XMLNSC.Messages.Control.tllog;
+		DECLARE msglogRef REFERENCE TO InputRoot.XMLNSC.Messages.Control.msglog;
+		--
+		--
+		--tllog
+		DECLARE message_sn CHARACTER InputRoot.XMLNSC.Messages.Request.Data.Header.req_id;
+		DECLARE tran_code CHARACTER headerRef.srv;
+		DECLARE sender_id CHARACTER headerRef.req_app;
+		DECLARE receiver_id CHARACTER headerRef.srv_app;
+		--Thoi gian sent tu client
+		DECLARE req_date CHARACTER SUBSTRING(headerRef.req_time FROM 1 FOR 10);
+		DECLARE req_time CHARACTER SUBSTRING(headerRef.req_time FROM 12 FOR 8);
+		--Thoi gian nhan tu inbox
+		DECLARE receive_date CHARACTER tllogRef.rcv_date;
+		DECLARE receive_time CHARACTER tllogRef.rcv_time;
+		--Thoi gian xu ly xong toan bo giao dich,dua ra outbox
+		DECLARE resp_date CHARACTER tllogRef.rsp_date;
+		DECLARE resp_time CHARACTER tllogRef.rsp_time;
+
+		DECLARE resp_code CHARACTER tllogRef.rsp_code;
+		DECLARE resp_msg CHARACTER tllogRef.rsp_msg;
+
+		DECLARE propRef REFERENCE TO InputRoot.Properties;
+		DECLARE inCCSID INT propRef.CodedCharSetId;
+		DECLARE inEncoding INT propRef.Encoding;
+		DECLARE msgInBitStream BLOB ASBITSTREAM(InputRoot.XMLNSC.Messages.Request, inEncoding, inCCSID);
+		DECLARE in_xml_msg CHAR CAST(msgInBitStream AS CHAR CCSID inCCSID);
+		DECLARE msgOutBitStream BLOB ASBITSTREAM(InputRoot.XMLNSC.Messages.Response, inEncoding, inCCSID);
+		DECLARE out_xml_msg CHAR CAST(msgOutBitStream AS CHAR CCSID inCCSID);
+		--Kienvt: 20130708:Them tam doan ghi log OTP
+		IF tran_code='OTP001' THEN
+			DECLARE v_sql CHARACTER 'INSERT INTO ESB_LOG_OTP(MESSAGE_SN,INST_TIME,CURR_TIME,CURR_DT,IN_OUT)
+			VALUES('''||message_sn||''','''
+			||CAST(CURRENT_GMTTIMESTAMP AS CHARACTER FORMAT 'HHmmss')||''','''
+			||CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HHmmss')||''',SYSDATE,''O'')';
+			PASSTHRU(v_sql);
+		END IF;
+		--end 20130708---
+		--insert tllog
+		INSERT INTO Database.esb_tllog(message_sn, tran_code, sender_id,
+		req_date, req_time, receiver_id,
+		receive_date, receive_time, resp_date,
+		resp_time, resp_code, resp_msg, in_xml_msg,
+		out_xml_msg,history_date)
+		VALUES(message_sn, tran_code, sender_id,
+		req_date, req_time, receiver_id,
+		receive_date, receive_time, resp_date,
+		resp_time, resp_code, resp_msg, in_xml_msg,
+		out_xml_msg,CURRENT_DATE);
+		--
+		--
+		--msglog
+		IF LASTMOVE(msglogRef) THEN
+			DECLARE msg_message_sn CHARACTER headerRef.req_id;
+			DECLARE msg_sender_id CHARACTER headerRef.req_app;
+			DECLARE msg_tran_sn CHARACTER headerRef.tran_sn;
+			DECLARE msg_tran_date CHARACTER headerRef.tran_date;
+			--Thoi gian nhan tu queu in cua subflow
+			DECLARE msg_receive_date CHARACTER msglogRef.rcv_date;
+			DECLARE msg_receive_time CHARACTER msglogRef.rcv_time;
+			--Thoi gian send den chuong trinh xu ly
+			DECLARE msg_req_date CHARACTER msglogRef.req_date;
+			DECLARE msg_req_time CHARACTER msglogRef.req_time;
+			--Thoi gian nhan ve sau khi goi den chuong trinh xu ly
+			DECLARE msg_rsp_date CHARACTER msglogRef.rsp_date;
+			DECLARE msg_rsp_time CHARACTER msglogRef.rsp_time;
+			--Ma loi tra ve tu chuong trinh xy ly
+			DECLARE msg_resp_code CHARACTER msglogRef.rsp_code;
+			DECLARE msg_resp_msg CHARACTER msglogRef.rsp_msg;
+			--Message gui/nhan den chuong trinh xu ly
+			DECLARE msg_in_message CHARACTER msglogRef.in_message;
+			DECLARE msg_out_message CHARACTER msglogRef.out_message;
+
+			DECLARE msg_teller_id CHARACTER msglogRef.teller_id;
+			DECLARE msg_approver_id CHARACTER msglogRef.approver_id;
+			DECLARE msg_ref_app_id CHARACTER msglogRef.ref_app_id;
+			DECLARE msg_ref_service CHARACTER msglogRef.ref_service;
+			DECLARE msg_ref_channel CHARACTER msglogRef.ref_channel;
+			DECLARE msg_ref_port CHARACTER msglogRef.ref_port;
+			DECLARE msg_ref_tran_code CHARACTER msglogRef.ref_tran_code;
+			DECLARE msg_ref_cif_acct CHARACTER msglogRef.ref_cif_acct;
+			DECLARE msg_ref_amt CHARACTER msglogRef.ref_amt;
+			--insert msglog
+			INSERT INTO Database.esb_msglog(message_sn,tran_code,sender_id,
+			tran_sn,tran_date,receive_date,receive_time,req_date,req_time,rsp_date ,
+			rsp_time,resp_code, resp_msg,in_message, out_message, teller_id, approver_id, ref_app_id,
+			ref_service, ref_channel, ref_port, ref_tran_code,ref_cif_acct, ref_amt,history_date)
+			VALUES(msg_message_sn,tran_code, msg_sender_id, msg_tran_sn, msg_tran_date, msg_receive_date,
+			msg_receive_time, msg_req_date, msg_req_time, msg_rsp_date, msg_rsp_time,
+			msg_resp_code, msg_resp_msg,msg_in_message,msg_out_message, msg_teller_id, msg_approver_id, msg_ref_app_id,
+			msg_ref_service, msg_ref_channel, msg_ref_port, msg_ref_tran_code,msg_ref_cif_acct, msg_ref_amt,CURRENT_DATE);
+
+		END IF;
+		SET SQLCode1 = SQLCODE;
+		IF SQLCode1 <> 0 THEN
+			SET SQLState1 = SQLSTATE;
+			SET SQLErrorText1 = SQLERRORTEXT;
+			SET SQLNativeError1 = SQLNATIVEERROR;
+			THROW USER EXCEPTION MESSAGE 2950 VALUES('The SQL State' , SQLState1 , SQLCode1 , SQLNativeError1 , SQLErrorText1);
+		END IF;
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

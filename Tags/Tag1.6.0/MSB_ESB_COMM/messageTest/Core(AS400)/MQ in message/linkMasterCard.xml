@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS005</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<linkMasterCard>
+			<channel>SMSBK01</channel>
+			<teller>TT110001</teller>
+			<bankCode>110</bankCode>
+			<accountTag>02001010666741</accountTag>
+			<accountType>D</accountType>
+			<usage>S</usage>
+			<currency>VND</currency>
+			<branchTag>020</branchTag>
+			<cifNumber>212868</cifNumber>
+			<idNumber>B7755333</idNumber>
+			<idType>IP</idType>
+			<name>LE ANH TUAN</name>
+			<address>HA NOI</address>
+			<product>FGDB</product>
+			<annualFee>300000</annualFee>
+			<vip>Y</vip>
+			<addressLine2>HELLO1</addressLine2>
+			<addressLine3>HELLO2</addressLine3>
+			<addressLine4>HELLO3</addressLine4>
+		</linkMasterCard>
+	</Body>
+</Data>
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data xmlns="http://www.w3schools.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3schools.com esb.xsd">
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>123abc</req_app>
+		<srv>2</srv>
+		<srv_app>xyz</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<createCif>
+			<channel></channel>
+			<teller></teller>
+			<hostName></hostName>
+			<bankCode></bankCode>
+			<IdNumber></IdNumber>
+			<IdType></IdType>
+			<IdDateIssued></IdDateIssued>
+			<IdCountryIssued></IdCountryIssued>
+			<IdPlaceIssued></IdPlaceIssued>
+			<strSurname></strSurname>
+			<afterSurname></afterSurname>
+			<addressLine1></addressLine1>
+			<addressLine2></addressLine2>
+			<addressLine3></addressLine3>
+			<addressLine4></addressLine4>
+			<addressLine5></addressLine5>
+			<nationality></nationality>
+			<birthday></birthday>
+			<raceCode></raceCode>
+			<maritalStatus></maritalStatus>
+			<gender></gender>
+			<occupationCode_2></occupationCode_2>
+			<placeOfBirth></placeOfBirth>
+			<typeElectronicAddress1></typeElectronicAddress1>
+			<typeElectronicAddress2></typeElectronicAddress2>
+			<typeElectronicAddress3></typeElectronicAddress3>
+			<electronicAddress1></electronicAddress1>
+			<electronicAddress2></electronicAddress2>
+			<electronicAddress3></electronicAddress3>
+			<hostDate></hostDate>
+			<birthday_Full></birthday_Full>
+			<idDateIssued_Full></idDateIssued_Full>
+			<strOccupationCode_1></strOccupationCode_1>
+			<strProvince></strProvince>
+		</createCif>
+	</Body>
+</Data>
+

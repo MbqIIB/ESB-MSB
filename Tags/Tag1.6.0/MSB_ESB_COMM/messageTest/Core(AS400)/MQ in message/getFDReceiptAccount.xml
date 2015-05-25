@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS049</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<getFDReceiptAccount>
+			<branchCode>02000</branchCode>
+			<currencyCode>01</currencyCode>
+			<groupCode>2</groupCode>
+		</getFDReceiptAccount>
+	</Body>
+</Data>
+

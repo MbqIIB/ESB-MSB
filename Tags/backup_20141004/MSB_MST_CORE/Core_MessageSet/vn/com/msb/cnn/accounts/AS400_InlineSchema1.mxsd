@@ -1,0 +1,1658 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://accounts.cnn.msb.com.vn" xmlns:ns1="http://utils.cnn.msb.com.vn" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soapenv11="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenv12="http://www.w3.org/2003/05/soap-envelope" xmlns:tns="http://accounts.cnn.msb.com.vn" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://utils.cnn.msb.com.vn" schemaLocation="../utils/AS400_InlineSchema2.mxsd"/>
+            <xsd:element name="createHoldMessage">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.734" schemaObject="/0/createHoldMessage;XSDElementDeclaration"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="account" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="expiryDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="description" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="amount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="code" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:complexType name="ArrayOfString">
+<xsd:sequence>
+<xsd:element maxOccurs="unbounded" minOccurs="0" name="string" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+            <xsd:element name="createHoldMessageResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.735" schemaObject="/0/createHoldMessageResponse;XSDElementDeclaration=1"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createFD">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.736" schemaObject="/0/createFD;XSDElementDeclaration=2"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostId" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="currencyType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="modeOfOperation" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createFDResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.737" schemaObject="/0/createFDResponse;XSDElementDeclaration=3"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="lockUpdateMainternanceCA">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.738" schemaObject="/0/lockUpdateMainternanceCA;XSDElementDeclaration=4"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="lockUpdateMainternanceCAResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.739" schemaObject="/0/lockUpdateMainternanceCAResponse;XSDElementDeclaration=5"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="debitAdvice">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.740" schemaObject="/0/debitAdvice;XSDElementDeclaration=6"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sequence" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="manager" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="effectiveDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="crAmount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="glAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="drAmount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="buyRate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sellRate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="debitCurrency" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="glCurrency" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="remark" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transcode" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="debitAdviceResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.741" schemaObject="/0/debitAdviceResponse;XSDElementDeclaration=7"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="HostMessageSending">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.742" schemaObject="/0/HostMessageSending;XSDElementDeclaration=8"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="message" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="HostMessageSendingResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.743" schemaObject="/0/HostMessageSendingResponse;XSDElementDeclaration=9"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="linkMasterCard">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.744" schemaObject="/0/linkMasterCard;XSDElementDeclaration=10"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountTag" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="usage" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="currency" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchTag" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="idNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="idType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="name" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="address" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="product" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="annualFee" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="vip" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="addressLine2" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="addressLine3" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="addressLine4" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="linkMasterCardResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.745" schemaObject="/0/linkMasterCardResponse;XSDElementDeclaration=11"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="lockUpdateE_Contact">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.746" schemaObject="/0/lockUpdateE_Contact;XSDElementDeclaration=12"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sequenceNo" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="lockUpdateE_ContactResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.747" schemaObject="/0/lockUpdateE_ContactResponse;XSDElementDeclaration=13"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="changeCardService">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.748" schemaObject="/0/changeCardService;XSDElementDeclaration=14"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cardNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="serviceName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="changeCardServiceResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.749" schemaObject="/0/changeCardServiceResponse;XSDElementDeclaration=15"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createFDReceipt">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.750" schemaObject="/0/createFDReceipt;XSDElementDeclaration=16"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="journalSeq" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="fdGroupAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="depositAmt" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="effectiveDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="fdReceipt" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="rate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="intPaymentToAcctno" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="printTranferToAcctno" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="currency" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="productCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="autoRenew" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="intPaymentMode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="fdType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="remark" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createFDReceiptResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.751" schemaObject="/0/createFDReceiptResponse;XSDElementDeclaration=17"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="transferFromCASAToCASA">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.752" schemaObject="/0/transferFromCASAToCASA;XSDElementDeclaration=18"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="creditAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="creditAmount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="creditCurrency" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="creditRate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="debitAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="debitAmount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="debitCurrency" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="debitRate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="manager" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="description" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sequence" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="vatFee" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="serviceFee" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="transferFromCASAToCASAResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.753" schemaObject="/0/transferFromCASAToCASAResponse;XSDElementDeclaration=19"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createCifMainternanceMessage">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.754" schemaObject="/0/createCifMainternanceMessage;XSDElementDeclaration=20"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifObj" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createCifMainternanceMessageResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.755" schemaObject="/0/createCifMainternanceMessageResponse;XSDElementDeclaration=21"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="lockTransferAccountFromCifToAnother">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.756" schemaObject="/0/lockTransferAccountFromCifToAnother;XSDElementDeclaration=22"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sourceCif" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountToMove" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="lockTransferAccountFromCifToAnotherResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.757" schemaObject="/0/lockTransferAccountFromCifToAnotherResponse;XSDElementDeclaration=23"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createSA">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.758" schemaObject="/0/createSA;XSDElementDeclaration=24"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostId" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="currencyType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="modeOfOperation" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createSAResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.759" schemaObject="/0/createSAResponse;XSDElementDeclaration=25"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="TFMessageSending">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.760" schemaObject="/0/TFMessageSending;XSDElementDeclaration=26"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="message" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="TFMessageSendingResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.761" schemaObject="/0/TFMessageSendingResponse;XSDElementDeclaration=27"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="joinSA">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.762" schemaObject="/0/joinSA;XSDElementDeclaration=28"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strteller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strBankcode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strCifnumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strNameAcount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strcurrCode" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="joinSAResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.763" schemaObject="/0/joinSAResponse;XSDElementDeclaration=29"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="joinCA">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.764" schemaObject="/0/joinCA;XSDElementDeclaration=30"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strteller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strBankcode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strCifnumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strNameAcount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strcurrCode" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="joinCAResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.765" schemaObject="/0/joinCAResponse;XSDElementDeclaration=31"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="accountInquiry">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.766" schemaObject="/0/accountInquiry;XSDElementDeclaration=32"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="account" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transDate" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="accountInquiryResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.767" schemaObject="/0/accountInquiryResponse;XSDElementDeclaration=33"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createAddCifGroupMainternanceMessage">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.768" schemaObject="/0/createAddCifGroupMainternanceMessage;XSDElementDeclaration=34"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifCorp" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="seq" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifEmp" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="relationalEmpLev" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="relationalType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="relationalCorpLev" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createAddCifGroupMainternanceMessageResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.769" schemaObject="/0/createAddCifGroupMainternanceMessageResponse;XSDElementDeclaration=35"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="markHotCard">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.770" schemaObject="/0/markHotCard;XSDElementDeclaration=36"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cardNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="typeLock" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="comment" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="markHotCardResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.771" schemaObject="/0/markHotCardResponse;XSDElementDeclaration=37"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="getInformationByIDForIBSRegistration">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.772" schemaObject="/0/getInformationByIDForIBSRegistration;XSDElementDeclaration=38"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cert_code" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="getInformationByIDForIBSRegistrationResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.773" schemaObject="/0/getInformationByIDForIBSRegistrationResponse;XSDElementDeclaration=39"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="searchCustomerById">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.774" schemaObject="/0/searchCustomerById;XSDElementDeclaration=40"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="idNumber" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="searchCustomerByIdResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.775" schemaObject="/0/searchCustomerByIdResponse;XSDElementDeclaration=41"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="creditAdvice">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.776" schemaObject="/0/creditAdvice;XSDElementDeclaration=42"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sequence" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="manager" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="effectiveDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="crAmount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="glAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="drAmount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="buyRate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sellRate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="debitCurrency" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="glCurrency" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="remark" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transcode" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="creditAdviceResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.777" schemaObject="/0/creditAdviceResponse;XSDElementDeclaration=43"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="linkCard">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.778" schemaObject="/0/linkCard;XSDElementDeclaration=44"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cardNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountTag" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="usage" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="currency" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchTag" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="idNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="idType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="name" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="address" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="product" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="annualFee" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="vip" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="addressLine2" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="addressLine3" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="addressLine4" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="linkCardResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.779" schemaObject="/0/linkCardResponse;XSDElementDeclaration=45"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="reActiveCard">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.780" schemaObject="/0/reActiveCard;XSDElementDeclaration=46"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cardNumber" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="reActiveCardResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.781" schemaObject="/0/reActiveCardResponse;XSDElementDeclaration=47"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="reversableTransaction">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.782" schemaObject="/0/reversableTransaction;XSDElementDeclaration=48"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="manager" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strFromAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strToAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strDescription" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strTranferAmount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strJournalSeq" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="orgJournalSeq" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strTransCode" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="reversableTransactionResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.783" schemaObject="/0/reversableTransactionResponse;XSDElementDeclaration=49"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="ddMasterInquiry">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.784" schemaObject="/0/ddMasterInquiry;XSDElementDeclaration=50"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountType" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="ddMasterInquiryResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.785" schemaObject="/0/ddMasterInquiryResponse;XSDElementDeclaration=51"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="searchAccountMoreByCif">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.786" schemaObject="/0/searchAccountMoreByCif;XSDElementDeclaration=52"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="lastAccountType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="lastAccountNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="relationShip" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="searchAccountMoreByCifResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.787" schemaObject="/0/searchAccountMoreByCifResponse;XSDElementDeclaration=53"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="loanAccountInquiry">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.788" schemaObject="/0/loanAccountInquiry;XSDElementDeclaration=54"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="loanAccountInquiryResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.789" schemaObject="/0/loanAccountInquiryResponse;XSDElementDeclaration=55"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="transferGLtoGL">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.790" schemaObject="/0/transferGLtoGL;XSDElementDeclaration=56"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="refID" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="debitGLBranch" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="debitGLAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="creditGLBranch" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="creditGLAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="amount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="currency" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="comments" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="referenceText" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="manager" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="reconcileGL" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transactionOffice" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="customerTypeCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="account" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="businessDeptCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode5" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="transferGLtoGLResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.791" schemaObject="/0/transferGLtoGLResponse;XSDElementDeclaration=57"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:int"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="transferFromCASAToGL">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.792" schemaObject="/0/transferFromCASAToGL;XSDElementDeclaration=58"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostIP" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="manager" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sequence" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="fromAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="amount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="fromCif" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="GLAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="vatFee" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="serviceFee" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="remarks" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="fromName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="fromId" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toId" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toAddress" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toIdIssueDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toIdIssuePlace" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transCode" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="transferFromCASAToGLResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.793" schemaObject="/0/transferFromCASAToGLResponse;XSDElementDeclaration=59"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="updateE_Contact">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.794" schemaObject="/0/updateE_Contact;XSDElementDeclaration=60"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sequenceNo" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="eContactType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="newEcontact" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="updateE_ContactResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.795" schemaObject="/0/updateE_ContactResponse;XSDElementDeclaration=61"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="updateMainternanceCA">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.796" schemaObject="/0/updateMainternanceCA;XSDElementDeclaration=62"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="introducerCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="expense" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountName" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="updateMainternanceCAResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.797" schemaObject="/0/updateMainternanceCAResponse;XSDElementDeclaration=63"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="getInformationByCIFForIBSRegistration">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.798" schemaObject="/0/getInformationByCIFForIBSRegistration;XSDElementDeclaration=64"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cif_no" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="getInformationByCIFForIBSRegistrationResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.799" schemaObject="/0/getInformationByCIFForIBSRegistrationResponse;XSDElementDeclaration=65"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createUnHoldMessage">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.800" schemaObject="/0/createUnHoldMessage;XSDElementDeclaration=66"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="account" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="description" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="amount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="code" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sequence" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="actionCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="expireDate" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createUnHoldMessageResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.801" schemaObject="/0/createUnHoldMessageResponse;XSDElementDeclaration=67"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="transferFromWUToCA">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.802" schemaObject="/0/transferFromWUToCA;XSDElementDeclaration=68"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostIP" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="manager" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sequence" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="crAmount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="ttAmount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toCif" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="WUAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="vatFee" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="serviceFee" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="buyRate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sendRate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="ttSendRate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="remarks" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toId" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toAddress" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toIdIssueDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toIdIssuePlace" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="refWU" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sendingCurrencyType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="receivingCurrencyType" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="transferFromWUToCAResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.803" schemaObject="/0/transferFromWUToCAResponse;XSDElementDeclaration=69"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="miniStatement">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.804" schemaObject="/0/miniStatement;XSDElementDeclaration=70"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="recordNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountType" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="miniStatementResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.805" schemaObject="/0/miniStatementResponse;XSDElementDeclaration=71"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="searchCustomerByCif">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.806" schemaObject="/0/searchCustomerByCif;XSDElementDeclaration=72"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="searchCustomerByCifResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.807" schemaObject="/0/searchCustomerByCifResponse;XSDElementDeclaration=73"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="addE_Contact">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.808" schemaObject="/0/addE_Contact;XSDElementDeclaration=74"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="eContactType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="newEcontact" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="addE_ContactResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.809" schemaObject="/0/addE_ContactResponse;XSDElementDeclaration=75"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createCA">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.810" schemaObject="/0/createCA;XSDElementDeclaration=76"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostId" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="currencyType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="modeOfOperation" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createCAResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.811" schemaObject="/0/createCAResponse;XSDElementDeclaration=77"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="reversableOL2Transaction">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.812" schemaObject="/0/reversableOL2Transaction;XSDElementDeclaration=78"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostIP" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="manager" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sequence" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="oldSequence" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="transDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="fromAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="amount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="amountMustPay" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="fromCif" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="GLAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="vatFee" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="serviceFee" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="remarks" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="fromName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="fromId" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toAccount" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toId" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toAddress" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toIdIssueDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="toIdIssuePlace" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strTransCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="refId" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="reversableOL2TransactionResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.813" schemaObject="/0/reversableOL2TransactionResponse;XSDElementDeclaration=79"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="getAccount">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.814" schemaObject="/0/getAccount;XSDElementDeclaration=80"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="currencyCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="groupCode" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="getAccountResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.815" schemaObject="/0/getAccountResponse;XSDElementDeclaration=81"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="updateMainternanceNewCA">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.816" schemaObject="/0/updateMainternanceNewCA;XSDElementDeclaration=82"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="introducerCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="expense" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountName" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="updateMainternanceNewCAResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.817" schemaObject="/0/updateMainternanceNewCAResponse;XSDElementDeclaration=83"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="transferAccountFromCifToAnother">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.818" schemaObject="/0/transferAccountFromCifToAnother;XSDElementDeclaration=84"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sourceCif" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountToMove" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="destinationCif" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="destinationName" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="transferAccountFromCifToAnotherResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.819" schemaObject="/0/transferAccountFromCifToAnotherResponse;XSDElementDeclaration=85"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="cardActivation">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.820" schemaObject="/0/cardActivation;XSDElementDeclaration=86"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cardNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="idNo" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="idType" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="cardActivationResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.821" schemaObject="/0/cardActivationResponse;XSDElementDeclaration=87"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="searchAccountByCif">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.822" schemaObject="/0/searchAccountByCif;XSDElementDeclaration=88"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="searchAccountByCifResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.823" schemaObject="/0/searchAccountByCifResponse;XSDElementDeclaration=89"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createCif">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.824" schemaObject="/0/createCif;XSDElementDeclaration=90"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="IdNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="IdType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="IdDateIssued" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="IdCountryIssued" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="IdPlaceIssued" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strSurname" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="afterSurname" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="addressLine1" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="addressLine2" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="addressLine3" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="addressLine4" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="addressLine5" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="nationality" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="birthday" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="raceCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="maritalStatus" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="gender" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="occupationCode_2" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="placeOfBirth" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="typeElectronicAddress1" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="typeElectronicAddress2" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="typeElectronicAddress3" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="electronicAddress1" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="electronicAddress2" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="electronicAddress3" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostDate" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="birthday_Full" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="idDateIssued_Full" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strOccupationCode_1" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="strProvince" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createCifResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.825" schemaObject="/0/createCifResponse;XSDElementDeclaration=91"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="lockUpdateMainternanceNewCA">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.826" schemaObject="/0/lockUpdateMainternanceNewCA;XSDElementDeclaration=92"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="lockUpdateMainternanceNewCAResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.827" schemaObject="/0/lockUpdateMainternanceNewCAResponse;XSDElementDeclaration=93"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createLockForUnHoldMessage">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.828" schemaObject="/0/createLockForUnHoldMessage;XSDElementDeclaration=94"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="account" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="sequence" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="createLockForUnHoldMessageResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.829" schemaObject="/0/createLockForUnHoldMessageResponse;XSDElementDeclaration=95"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="searchE_ContactByCif">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.830" schemaObject="/0/searchE_ContactByCif;XSDElementDeclaration=96"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="searchE_ContactByCifResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.831" schemaObject="/0/searchE_ContactByCifResponse;XSDElementDeclaration=97"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="searchCustomerInformationByID">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.832" schemaObject="/0/searchCustomerInformationByID;XSDElementDeclaration=98"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="channel" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="teller" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="hostName" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="bankCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="searchCustomerInformationByIDResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.833" schemaObject="/0/searchCustomerInformationByIDResponse;XSDElementDeclaration=99"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:Messages"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="getFDReceiptAccount">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.834" schemaObject="/0/getFDReceiptAccount;XSDElementDeclaration=100"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="currencyCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="groupCode" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+            <xsd:element name="getFDReceiptAccountResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="///@mrObject.835" schemaObject="/0/getFDReceiptAccountResponse;XSDElementDeclaration=101"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+        </xsd:schema>

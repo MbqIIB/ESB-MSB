@@ -1,0 +1,84 @@
+
+
+
+
+
+/*
+*
+* File Name: ExceptionHandling.esql
+*
+* Purpose: Main ExceptionHandling for all flow
+*
+* Authors: Vu Trung Kien
+*
+* Date 12 Dec 2012
+* Version: 1.0
+*
+* @copyright Seatechit . 2012. All rights reserved.
+*
+*/
+BROKER SCHEMA seatechit.esb.flows
+
+CREATE COMPUTE MODULE ExceptionHandling_WriteException
+	DECLARE BASE_FLOW_NAME CHARACTER 'seatechit.esb.flows.';
+	DECLARE REQ_FLOW_NAME CHARACTER BASE_FLOW_NAME||'RequestMainFlow';
+	DECLARE RES_FLOW_NAME CHARACTER BASE_FLOW_NAME||'ResponseMainFlow';
+	DECLARE TCP_FLOW_NAME CHARACTER BASE_FLOW_NAME||'TCPOutFlow';
+	DECLARE TSU_FLOW_NAME CHARACTER BASE_FLOW_NAME||'TSUOutFlow';
+
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		--Lay ten cua flow dang gay loi
+		DECLARE MessageFlowName CHARACTER SQL.MessageFlowLabel;
+		DECLARE SQLState1 CHARACTER;
+		DECLARE SQLErrorText1 CHARACTER;
+		DECLARE SQLCode1 INTEGER;
+		DECLARE SQLNativeError1 INTEGER;
+
+		CALL CopyMessageHeaders();
+		CALL CopyEntireMessage();
+		DECLARE ptrException REFERENCE TO InputExceptionList.*[1];
+		DECLARE errNumber INTEGER 0;
+		DECLARE errMessage CHARACTER '';
+		DECLARE curr_time CHAR CURRENT_TIME;
+		DECLARE curr_date CHAR CURRENT_DATE;
+		DECLARE log_Seq INTEGER;
+		--DECLARE rootExceptionText CHARACTER ptrException.Text;
+		--DECLARE propRef REFERENCE TO InputRoot.Properties;
+		--DECLARE inCCSID INT propRef.CodedCharSetId;
+		--DECLARE inEncoding INT propRef.Encoding;
+		--DECLARE msgInBitStream BLOB ASBITSTREAM(ptrException.RecoverableException, inEncoding, inCCSID);
+		--DECLARE fullErrMessage CHAR CAST(msgInBitStream AS CHAR CCSID inCCSID);
+
+		WHILE LASTMOVE(ptrException) DO
+			IF ptrException.Number IS NOT NULL THEN
+				SET errNumber = ptrException.Number;
+				SET errMessage = ptrException.Text;
+			END IF;
+			MOVE ptrException LASTCHILD;
+		END WHILE;
+
+		SET OutputLocalEnvironment.XMLNSC.log_seq[] = PASSTHRU('SELECT SEQ_ERRLOG.NEXTVAL FROM DUAL');
+		SET log_Seq = OutputLocalEnvironment.XMLNSC.log_seq[1].*[1];
+		SET OutputLocalEnvironment.XMLNSC.log_seq VALUE = NULL;
+		INSERT INTO Database.ESB_ERRLOG(AUTO_ID,LOG_DATE,ERR_CODE,ERR_MSG)
+		VALUES(log_Seq,CURRENT_DATE,errNumber,errMessage);
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+
+END MODULE;

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS008</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<changeCardService>
+			<channel>SMSBK01</channel>
+			<teller>TT110001</teller>
+			<branchCode>110</branchCode>
+			<cardNumber>9704260000165779</cardNumber>
+			<serviceName>A30M60M</serviceName>
+			<cifNumber>212868</cifNumber>
+		</changeCardService>
+	</Body>
+</Data>
+

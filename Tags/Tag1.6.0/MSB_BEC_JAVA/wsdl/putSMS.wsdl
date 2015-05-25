@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://sms.cnn.msb.com.vn" xmlns:ns1="http://smsinfo.sms.cnn.msb.com.vn" xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding" xmlns:tns="http://sms.cnn.msb.com.vn" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <wsdl:types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://smsinfo.sms.cnn.msb.com.vn">
+<xsd:complexType name="SMSRequest">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="content" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="numberGW" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="phoneNumber" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="sequence" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SMSResponse">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="content" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="sequence" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="status" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://sms.cnn.msb.com.vn">
+<xsd:element name="putSMS">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="SMSRequest" nillable="true" type="ns1:SMSRequest"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="putSMSResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:SMSResponse"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="regNewSMSBanking">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="serviceType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="alert" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="phoneNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="appReg" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="regNewSMSBankingResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="regSMSBankingFromIBS">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountList" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="phoneNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="serviceType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="defaultAcc" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="regSMSBankingFromIBSResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="regSMSBanking">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="cifNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="accountNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="serviceType" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="alert" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="phoneNumber" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="branchCode" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="appReg" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="regSMSBankingResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="regSMSBankingRequest">
+    <wsdl:part name="parameters" element="tns:regSMSBanking">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="regSMSBankingFromIBSResponse">
+    <wsdl:part name="parameters" element="tns:regSMSBankingFromIBSResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="regNewSMSBankingResponse">
+    <wsdl:part name="parameters" element="tns:regNewSMSBankingResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putSMSResponse">
+    <wsdl:part name="parameters" element="tns:putSMSResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="regSMSBankingResponse">
+    <wsdl:part name="parameters" element="tns:regSMSBankingResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="regNewSMSBankingRequest">
+    <wsdl:part name="parameters" element="tns:regNewSMSBanking">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="regSMSBankingFromIBSRequest">
+    <wsdl:part name="parameters" element="tns:regSMSBankingFromIBS">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="putSMSRequest">
+    <wsdl:part name="parameters" element="tns:putSMS">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SMSBankingService">
+    <wsdl:operation name="putSMS">
+      <wsdl:input name="putSMSRequest" message="tns:putSMSRequest">
+    </wsdl:input>
+      <wsdl:output name="putSMSResponse" message="tns:putSMSResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="regNewSMSBanking">
+      <wsdl:input name="regNewSMSBankingRequest" message="tns:regNewSMSBankingRequest">
+    </wsdl:input>
+      <wsdl:output name="regNewSMSBankingResponse" message="tns:regNewSMSBankingResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="regSMSBankingFromIBS">
+      <wsdl:input name="regSMSBankingFromIBSRequest" message="tns:regSMSBankingFromIBSRequest">
+    </wsdl:input>
+      <wsdl:output name="regSMSBankingFromIBSResponse" message="tns:regSMSBankingFromIBSResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="regSMSBanking">
+      <wsdl:input name="regSMSBankingRequest" message="tns:regSMSBankingRequest">
+    </wsdl:input>
+      <wsdl:output name="regSMSBankingResponse" message="tns:regSMSBankingResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SMSBankingServiceHttpBinding" type="tns:SMSBankingService">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="putSMS">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="putSMSRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="putSMSResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="regNewSMSBanking">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="regNewSMSBankingRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="regNewSMSBankingResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="regSMSBankingFromIBS">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="regSMSBankingFromIBSRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="regSMSBankingFromIBSResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="regSMSBanking">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="regSMSBankingRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="regSMSBankingResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SMSBankingService">
+    <wsdl:port name="SMSBankingServiceHttpPort" binding="tns:SMSBankingServiceHttpBinding">
+      <wsdlsoap:address location="http://10.1.17.240:8089/SMS/services/SMSBankingService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

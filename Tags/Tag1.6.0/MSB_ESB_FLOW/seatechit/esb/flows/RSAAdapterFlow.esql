@@ -1,0 +1,182 @@
+
+
+
+
+
+
+
+
+
+
+
+/*
+*
+* File Name: RSAAdapterFlow.esql
+*
+* Purpose: Create Webservice adapter for RSA Service.
+*
+* Authors: Vu Trung Kien
+*
+* Date 12 Jan 2013
+* Version: 1.0
+*
+* @copyright Seatechit . 2012. All rights reserved.
+*
+*/
+BROKER SCHEMA seatechit.esb.flows
+
+CREATE COMPUTE MODULE RSAAdapterFlow_PreProcess
+	DECLARE tns NAMESPACE 'http://rsa.esb.seatechit/';
+	DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+		CALL CopyMessageHeaders();
+		-- Output is MQ, so remove HTTP headers
+		SET OutputRoot.HTTPInputHeader = null;
+		SET OutputRoot.Properties.MessageFormat='XML1';
+		CREATE NEXTSIBLING OF OutputRoot.Properties DOMAIN 'MQMD';
+		-- Process Input Message
+
+		IF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:Assign[])) THEN
+			CALL BuildXMLMsgHeader('Assign','RSA001');
+			CALL Assign();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:checkOTP[])) THEN
+			CALL BuildXMLMsgHeader('checkOTP','RSA002');
+			CALL checkOTP();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:CreateUser[])) THEN
+			CALL BuildXMLMsgHeader('CreateUser','RSA003');
+			CALL CreateUser();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:deleteUser[])) THEN
+			CALL BuildXMLMsgHeader('deleteUser','RSA004');
+			CALL deleteUser();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:Unassign[])) THEN
+			CALL BuildXMLMsgHeader('Unassign','RSA004');
+			CALL Unassign();
+		END IF;
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+
+	CREATE PROCEDURE BuildXMLMsgHeader(IN operator CHARACTER,IN srv CHARACTER) BEGIN
+		SET OutputRoot.Properties.MessageType = operator;
+		SET OutputRoot.XMLNS.Data.Header.req_id = 'WRS'||CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMddHHmmssSSSSSS');
+		SET OutputRoot.XMLNS.Data.Header.req_app = 'WRS';
+		SET OutputRoot.XMLNS.Data.Header.srv = srv;
+		SET OutputRoot.XMLNS.Data.Header.srv_app = 'RSA';
+		SET OutputRoot.XMLNS.Data.Header.req_time = CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyy-MM-dd HH:mm:ss.SSS');
+	END;
+
+
+	CREATE PROCEDURE Assign() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.Assign.userId = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:Assign.tns:userId;
+		SET OutputRoot.XMLNS.Data.Body.Assign.sn = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:Assign.tns:sn;
+		SET OutputRoot.XMLNS.Data.Body.Assign.pin = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:Assign.tns:pin;
+	END;
+
+	CREATE PROCEDURE checkOTP() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.checkOTP.userId = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:checkOTP.tns:userId;
+		SET OutputRoot.XMLNS.Data.Body.checkOTP.otp = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:checkOTP.tns:otp;
+	END;
+
+	CREATE PROCEDURE CreateUser() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.CreateUser.userId = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:CreateUser.tns:userId;
+		SET OutputRoot.XMLNS.Data.Body.CreateUser.pwd = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:CreateUser.tns:pwd;
+		SET OutputRoot.XMLNS.Data.Body.CreateUser.fname = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:CreateUser.tns:fname;
+		SET OutputRoot.XMLNS.Data.Body.CreateUser.lname = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:CreateUser.tns:lname;
+	END;
+
+	CREATE PROCEDURE deleteUser() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.deleteUser.userId = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:deleteUser.tns:userId;
+	END;
+	CREATE PROCEDURE Unassign() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.Unassign.sn = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:Unassign.tns:sn;
+	END;
+
+END MODULE;
+
+CREATE COMPUTE MODULE RSAAdapterFlow_PostProcess
+
+	DECLARE tns NAMESPACE 'http://rsa.esb.seatechit/';
+	DECLARE xsi NAMESPACE 'http://www.w3.org/2001/XMLSchema-instance';
+
+	DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Input is CWF, output is SOAP/XML
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.MessageType = 'Envelope';
+
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsd='http://www.w3.org/2001/XMLSchema';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance';
+
+		DECLARE srv CHARACTER InputRoot.XMLNSC.Data.Header.srv;
+
+
+		IF (srv= 'CBS001') THEN
+			CALL Assign();
+		ELSEIF (srv='CBS002') THEN
+			CALL checkOTP();
+		ELSEIF (srv='CBS003') THEN
+			CALL CreateUser();
+		ELSEIF (srv='CBS004') THEN
+			CALL deleteUser();
+		ELSEIF (srv='CBS005') THEN
+			CALL Unassign();
+		END IF;
+		-- Set the http reply identifier
+		SET OutputLocalEnvironment.Destination.HTTP.RequestIdentifier =
+		CAST(InputLocalEnvironment.XMLNSC.Header.HTTP.RequestIdentifier AS BLOB);
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+
+	CREATE PROCEDURE Assign() BEGIN
+	END;
+
+	CREATE PROCEDURE checkOTP() BEGIN
+	END;
+
+	CREATE PROCEDURE CreateUser() BEGIN
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:getAccountResponse.tns:out = InputRoot.XMLNSC.Data.Body.getAccount.out.accountNumber;
+	END;
+
+	CREATE PROCEDURE deleteUser() BEGIN
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:deleteUserResponse.tns:out = InputRoot.XMLNSC.Data.Body.getFDReceiptAccount.out.accountNumber;
+	END;
+
+	CREATE PROCEDURE Unassign() BEGIN
+	END;
+END MODULE;

@@ -1,0 +1,21 @@
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS035</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<searchCustomerByCif>
+			<out>
+				<Messages>
+					<arrString>*SOKI|192.168.163.128|00008|009600||0213|000791|0200|*DSP|MBSD|*LINX|BBMBSCFINQ|00|/0000000|00000000001|00|STDATDSPV5DSPV5001IQ|BBMBSCFINQFNC||5401841212041516363812||0000|0010|0010|TT110001|localhost|15103|N|||AA|TT110001|1|00000|*END|000|BTS||DSPO7002Q|localhost|27|00000||||15103|I|R|1|Y|F|||||||||||000000000|0000000|0000000000000000000||0000000000000000000||213068|M-BUSSINESS-CLASSIC|7878HHGHH|IP|110|M-BUSSINESS-CLASSIC|||C
+					</arrString>
+					<description>System Ok</description>
+					<errCode>0</errCode>
+				</Messages>
+			</out>
+		</searchCustomerByCif>
+	</Body>
+</Data>

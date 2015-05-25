@@ -1,0 +1,279 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BROKER SCHEMA seatechit.esb.flows
+--Bien luu data len cache
+DECLARE CacheParamTable SHARED ROW;
+DECLARE CacheRoutingTable SHARED ROW;
+DECLARE CacheServiceURLTable SHARED ROW;
+--Dinh nghia ten cac flow trong chuong trinh
+DECLARE BASE_FLOW_NAME CHARACTER 'seatechit.esb.flows.';
+DECLARE REQ_FLOW_NAME CHARACTER BASE_FLOW_NAME||'RequestMainFlow';
+DECLARE RES_FLOW_NAME CHARACTER BASE_FLOW_NAME||'ResponseMainFlow';
+DECLARE TCP_FLOW_NAME CHARACTER BASE_FLOW_NAME||'TCPOutFlow';
+DECLARE TSU_FLOW_NAME CHARACTER BASE_FLOW_NAME||'TSUOutFlow';
+--Dinh nghia mot so hang so dung trong chuong trinh
+DECLARE ERR_SYSTEM_OK INTEGER 0;
+--
+CREATE COMPUTE MODULE CachingGlobal_CachingData
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE MessageFlowName CHARACTER SQL.MessageFlowLabel;
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		CALL CopyMessageHeaders();
+		CALL CopyEntireMessage();
+		--CALL RemoveAllNameSpace(); --Remove all
+		--Load data len cache memory
+		--Flow nao thi load data do
+		DECLARE srv CHARACTER OutputRoot.XMLNSC.Data.Header.srv;
+		--Clear cache neu gap admin message
+		IF (srv='RFH001' AND MessageFlowName=REQ_FLOW_NAME) THEN
+			SET CacheParamTable.Valid VALUE=NULL;
+			SET CacheRoutingTable.Valid VALUE=NULL;
+			SET CacheServiceURLTable.Valid VALUE=NULL;
+		END IF;
+
+		PARAM : BEGIN ATOMIC
+			IF CacheParamTable.Valid IS NULL THEN
+				SET CacheParamTable.Param[] =(SELECT a.auto_id, a.grp_name, a.p_name, a.p_value, a.param1, a.param2,a.p_desc, a.lstord FROM Database.esb_param as a);
+				SET CacheParamTable.Valid = true;
+			END IF;
+			SET OutputLocalEnvironment.XMLNSC.param_list[] =
+			(
+			SELECT a.p_name as paramName, a.p_value as paramValue , a.param1 as param1,a.param2 as param2
+			FROM CacheParamTable.Param[] as a
+			);
+		END PARAM;
+		--4)Cache routing table on memory
+		--Chi load routing data cho request/response flow
+		IF (MessageFlowName = REQ_FLOW_NAME OR MessageFlowName = RES_FLOW_NAME) THEN
+			ROUTING : BEGIN ATOMIC
+				IF CacheRoutingTable.Valid IS NULL THEN
+					SET CacheRoutingTable.DestinationData[] =(SELECT a.tran_code, a.sender_id, a.receiver_id, a.qmgr_name,a.queue_name FROM Database.esb_routing as a);
+					SET CacheRoutingTable.Valid = true;
+				END IF;
+				SET OutputLocalEnvironment.XMLNSC.queue_name_list[] =
+				(
+				SELECT a.qmgr_name as queueManagerName, a.queue_name as queueName
+				FROM CacheRoutingTable.DestinationData[] as a
+
+				);
+			END ROUTING;
+		END IF;
+		--5)Cache service info on memory
+		--Chi load service info cho webservice flow
+		SERVICE_INFO : BEGIN ATOMIC
+			IF CacheServiceURLTable.Valid IS NULL THEN
+				SET CacheServiceURLTable.ServiceInfoData[] =(SELECT a.service_id, a.service_type, a.service_name, a.service_url,a.service_timeout FROM Database.esb_service_url AS a);
+				SET CacheServiceURLTable.Valid = true;
+			END IF;
+			SET OutputLocalEnvironment.XMLNSC.service_list[] =
+			(
+			SELECT a.service_url as service_url, a.service_timeout as service_timeout
+			FROM CacheServiceURLTable.ServiceInfoData[] as a
+
+			);
+		END SERVICE_INFO;
+		--6)Load data
+		--Chi genAccount,rm_number cho TCP Flow va message cu the
+		--Gen ref_id for inter-bank transfer
+		IF ((srv='CBS033' OR srv='CBS028') AND MessageFlowName=TCP_FLOW_NAME) THEN
+			SET OutputLocalEnvironment.XMLNSC.rm_seq_list[] = PASSTHRU('SELECT fnc_get_rm_num() RM_SEQ FROM DUAL');
+		END IF;
+		--Gen accountnumber for FD account
+		--getAccount
+
+		IF (srv='CBS039' AND MessageFlowName=TCP_FLOW_NAME) THEN
+			DECLARE branchCode CHARACTER OutputRoot.XMLNSC.Data.Body.getAccount.branchCode;
+			DECLARE currencyCode CHARACTER OutputRoot.XMLNSC.Data.Body.getAccount.currencyCode;
+			DECLARE groupCode CHARACTER OutputRoot.XMLNSC.Data.Body.getAccount.groupCode;
+			DECLARE v_sql CHARACTER;
+			SET v_sql = 'SELECT fnc_get_act_seq('''||branchCode||''','''||groupCode||''','''||currencyCode||''') ACT_SEQ FROM DUAL';
+			SET OutputLocalEnvironment.XMLNSC.act_seq_list[] = PASSTHRU(v_sql);
+		END IF;
+		--getFDReceipt
+		IF (srv='CBS049' AND MessageFlowName=TCP_FLOW_NAME) THEN
+			DECLARE branchCode CHARACTER OutputRoot.XMLNSC.Data.Body.getFDReceiptAccount.branchCode;
+			DECLARE currencyCode CHARACTER OutputRoot.XMLNSC.Data.Body.getFDReceiptAccount.currencyCode;
+			DECLARE groupCode CHARACTER OutputRoot.XMLNSC.Data.Body.getFDReceiptAccount.groupCode;
+			DECLARE v_sql CHARACTER;
+			SET v_sql = 'SELECT fnc_get_act_seq('''||branchCode||''','''||groupCode||''','''||currencyCode||''') ACT_SEQ FROM DUAL';
+			SET OutputLocalEnvironment.XMLNSC.act_seq_list[] = PASSTHRU(v_sql);
+		END IF;
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE RemoveAllNameSpace()
+	BEGIN
+		DECLARE SourceNamespace NAMESPACE 'http://www.w3schools.com';
+		DECLARE TargetNamespace NAMESPACE '';
+		--CALL CopyMessageHeaders();
+
+		DECLARE oldNamespace CHARACTER '';
+		DECLARE newNamespace CHARACTER '';
+
+		SET oldNamespace = SourceNamespace;
+		SET newNamespace = TargetNamespace;
+		-- The target namespace can be specified dynamically in the MQRFH2 header.
+		-- The following logic checks whether the MQRFH2 contains this info; if it does not,
+		-- defaults are supplied in the message flow.
+
+		IF InputRoot.MQRFH2.usr.SourceNamespace IS NOT NULL THEN
+			IF InputRoot.MQRFH2.usr.SourceNamespace = 'NONAMESPACE' THEN
+				SET oldNamespace = '';
+			ELSE
+				SET oldNamespace = InputRoot.MQRFH2.usr.SourceNamespace;
+			END IF;
+		ELSE
+			SET oldNamespace = SourceNamespace;
+		END IF;
+		-- Make the output tree the same as the input tree.
+		-- We will then walk the tree changing things as we go
+		SET OutputRoot.XMLNSC = InputBody;
+		DECLARE rootNode REFERENCE TO OutputRoot.XMLNSC;
+		CALL ChangeNamespaceInOutputRoot (rootNode, oldNamespace, newNamespace);
+
+	END;
+
+	CREATE FUNCTION ChangeNamespaceInOutputRoot(In rootNode REFERENCE, In oldNamespace CHARACTER, In newNamespace CHARACTER)
+	BEGIN
+		--
+		-- Need to remove schemalocation and namespace declarations
+		--
+		IF newNamespace = '' THEN
+			SET rootNode.(XMLNSC.Element)*[1].*:schemaLocation = NULL;
+			DECLARE I1 INTEGER CARDINALITY(rootNode.(XMLNSC.Element)*[1].(XMLNSC.NamespaceDecl)*[]);
+			DECLARE I2 INTEGER 1;
+			WHILE I2 <= I1 DO
+				SET rootNode.(XMLNSC.Element)*[1].(XMLNSC.NamespaceDecl)*[1] = NULL;
+				SET I2 = I2 + 1;
+			END WHILE;
+		ELSE
+			--
+			-- Need to modify the schema locations and the namespace declarations
+			--
+			-- The target schemalocations can be identified within the source message's
+			-- MQRFH2 header, <usr> folder, tag <TargetSchemaLocation>
+			--
+			IF rootNode.(XMLNSC.Element)*[1].*:schemaLocation IS NOT NULL THEN
+				SET rootNode.(XMLNSC.Element)*[1].*:schemaLocation = newNamespace;
+			END IF;
+		END IF;
+		--
+		-- CHECKSIBLING is a flag which, when set to TRUE, ensures that the WHILE loop does an
+		-- unconditional MOVE ... NEXTSIBLING (rather than MOVE ... FIRSTCHILD)
+		-- We need this when we go up a level in the tree... otherwise we go back where we have
+		-- just come from
+		--
+		DECLARE CHECKSIBLING BOOLEAN FALSE;
+		--
+		-- DEPTH determines when to finish.
+		-- Every time we MOVE FIRSTCHILD we add 1 to DEPTH
+		-- Every time we MOVE PARENT we subtract 1 from DEPTH
+		-- MOVE NEXTSIBLING does not change DEPTH
+		-- Initial value is 1, so we are finished when DEPTH = 0
+		--
+		DECLARE DEPTH INTEGER 1;
+		--
+		-- Walk the tree top to bottom, left to right
+		--
+		WHILE DEPTH <> 0 DO
+			IF CHECKSIBLING = FALSE THEN
+				MOVE rootNode FirstChild;
+				IF LASTMOVE(rootNode) = TRUE THEN
+					SET DEPTH = DEPTH + 1;
+					CALL ChangeNamespace(rootNode, oldNamespace, newNamespace);
+				ELSE
+					MOVE rootNode NEXTSIBLING;
+					IF LASTMOVE(rootNode) = TRUE THEN
+						CALL ChangeNamespace(rootNode, oldNamespace, newNamespace);
+						SET CHECKSIBLING = FALSE;
+					ELSE
+						SET DEPTH = DEPTH - 1;
+						Move rootNode PARENT;
+						SET CHECKSIBLING = TRUE;
+					END IF;
+				END IF;
+			ELSE
+				MOVE rootNode NEXTSIBLING;
+				IF LASTMOVE(rootNode) = TRUE THEN
+					CALL ChangeNamespace(rootNode, oldNamespace, newNamespace);
+					SET CHECKSIBLING = FALSE;
+				ELSE
+					SET DEPTH = DEPTH - 1;
+					Move rootNode PARENT;
+					SET CHECKSIBLING = TRUE;
+				END IF;
+			END IF;
+		END WHILE;
+	END;
+
+	CREATE FUNCTION ChangeNamespace(IN rootNode REFERENCE, In oldNamespace CHARACTER, In newNamespace CHARACTER)
+	BEGIN
+		--
+		-- Check for elements/attributes with the source namespace
+		--
+		IF (FIELDTYPE(rootNode) = Name) OR (FIELDTYPE(rootNode) = NameValue) THEN
+			IF FIELDNAMESPACE(rootNode) IN (oldNamespace) THEN
+				--
+				-- Set the new target namespace
+				--
+				SET rootNode NAMESPACE = newNamespace;
+				--
+				-- Get rid of any inline namespace definitions
+				--
+				SET rootNode.(XMLNSC.NamespaceDecl)* = NULL;
+			END IF;
+		END IF;
+	END;
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE CachingGlobal_Refresh_Cache
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET CacheParamTable.Valid VALUE=NULL;
+		SET CacheRoutingTable.Valid VALUE=NULL;
+		SET CacheServiceURLTable.Valid VALUE=NULL;
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

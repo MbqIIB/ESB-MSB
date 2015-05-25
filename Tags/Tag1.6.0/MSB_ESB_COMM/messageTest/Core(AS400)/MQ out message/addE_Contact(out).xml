@@ -1,0 +1,21 @@
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS036</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<addE_Contact>
+			<out>
+				<Messages>
+					<arrString>*SOKI|TT110001|00002|009600||0213|000783|0200|*DSP|MBSD|*LINX|BBMBSCFMNT|00|/0000000|00000000001|00|STDATDSPV5DSPV5001IQ|BBMBSCFMNTFNC||5401841212041732294073||0000|0001|0010|TT110001|192.168.16|17240|N|||AA|TT110001|1|00000|*END|000|BTS|RBS|DSPO7002Q|192.168.16|27|00000||||17240|A|R|1|N|F|||||||||||000000000|0000000|0000000000000000000||0000000000000000000||212868|C|5|EM|vkient@yahoo.com|||||180612|173229|212868
+					</arrString>
+					<description>System Ok</description>
+					<errCode>0</errCode>
+				</Messages>
+			</out>
+		</addE_Contact>
+	</Body>
+</Data>

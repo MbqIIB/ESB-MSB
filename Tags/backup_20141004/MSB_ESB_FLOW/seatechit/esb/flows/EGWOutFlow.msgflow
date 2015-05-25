@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmWSRequest.msgnode="ComIbmWSRequest.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:seatechit_esb_flows_CachingGlobal.subflow="seatechit/esb/flows/CachingGlobal.subflow" xmlns:seatechit_esb_flows_ExceptionHandling.subflow="seatechit/esb/flows/ExceptionHandling.subflow"
+    xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="seatechit/esb/flows/EGWOutFlow.msgflow"
+    nsPrefix="seatechit_esb_flows_EGWOutFlow.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="EGWOutFlow" bundleName="seatechit/esb/flows/EGWOutFlow" pluginId="MSB_ESB_FLOW"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/MSB_ESB_FLOW/icons/full/obj16/EGWOutFlow.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/MSB_ESB_FLOW/icons/full/obj30/EGWOutFlow.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="492,198" URLSpecifier="http://10.0.2.51:80/ePaymentGateway/InternalEGW" messageDomainProperty="XMLNS">
+        <translation xmi:type="utility:ConstantString" string="HTTP EGW"/>
+      </nodes>
+      <nodes xmi:type="seatechit_esb_flows_ExceptionHandling.subflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="723,62">
+        <translation xmi:type="utility:ConstantString" string="Exception Process"/>
+      </nodes>
+      <nodes xmi:type="seatechit_esb_flows_CachingGlobal.subflow:FCMComposite_1" xmi:id="FCMComposite_1_3" location="182,197">
+        <translation xmi:type="utility:ConstantString" string="CachingGlobal"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="869,197" queueName="ESB.REP.INBOX" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="ESB.REP.INBOX"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="688,196" computeExpression="esql://routine/seatechit.esb.flows#EGWOutFlow_PostProcess.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="PostProcess"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="31,196" queueName="ESB.EGW.INBOX" messageDomainProperty="XMLNS" validateTiming="complete">
+        <translation xmi:type="utility:ConstantString" string="ESB.EGW.INBOX"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="348,198" computeExpression="esql://routine/seatechit.esb.flows#EGWOutFlow_PreProcess.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="PreProcess"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.error" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

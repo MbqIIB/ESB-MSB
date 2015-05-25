@@ -1,0 +1,866 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:complexType name="header_type">
+		<xs:sequence>
+			<xs:element name="req_id" type="xs:string" />
+			<xs:element name="req_app" type="xs:string" />
+			<xs:element name="srv" type="xs:string" />
+			<xs:element name="srv_app" type="xs:string" />
+			<xs:element name="req_time" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="createHoldMessage_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="account" type="xs:string" />
+			<xs:element name="expiryDate" type="xs:string" />
+			<xs:element name="description" type="xs:string" />
+			<xs:element name="amount" type="xs:string" />
+			<xs:element name="code" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="createFD_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="hostDate" type="xs:string" />
+			<xs:element name="hostId" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="currencyType" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+			<xs:element name="accountType" type="xs:string" />
+			<xs:element name="accountName" type="xs:string" />
+			<xs:element name="modeOfOperation" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="lockUpdateMainternanceCA_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="debitAdvice_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="sequence" type="xs:string" />
+			<xs:element name="transDate" type="xs:string" />
+			<xs:element name="manager" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+			<xs:element name="effectiveDate" type="xs:string" />
+			<xs:element name="crAmount" type="xs:string" />
+			<xs:element name="glAccount" type="xs:string" />
+			<xs:element name="drAmount" type="xs:string" />
+			<xs:element name="buyRate" type="xs:string" />
+			<xs:element name="sellRate" type="xs:string" />
+			<xs:element name="debitCurrency" type="xs:string" />
+			<xs:element name="glCurrency" type="xs:string" />
+			<xs:element name="remark" type="xs:string" />
+			<xs:element name="transcode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="linkMasterCard_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="accountTag" type="xs:string" />
+			<xs:element name="accountType" type="xs:string" />
+			<xs:element name="usage" type="xs:string" />
+			<xs:element name="currency" type="xs:string" />
+			<xs:element name="branchTag" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+			<xs:element name="idNumber" type="xs:string" />
+			<xs:element name="idType" type="xs:string" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="address" type="xs:string" />
+			<xs:element name="product" type="xs:string" />
+			<xs:element name="annualFee" type="xs:string" />
+			<xs:element name="vip" type="xs:string" />
+			<xs:element name="addressLine2" type="xs:string" />
+			<xs:element name="addressLine3" type="xs:string" />
+			<xs:element name="addressLine4" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="HostMessageSending_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="message" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="lockUpdateE_Contact_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+			<xs:element name="sequenceNo" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="changeCardService_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="cardNumber" type="xs:string" />
+			<xs:element name="serviceName" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="createFDReceipt_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="journalSeq" type="xs:string" />
+			<xs:element name="transDate" type="xs:string" />
+			<xs:element name="fdGroupAccount" type="xs:string" />
+			<xs:element name="depositAmt" type="xs:string" />
+			<xs:element name="effectiveDate" type="xs:string" />
+			<xs:element name="fdReceipt" type="xs:string" />
+			<xs:element name="rate" type="xs:string" />
+			<xs:element name="intPaymentToAcctno" type="xs:string" />
+			<xs:element name="printTranferToAcctno" type="xs:string" />
+			<xs:element name="currency" type="xs:string" />
+			<xs:element name="productCode" type="xs:string" />
+			<xs:element name="autoRenew" type="xs:string" />
+			<xs:element name="intPaymentMode" type="xs:string" />
+			<xs:element name="fdType" type="xs:string" />
+			<xs:element name="remark" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="transferFromCASAToCASA_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="creditAccount" type="xs:string" />
+			<xs:element name="creditAmount" type="xs:string" />
+			<xs:element name="creditCurrency" type="xs:string" />
+			<xs:element name="creditRate" type="xs:string" />
+			<xs:element name="debitAccount" type="xs:string" />
+			<xs:element name="debitAmount" type="xs:string" />
+			<xs:element name="debitCurrency" type="xs:string" />
+			<xs:element name="debitRate" type="xs:string" />
+			<xs:element name="manager" type="xs:string" />
+			<xs:element name="description" type="xs:string" />
+			<xs:element name="sequence" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="transDate" type="xs:string" />
+			<xs:element name="transCode" type="xs:string" />
+			<xs:element name="vatFee" type="xs:string" />
+			<xs:element name="serviceFee" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="lockTransferAccountFromCifToAnother_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="sourceCif" type="xs:string" />
+			<xs:element name="accountToMove" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="createSA_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="hostDate" type="xs:string" />
+			<xs:element name="hostId" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="currencyType" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+			<xs:element name="accountType" type="xs:string" />
+			<xs:element name="accountName" type="xs:string" />
+			<xs:element name="modeOfOperation" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TFMessageSending_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="message" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="joinSA_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="strteller" type="xs:string" />
+			<xs:element name="strBankcode" type="xs:string" />
+			<xs:element name="transDate" type="xs:string" />
+			<xs:element name="strAccount" type="xs:string" />
+			<xs:element name="strCifnumber" type="xs:string" />
+			<xs:element name="strNameAcount" type="xs:string" />
+			<xs:element name="strcurrCode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="joinCA_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="strteller" type="xs:string" />
+			<xs:element name="strBankcode" type="xs:string" />
+			<xs:element name="transDate" type="xs:string" />
+			<xs:element name="strAccount" type="xs:string" />
+			<xs:element name="strCifnumber" type="xs:string" />
+			<xs:element name="strNameAcount" type="xs:string" />
+			<xs:element name="strcurrCode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="accountInquiry_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="account" type="xs:string" />
+			<xs:element name="transDate">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-3][0-9][0-1][0-9][0-9][0-9]" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+
+	<xs:complexType name="markHotCard_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="cardNumber" type="xs:string" />
+			<xs:element name="typeLock" type="xs:string" />
+			<xs:element name="comment" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="getInformationByIDForIBSRegistration_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="hostName" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="cert_code" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="searchCustomerById_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="hostName" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="idNumber" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="creditAdvice_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="sequence" type="xs:string" />
+			<xs:element name="transDate" type="xs:string" />
+			<xs:element name="manager" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+			<xs:element name="effectiveDate" type="xs:string" />
+			<xs:element name="crAmount" type="xs:string" />
+			<xs:element name="glAccount" type="xs:string" />
+			<xs:element name="drAmount" type="xs:string" />
+			<xs:element name="buyRate" type="xs:string" />
+			<xs:element name="sellRate" type="xs:string" />
+			<xs:element name="debitCurrency" type="xs:string" />
+			<xs:element name="glCurrency" type="xs:string" />
+			<xs:element name="remark" type="xs:string" />
+			<xs:element name="transcode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="linkCard_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="cardNumber" type="xs:string" />
+			<xs:element name="accountTag" type="xs:string" />
+			<xs:element name="accountType" type="xs:string" />
+			<xs:element name="usage" type="xs:string" />
+			<xs:element name="currency" type="xs:string" />
+			<xs:element name="branchTag" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+			<xs:element name="idNumber" type="xs:string" />
+			<xs:element name="idType" type="xs:string" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="address" type="xs:string" />
+			<xs:element name="product" type="xs:string" />
+			<xs:element name="annualFee" type="xs:string" />
+			<xs:element name="vip" type="xs:string" />
+			<xs:element name="addressLine2" type="xs:string" />
+			<xs:element name="addressLine3" type="xs:string" />
+			<xs:element name="addressLine4" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="reActiveCard_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="cardNumber" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="reversableTransaction_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="manager" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="strFromAccount" type="xs:string" />
+			<xs:element name="strToAccount" type="xs:string" />
+			<xs:element name="transDate" type="xs:string" />
+			<xs:element name="strDescription" type="xs:string" />
+			<xs:element name="strTranferAmount" type="xs:string" />
+			<xs:element name="strJournalSeq" type="xs:string" />
+			<xs:element name="orgJournalSeq" type="xs:string" />
+			<xs:element name="strTransCode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ddMasterInquiry_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="hostName" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+			<xs:element name="accountType" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="searchAccountMoreByCif_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="hostName" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+			<xs:element name="lastAccountType" type="xs:string" />
+			<xs:element name="lastAccountNumber" type="xs:string" />
+			<xs:element name="relationShip" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="loanAccountInquiry_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="hostName" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="transferGLtoGL_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="refID" type="xs:string" />
+			<xs:element name="debitGLBranch" type="xs:string" />
+			<xs:element name="debitGLAccount" type="xs:string" />
+			<xs:element name="creditGLBranch" type="xs:string" />
+			<xs:element name="creditGLAccount" type="xs:string" />
+			<xs:element name="amount" type="xs:string" />
+			<xs:element name="currency" type="xs:string" />
+			<xs:element name="comments" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="manager" type="xs:string" />
+			<xs:element name="hostDate" type="xs:string" />
+			<xs:element name="reconcileGL" type="xs:string" />
+			<xs:element name="transactionOffice" type="xs:string" />
+			<xs:element name="customerTypeCode" type="xs:string" />
+			<xs:element name="account" type="xs:string" />
+			<xs:element name="businessDeptCode" type="xs:string" />
+			<xs:element name="branchCode5" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="transferFromCASAToGL_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="hostIP" type="xs:string" />
+			<xs:element name="hostName" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="manager" type="xs:string" />
+			<xs:element name="sequence" type="xs:string" />
+			<xs:element name="transDate" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="fromAccount" type="xs:string" />
+			<xs:element name="amount" type="xs:string" />
+			<xs:element name="fromCif" type="xs:string" />
+			<xs:element name="GLAccount" type="xs:string" />
+			<xs:element name="vatFee" type="xs:string" />
+			<xs:element name="serviceFee" type="xs:string" />
+			<xs:element name="remarks" type="xs:string" />
+			<xs:element name="fromName" type="xs:string" />
+			<xs:element name="fromId" type="xs:string" />
+			<xs:element name="toAccount" type="xs:string" />
+			<xs:element name="toName" type="xs:string" />
+			<xs:element name="toId" type="xs:string" />
+			<xs:element name="toAddress" type="xs:string" />
+			<xs:element name="toIdIssueDate" type="xs:string" />
+			<xs:element name="toIdIssuePlace" type="xs:string" />
+			<xs:element name="transCode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="updateE_Contact_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+			<xs:element name="sequenceNo" type="xs:string" />
+			<xs:element name="eContactType" type="xs:string" />
+			<xs:element name="newEcontact" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="updateMainternanceCA_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+			<xs:element name="introducerCode" type="xs:string" />
+			<xs:element name="expense" type="xs:string" />
+			<xs:element name="accountName" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="getInformationByCIFForIBSRegistration_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="hostName" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="cif_no" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="createUnHoldMessage_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="account" type="xs:string" />
+			<xs:element name="description" type="xs:string" />
+			<xs:element name="amount" type="xs:string" />
+			<xs:element name="code" type="xs:string" />
+			<xs:element name="sequence" type="xs:string" />
+			<xs:element name="actionCode" type="xs:string" />
+			<xs:element name="expireDate" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="transferFromWUToCA_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="hostIP" type="xs:string" />
+			<xs:element name="hostName" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="manager" type="xs:string" />
+			<xs:element name="sequence" type="xs:string" />
+			<xs:element name="transDate" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="toAccount" type="xs:string" />
+			<xs:element name="crAmount" type="xs:string" />
+			<xs:element name="ttAmount" type="xs:string" />
+			<xs:element name="toCif" type="xs:string" />
+			<xs:element name="WUAccount" type="xs:string" />
+			<xs:element name="vatFee" type="xs:string" />
+			<xs:element name="serviceFee" type="xs:string" />
+			<xs:element name="buyRate" type="xs:string" />
+			<xs:element name="sendRate" type="xs:string" />
+			<xs:element name="ttSendRate" type="xs:string" />
+			<xs:element name="remarks" type="xs:string" />
+			<xs:element name="toName" type="xs:string" />
+			<xs:element name="toId" type="xs:string" />
+			<xs:element name="toAddress" type="xs:string" />
+			<xs:element name="toIdIssueDate" type="xs:string" />
+			<xs:element name="toIdIssuePlace" type="xs:string" />
+			<xs:element name="transCode" type="xs:string" />
+			<xs:element name="refWU" type="xs:string" />
+			<xs:element name="sendingCurrencyType" type="xs:string" />
+			<xs:element name="receivingCurrencyType" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="miniStatement_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="recordNumber" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+			<xs:element name="accountType" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="searchCustomerByCif_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="hostName" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="addE_Contact_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+			<xs:element name="eContactType" type="xs:string" />
+			<xs:element name="newEcontact" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="createCA_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="hostDate" type="xs:string" />
+			<xs:element name="hostId" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="currencyType" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+			<xs:element name="accountType" type="xs:string" />
+			<xs:element name="accountName" type="xs:string" />
+			<xs:element name="modeOfOperation" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="reversableOL2Transaction_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="hostIP" type="xs:string" />
+			<xs:element name="hostName" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="manager" type="xs:string" />
+			<xs:element name="sequence" type="xs:string" />
+			<xs:element name="oldSequence" type="xs:string" />
+			<xs:element name="transDate" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="fromAccount" type="xs:string" />
+			<xs:element name="amount" type="xs:string" />
+			<xs:element name="amountMustPay" type="xs:string" />
+			<xs:element name="fromCif" type="xs:string" />
+			<xs:element name="GLAccount" type="xs:string" />
+			<xs:element name="vatFee" type="xs:string" />
+			<xs:element name="serviceFee" type="xs:string" />
+			<xs:element name="remarks" type="xs:string" />
+			<xs:element name="fromName" type="xs:string" />
+			<xs:element name="fromId" type="xs:string" />
+			<xs:element name="toAccount" type="xs:string" />
+			<xs:element name="toName" type="xs:string" />
+			<xs:element name="toId" type="xs:string" />
+			<xs:element name="toAddress" type="xs:string" />
+			<xs:element name="toIdIssueDate" type="xs:string" />
+			<xs:element name="toIdIssuePlace" type="xs:string" />
+			<xs:element name="strTransCode" type="xs:string" />
+			<xs:element name="refId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="getAccount_type">
+		<xs:sequence>
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="currencyCode" type="xs:string" />
+			<xs:element name="groupCode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="updateMainternanceNewCA_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+			<xs:element name="introducerCode" type="xs:string" />
+			<xs:element name="expense" type="xs:string" />
+			<xs:element name="accountName" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="transferAccountFromCifToAnother_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="sourceCif" type="xs:string" />
+			<xs:element name="accountToMove" type="xs:string" />
+			<xs:element name="destinationCif" type="xs:string" />
+			<xs:element name="destinationName" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="cardActivation_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="cardNumber" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+			<xs:element name="idNo" type="xs:string" />
+			<xs:element name="idType" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="searchAccountByCif_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="hostName" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="createCif_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="hostName" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="IdNumber" type="xs:string" />
+			<xs:element name="IdType" type="xs:string" />
+			<xs:element name="IdDateIssued" type="xs:string" />
+			<xs:element name="IdCountryIssued" type="xs:string" />
+			<xs:element name="IdPlaceIssued" type="xs:string" />
+			<xs:element name="strSurname" type="xs:string" />
+			<xs:element name="afterSurname" type="xs:string" />
+			<xs:element name="addressLine1" type="xs:string" />
+			<xs:element name="addressLine2" type="xs:string" />
+			<xs:element name="addressLine3" type="xs:string" />
+			<xs:element name="addressLine4" type="xs:string" />
+			<xs:element name="addressLine5" type="xs:string" />
+			<xs:element name="nationality" type="xs:string" />
+			<xs:element name="birthday" type="xs:string" />
+			<xs:element name="raceCode" type="xs:string" />
+			<xs:element name="maritalStatus" type="xs:string" />
+			<xs:element name="gender" type="xs:string" />
+			<xs:element name="occupationCode_2" type="xs:string" />
+			<xs:element name="placeOfBirth" type="xs:string" />
+			<xs:element name="typeElectronicAddress1" type="xs:string" />
+			<xs:element name="typeElectronicAddress2" type="xs:string" />
+			<xs:element name="typeElectronicAddress3" type="xs:string" />
+			<xs:element name="electronicAddress1" type="xs:string" />
+			<xs:element name="electronicAddress2" type="xs:string" />
+			<xs:element name="electronicAddress3" type="xs:string" />
+			<xs:element name="hostDate" type="xs:string" />
+			<xs:element name="birthday_Full" type="xs:string" />
+			<xs:element name="idDateIssued_Full" type="xs:string" />
+			<xs:element name="strOccupationCode_1" type="xs:string" />
+			<xs:element name="strProvince" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="lockUpdateMainternanceNewCA_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="createLockForUnHoldMessage_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="account" type="xs:string" />
+			<xs:element name="sequence" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="searchE_ContactByCif_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="searchCustomerInformationByID_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="hostName" type="xs:string" />
+			<xs:element name="bankCode" type="xs:string" />
+			<xs:element name="cifNumber" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="getFDReceiptAccount_type">
+		<xs:sequence>
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="currencyCode" type="xs:string" />
+			<xs:element name="groupCode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="createAddCifGroupMainternance_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="teller" type="xs:string" />
+			<xs:element name="branchCode" type="xs:string" />
+			<xs:element name="cifCorp" type="xs:string" />
+			<xs:element name="seq" type="xs:string" />
+			<xs:element name="cifEmp" type="xs:string" />
+			<xs:element name="relationalEmpLev" type="xs:string" />
+			<xs:element name="relationalType" type="xs:string" />
+			<xs:element name="relationalCorpLev" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="createCifMainternanceMessage_type">
+		<xs:sequence>
+			<xs:element name="cifObj" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="body_type">
+		<xs:sequence>
+			<xs:element name="createHoldMessage" type="createHoldMessage_type"
+				minOccurs="0" />
+			<xs:element name="createFD" type="createFD_type"
+				minOccurs="0" />
+			<xs:element name="lockUpdateMainternanceCA" type="lockUpdateMainternanceCA_type"
+				minOccurs="0" />
+			<xs:element name="debitAdvice" type="debitAdvice_type"
+				minOccurs="0" />
+			<xs:element name="linkMasterCard" type="linkMasterCard_type"
+				minOccurs="0" />
+			<xs:element name="HostMessageSending" type="HostMessageSending_type"
+				minOccurs="0" />
+			<xs:element name="lockUpdateE_Contact" type="lockUpdateE_Contact_type"
+				minOccurs="0" />
+			<xs:element name="changeCardService" type="changeCardService_type"
+				minOccurs="0" />
+			<xs:element name="createFDReceipt" type="createFDReceipt_type"
+				minOccurs="0" />
+			<xs:element name="transferFromCASAToCASA" type="transferFromCASAToCASA_type"
+				minOccurs="0" />
+			<xs:element name="lockTransferAccountFromCifToAnother"
+				type="lockTransferAccountFromCifToAnother_type" minOccurs="0" />
+			<xs:element name="createSA" type="createSA_type"
+				minOccurs="0" />
+			<xs:element name="TFMessageSending" type="TFMessageSending_type"
+				minOccurs="0" />
+			<xs:element name="joinSA" type="joinSA_type" minOccurs="0" />
+			<xs:element name="joinCA" type="joinCA_type" minOccurs="0" />
+			<xs:element name="accountInquiry" type="accountInquiry_type"
+				minOccurs="0" />
+			<xs:element name="markHotCard" type="markHotCard_type"
+				minOccurs="0" />
+			<xs:element name="getInformationByIDForIBSRegistration"
+				type="getInformationByIDForIBSRegistration_type" minOccurs="0" />
+			<xs:element name="searchCustomerById" type="searchCustomerById_type"
+				minOccurs="0" />
+			<xs:element name="creditAdvice" type="creditAdvice_type"
+				minOccurs="0" />
+			<xs:element name="linkCard" type="linkCard_type"
+				minOccurs="0" />
+			<xs:element name="reActiveCard" type="reActiveCard_type"
+				minOccurs="0" />
+			<xs:element name="reversableTransaction" type="reversableTransaction_type"
+				minOccurs="0" />
+			<xs:element name="ddMasterInquiry" type="ddMasterInquiry_type"
+				minOccurs="0" />
+			<xs:element name="searchAccountMoreByCif" type="searchAccountMoreByCif_type"
+				minOccurs="0" />
+			<xs:element name="loanAccountInquiry" type="loanAccountInquiry_type"
+				minOccurs="0" />
+			<xs:element name="transferGLtoGL" type="transferGLtoGL_type"
+				minOccurs="0" />
+			<xs:element name="transferFromCASAToGL" type="transferFromCASAToGL_type"
+				minOccurs="0" />
+			<xs:element name="updateE_Contact" type="updateE_Contact_type"
+				minOccurs="0" />
+			<xs:element name="updateMainternanceCA" type="updateMainternanceCA_type"
+				minOccurs="0" />
+			<xs:element name="getInformationByCIFForIBSRegistration"
+				type="getInformationByCIFForIBSRegistration_type" minOccurs="0" />
+			<xs:element name="createUnHoldMessage" type="createUnHoldMessage_type"
+				minOccurs="0" />
+			<xs:element name="transferFromWUToCA" type="transferFromWUToCA_type"
+				minOccurs="0" />
+			<xs:element name="miniStatement" type="miniStatement_type"
+				minOccurs="0" />
+			<xs:element name="searchCustomerByCif" type="searchCustomerByCif_type"
+				minOccurs="0" />
+			<xs:element name="addE_Contact" type="addE_Contact_type"
+				minOccurs="0" />
+			<xs:element name="createCA" type="createCA_type"
+				minOccurs="0" />
+			<xs:element name="reversableOL2Transaction" type="reversableOL2Transaction_type"
+				minOccurs="0" />
+			<xs:element name="getAccount" type="getAccount_type"
+				minOccurs="0" />
+			<xs:element name="updateMainternanceNewCA" type="updateMainternanceNewCA_type"
+				minOccurs="0" />
+			<xs:element name="transferAccountFromCifToAnother" type="transferAccountFromCifToAnother_type"
+				minOccurs="0" />
+			<xs:element name="cardActivation" type="cardActivation_type"
+				minOccurs="0" />
+			<xs:element name="searchAccountByCif" type="searchAccountByCif_type"
+				minOccurs="0" />
+			<xs:element name="createCif" type="createCif_type"
+				minOccurs="0" />
+			<xs:element name="lockUpdateMainternanceNewCA" type="lockUpdateMainternanceNewCA_type"
+				minOccurs="0" />
+			<xs:element name="createLockForUnHoldMessage" type="createLockForUnHoldMessage_type"
+				minOccurs="0" />
+			<xs:element name="searchE_ContactByCif" type="searchE_ContactByCif_type"
+				minOccurs="0" />
+			<xs:element name="searchCustomerInformationByID" type="searchCustomerInformationByID_type"
+				minOccurs="0" />
+			<xs:element name="getFDReceiptAccount" type="getFDReceiptAccount_type"
+				minOccurs="0" />
+			<xs:element name="createAddCifGroupMainternance" type="createAddCifGroupMainternance_type"
+				minOccurs="0" />
+			<xs:element name="createCifMainternanceMessage" type="createCifMainternanceMessage_type"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="Data">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Header" type="header_type" />
+				<xs:element name="Body" type="body_type" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

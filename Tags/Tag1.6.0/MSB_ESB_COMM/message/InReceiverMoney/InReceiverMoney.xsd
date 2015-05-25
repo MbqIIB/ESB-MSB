@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.w3schools.com" xmlns="http://www.w3schools.com"
+	elementFormDefault="qualified">
+	<xs:complexType name="header_type">
+		<xs:sequence>
+			<xs:element name="req_id" type="xs:int" />
+			<xs:element name="req_app" type="xs:string" />
+			<xs:element name="srv" type="xs:int" />
+			<xs:element name="srv_app" type="xs:string" />
+			<xs:element name="req_time" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="wuBankAccount_type">
+		<xs:sequence>
+			<xs:element name="accountName" type="xs:string" />
+			<xs:element name="accountNumber" type="xs:string" />
+			<xs:element name="accountType" type="xs:string" />
+			<xs:element name="cifNum" type="xs:string" />
+			<xs:element name="pinVerificationTime" type="xs:string" />
+			<xs:element name="routingNumber" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="paymentDtl_type">
+		<xs:sequence>
+			<xs:element name="county_tax" type="xs:long" />
+			<xs:element name="desCountryCode" type="xs:string" />
+			<xs:element name="desCurrencyCode" type="xs:string" />
+			<xs:element name="desPayoutActualAmount" type="xs:long" />
+			<xs:element name="desPayoutAmount" type="xs:long" />
+			<xs:element name="exchange_rate" type="xs:double" />
+			<xs:element name="fee_charges" type="xs:long" />
+			<xs:element name="municipal_tax" type="xs:long" />
+			<xs:element name="orgCountryCode" type="xs:string" />
+			<xs:element name="orgCurrencyCode" type="xs:string" />
+			<xs:element name="origineAmount" type="xs:long" />
+			<xs:element name="origineGrossAmount" type="xs:long" />
+			<xs:element name="promotion" type="xs:long" />
+			<xs:element name="promotionCode" type="xs:string" />
+			<xs:element name="promotionDescription" type="xs:string" />
+			<xs:element name="promotionMesssage" type="xs:string" />
+			<xs:element name="promotionName" type="xs:string" />
+			<xs:element name="state_tax" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="wuReceiver_type">
+		<xs:sequence>
+			<xs:element name="address1" type="xs:string" />
+			<xs:element name="address2" type="xs:string" />
+			<xs:element name="adressCountry" type="xs:string" />
+			<xs:element name="city" type="xs:string" />
+			<xs:element name="contactPhone" type="xs:string" />
+			<xs:element name="countryCode" type="xs:string" />
+			<xs:element name="countryName" type="xs:string" />
+			<xs:element name="dateOfBirth" type="xs:string" />
+			<xs:element name="expiradate" type="xs:string" />
+			<xs:element name="idDate" type="xs:string" />
+			<xs:element name="idPlace" type="xs:string" />
+			<xs:element name="identity" type="xs:string" />
+			<xs:element name="mobilePhone" type="xs:string" />
+			<xs:element name="national" type="xs:string" />
+			<xs:element name="postalCode" type="xs:string" />
+			<xs:element name="receiveFirstName" type="xs:string" />
+			<xs:element name="receiveIDType" type="xs:string" />
+			<xs:element name="receiveLastName" type="xs:string" />
+			<xs:element name="receiverAdd" type="xs:string" />
+			<xs:element name="stateCode" type="xs:string" />
+			<xs:element name="stateName" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="wuSender_type">
+		<xs:sequence>
+			<xs:element name="contactPhone" type="xs:string" />
+			<xs:element name="sendAddress" type="xs:string" />
+			<xs:element name="sendAddress2" type="xs:string" />
+			<xs:element name="sendCity" type="xs:string" />
+			<xs:element name="sendCountryIsoCode" type="xs:string" />
+			<xs:element name="sendFirstName" type="xs:string" />
+			<xs:element name="sendLastName" type="xs:string" />
+			<xs:element name="sendPostalCose" type="xs:string" />
+			<xs:element name="sendState" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="transactionInquiryRequest_type">
+		<xs:sequence>
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="countryCode" type="xs:string" />
+			<xs:element name="firstName" type="xs:string" />
+			<xs:element name="lastName" type="xs:string" />
+			<xs:element name="mstcn" type="xs:string" />
+			<xs:element name="serviceCode" type="xs:string" />
+			<xs:element name="transactionDate" type="xs:string" />
+			<xs:element name="transactionID" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="transationInquiry_type">
+		<xs:sequence>
+			<xs:element name="request" type="transactionInquiryRequest_type" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="pickupValidateReq_type">
+		<xs:sequence>
+			<xs:element name="bankAcc" type="wuBankAccount_type" />
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="comment" type="xs:string" />
+			<xs:element name="mtcn" type="xs:string" />
+			<xs:element name="paymentDtl" type="paymentDtl_type" />
+			<xs:element name="receiver" type="wuReceiver_type" />
+			<xs:element name="refNo" type="xs:string" />
+			<xs:element name="sender" type="wuSender_type" />
+			<xs:element name="serviceCode" type="xs:string" />
+			<xs:element name="transactionDate" type="xs:string" />
+			<xs:element name="transactionID" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="pickupValidate_type">
+		<xs:sequence>
+			<xs:element name="request" type="pickupValidateReq_type" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="pickupReciveMoneyReq_type">
+		<xs:sequence>
+			<xs:element name="bankAcc" type="wuBankAccount_type" />
+			<xs:element name="channel" type="xs:string" />
+			<xs:element name="comment" type="xs:string" />
+			<xs:element name="moneyTransactionID" type="xs:string" />
+			<xs:element name="moneyTransferDate" type="xs:string" />
+			<xs:element name="mtcn" type="xs:string" />
+			<xs:element name="others" type="xs:string" />
+			<xs:element name="paymentDtl" type="paymentDtl_type" />
+			<xs:element name="pickupReferenceNumber" type="xs:string" />
+			<xs:element name="receiver" type="wuReceiver_type" />
+			<xs:element name="referenceNo" type="xs:string" />
+			<xs:element name="sender" type="wuSender_type" />
+			<xs:element name="serviceCode" type="xs:string" />
+			<xs:element name="transactionDate" type="xs:string" />
+			<xs:element name="transactionDigest" type="xs:string" />
+			<xs:element name="transactionID" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="pickupReciveMoney_type">
+		<xs:sequence>
+			<xs:element name="request" type="pickupReciveMoneyReq_type" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="body_type">
+		<xs:sequence>
+			<xs:element name="transationInquiry" type="transationInquiry_type"
+				minOccurs="0" />
+			<xs:element name="pickupValidate" type="pickupValidate_type"
+				minOccurs="0" />
+			<xs:element name="pickupReciveMoney" type="pickupReciveMoney_type"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="Data">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Header" type="header_type" />
+				<xs:element name="Body" type="body_type" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+

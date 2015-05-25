@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS038</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<reversableOL2Transaction>
+			<channel>SMSBK01</channel>
+			<hostIP>10.0.0.1</hostIP>
+			<hostName>localhost</hostName>
+			<teller>TT110001</teller>
+			<manager>TT110001</manager>
+			<sequence>9999</sequence>
+			<oldSequence>11111</oldSequence>
+			<transDate>020712</transDate>
+			<branchCode>110</branchCode>
+			<fromAccount>11001010000105</fromAccount>
+			<amount>90000</amount>
+			<amountMustPay>90000</amountMustPay>
+			<fromCif>109928</fromCif>
+			<GLAccount>280898100</GLAccount>
+			<vatFee>0</vatFee>
+			<serviceFee>0</serviceFee>
+			<remarks>Reverse</remarks>
+			<fromName>TRAN KHAC HIEU</fromName>
+			<fromId>012945065</fromId>
+			<toAccount>11001010000105000</toAccount>
+			<toName>KIENVT</toName>
+			<toId>030394</toId>
+			<toAddress>KT</toAddress>
+			<toIdIssueDate>020711</toIdIssueDate>
+			<toIdIssuePlace>VN</toIdIssuePlace>
+			<strTransCode>8277</strTransCode>
+			<refId>999000044</refId>
+		</reversableOL2Transaction>
+	</Body>
+</Data>
+

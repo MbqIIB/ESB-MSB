@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<res_id></res_id>
+		<req_id></req_id>
+		<req_app></req_app>
+		<srv></srv>
+		<req_time></req_time>
+	</Header>
+	<Body>
+		<queryBilling>
+			<msgType></msgType>
+			<sequenceId></sequenceId>
+			<customerCode></customerCode>
+			<processingCode></processingCode>
+			<payProviderCode></payProviderCode>
+			<enquiryAmount></enquiryAmount>
+			<enquiryInfo></enquiryInfo>
+			<responseCode></responseCode>
+			<responseDescription></responseDescription>
+		</queryBilling>
+	</Body>
+</Data>

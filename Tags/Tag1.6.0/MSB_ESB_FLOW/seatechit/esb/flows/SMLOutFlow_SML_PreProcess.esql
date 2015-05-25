@@ -1,0 +1,131 @@
+BROKER SCHEMA seatechit.esb.flows
+
+
+CREATE COMPUTE MODULE SMLOutFlow_SML_PreProcess
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyMessageHeaders();
+		--CALL CopyEntireMessage();
+	
+		DECLARE q1 NAMESPACE 'http://Services.iso.m1t.com/';
+
+		DECLARE curr_time CHAR CURRENT_TIME;
+		DECLARE curr_date CHAR CURRENT_DATE;
+
+		DECLARE srv CHARACTER InputRoot.XMLNSC.Data.Header.srv;
+
+		SET OutputLocalEnvironment.XMLNS.Messages.Request.Data = (SELECT * FROM InputRoot.XMLNSC.Data);
+		SET OutputLocalEnvironment.XMLNS.Messages.Response.Data.Header = (SELECT * FROM InputRoot.XMLNSC.Data.Header);
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.tllog.rcv_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.tllog.rcv_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.rcv_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.rcv_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.req_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.req_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+		--SET OutputLocalEnvironment.Headermsg = InputRoot.XMLNS.Data.Header;
+
+		SET Environment.MQMD = InputRoot.MQMD;
+
+		SET OutputRoot.MQMD.Encoding = 546;
+		SET OutputRoot.MQMD.CodedCharSetId = 1208;
+		-- Save the MQMD; sending to HTTP later in the flow destroys it
+		--SET Environment.MQMD = InputRoot.MQMD;
+		--add namespace;
+		SET OutputRoot.Properties.MessageType = 'Envelope';		
+
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsd='http://www.w3.org/2001/XMLSchema';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance';
+
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:q1='http://Services.iso.m1t.com/';
+		
+		CASE srv
+		WHEN 'SML001' THEN
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q1:inquiry = InputRoot.XMLNSC.Data.Body.inquiry;
+		WHEN 'SML002' THEN	
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q1:deposite = InputRoot.XMLNSC.Data.Body.deposite;		
+		END CASE;	
+		
+
+		SET OutputLocalEnvironment.XMLNS.url_list[]=
+		(
+		SELECT a.service_url,a.service_timeout
+		FROM CacheServiceURLTable.ServiceInfoData[] as a
+		WHERE a.service_id=srv
+		);
+		SET OutputLocalEnvironment.Destination.HTTP.RequestLine.Method = 'POST';
+		SET OutputLocalEnvironment.Destination.HTTP.RequestURL = OutputLocalEnvironment.XMLNS.url_list.service_url; --SET OutputLocalEnvironment.Destination.HTTP.RequestURL = 'http://10.0.2.43/SMS/services/SMSBankingService'; --
+		SET OutputLocalEnvironment.Destination.HTTP.Timeout = OutputLocalEnvironment.XMLNS.url_list.service_timeout;
+
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE SMLOutFlow_SML_PostProcess
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+		CREATE NEXTSIBLING OF OutputRoot.Properties DOMAIN 'MQMD';
+		SET OutputRoot.MQMD = Environment.MQMD;
+
+
+		DECLARE ns2 NAMESPACE 'http://Services.iso.m1t.com/';	
+		DECLARE ns4 NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+
+		DECLARE curr_time CHAR CURRENT_TIME;
+		DECLARE curr_date CHAR CURRENT_DATE;
+		DECLARE psrv CHARACTER InputLocalEnvironment.XMLNS.Messages.Request.Data.Header.srv;
+
+		SET OutputRoot.XMLNS.Messages = InputLocalEnvironment.XMLNS.Messages;
+		SET OutputRoot.XMLNS.Messages.Control.msglog.rsp_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputRoot.XMLNS.Messages.Control.msglog.rsp_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+
+		CASE psrv
+		WHEN 'SML001' THEN
+			DECLARE value CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:inquiryResponse.return.infor;
+			DECLARE respCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:inquiryResponse.return.resCode;
+			DECLARE description CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:inquiryResponse.return.description;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.inquiry.out.inquiryResponse.info = value;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.inquiry.out.inquiryResponse.respCode = respCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.inquiry.out.inquiryResponse.description = description;
+		WHEN 'SML002' THEN
+			DECLARE value CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:depositeResponse.return.infor;
+			DECLARE respCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:depositeResponse.return.resCode;
+			DECLARE description CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:depositeResponse.return.description;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.deposite.out.depositeResponse.info = value;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.deposite.out.depositeResponse.respCode = respCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.deposite.out.depositeResponse.description = description;		
+		END CASE;	
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

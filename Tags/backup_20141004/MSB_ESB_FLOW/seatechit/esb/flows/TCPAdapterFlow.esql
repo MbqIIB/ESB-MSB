@@ -1,0 +1,1674 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+*
+* File Name: TCPAdapterFlow.esql
+*
+* Purpose: Create Webservice adapter for Corebank Service.
+*
+* Authors: Vu Trung Kien
+*
+* Date 12 Jan 2013
+* Version: 1.0
+*
+* @copyright Seatechit . 2012. All rights reserved.
+*
+*/
+BROKER SCHEMA seatechit.esb.flows
+
+CREATE COMPUTE MODULE TCPAdapterFlow_As400_PreProcess
+	DECLARE tns NAMESPACE 'http://accounts.cnn.msb.com.vn';
+	DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+		CALL CopyMessageHeaders();
+		-- Output is MQ, so remove HTTP headers
+		SET OutputRoot.HTTPInputHeader = null;
+		SET OutputRoot.Properties.MessageFormat='XML1';
+		CREATE NEXTSIBLING OF OutputRoot.Properties DOMAIN 'MQMD';
+		-- Process Input Message
+
+		IF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createHoldMessage[])) THEN
+			CALL BuildXMLMsgHeader('createHoldMessage','CBS001');
+			CALL createHoldMessage();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFD[])) THEN
+			CALL BuildXMLMsgHeader('createFD','CBS002');
+			CALL createFD();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceCA[])) THEN
+			CALL BuildXMLMsgHeader('lockUpdateMainternanceCA','CBS003');
+			CALL lockUpdateMainternanceCA();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice[])) THEN
+			CALL BuildXMLMsgHeader('debitAdvice','CBS004');
+			CALL debitAdvice();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard[])) THEN
+			CALL BuildXMLMsgHeader('linkMasterCard','CBS005');
+			CALL linkMasterCard();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:HostMessageSending[])) THEN
+			CALL BuildXMLMsgHeader('HostMessageSending','CBS006');
+			CALL HostMessageSending();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateE_Contact[])) THEN
+			CALL BuildXMLMsgHeader('lockUpdateE_Contact','CBS007');
+			CALL lockUpdateE_Contact();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:changeCardService[])) THEN
+			CALL BuildXMLMsgHeader('changeCardService','CBS008');
+			CALL changeCardService();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt[])) THEN
+			CALL BuildXMLMsgHeader('createFDReceipt','CBS009');
+			CALL createFDReceipt();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA[])) THEN
+			CALL BuildXMLMsgHeader('transferFromCASAToCASA','CBS010');
+			CALL transferFromCASAToCASA();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockTransferAccountFromCifToAnother[])) THEN
+			CALL BuildXMLMsgHeader('lockTransferAccountFromCifToAnother','CBS011');
+			CALL lockTransferAccountFromCifToAnother();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createSA[])) THEN
+			CALL BuildXMLMsgHeader('createSA','CBS012');
+			CALL createSA();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:TFMessageSending[])) THEN
+			CALL BuildXMLMsgHeader('TFMessageSending','CBS013');
+			CALL TFMessageSending();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinSA[])) THEN
+			CALL BuildXMLMsgHeader('joinSA','CBS014');
+			CALL joinSA();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinCA[])) THEN
+			CALL BuildXMLMsgHeader('joinCA','CBS015');
+			CALL joinCA();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:accountInquiry[])) THEN
+			CALL BuildXMLMsgHeader('accountInquiry','CBS016');
+			CALL accountInquiry();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:markHotCard[])) THEN
+			CALL BuildXMLMsgHeader('markHotCard','CBS017');
+			CALL markHotCard();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByIDForIBSRegistration[])) THEN
+			CALL BuildXMLMsgHeader('getInformationByIDForIBSRegistration','CBS018');
+			CALL getInformationByIDForIBSRegistration();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerById[])) THEN
+			CALL BuildXMLMsgHeader('searchCustomerById','CBS019');
+			CALL searchCustomerById();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice[])) THEN
+			CALL BuildXMLMsgHeader('creditAdvice','CBS020');
+			CALL creditAdvice();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard[])) THEN
+			CALL BuildXMLMsgHeader('linkCard','CBS021');
+			CALL linkCard();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reActiveCard[])) THEN
+			CALL BuildXMLMsgHeader('reActiveCard','CBS022');
+			CALL reActiveCard();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransaction[])) THEN
+			CALL BuildXMLMsgHeader('reversableTransaction','CBS023');
+			CALL reversableTransaction();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:ddMasterInquiry[])) THEN
+			CALL BuildXMLMsgHeader('ddMasterInquiry','CBS024');
+			CALL ddMasterInquiry();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountMoreByCif[])) THEN
+			CALL BuildXMLMsgHeader('searchAccountMoreByCif','CBS025');
+			CALL searchAccountMoreByCif();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:loanAccountInquiry[])) THEN
+			CALL BuildXMLMsgHeader('loanAccountInquiry','CBS026');
+			CALL loanAccountInquiry();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL[])) THEN
+			CALL BuildXMLMsgHeader('transferGLtoGL','CBS027');
+			CALL transferGLtoGL();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL[])) THEN
+			CALL BuildXMLMsgHeader('transferFromCASAToGL','CBS028');
+			CALL transferFromCASAToGL();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateE_Contact[])) THEN
+			CALL BuildXMLMsgHeader('updateE_Contact','CBS029');
+			CALL updateE_Contact();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceCA[])) THEN
+			CALL BuildXMLMsgHeader('updateMainternanceCA','CBS030');
+			CALL updateMainternanceCA();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByCIFForIBSRegistration[])) THEN
+			CALL BuildXMLMsgHeader('getInformationByCIFForIBSRegistration','CBS031');
+			CALL getInformationByCIFForIBSRegistration();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessage[])) THEN
+			CALL BuildXMLMsgHeader('createUnHoldMessage','CBS032');
+			CALL createUnHoldMessage();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA[])) THEN
+			CALL BuildXMLMsgHeader('transferFromWUToCA','CBS033');
+			CALL transferFromWUToCA();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:miniStatement[])) THEN
+			CALL BuildXMLMsgHeader('miniStatement','CBS034');
+			CALL miniStatement();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerByCif[])) THEN
+			CALL BuildXMLMsgHeader('searchCustomerByCif','CBS035');
+			CALL searchCustomerByCif();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:addE_Contact[])) THEN
+			CALL BuildXMLMsgHeader('addE_Contact','CBS036');
+			CALL addE_Contact();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCA[])) THEN
+			CALL BuildXMLMsgHeader('createCA','CBS037');
+			CALL createCA();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction[])) THEN
+			CALL BuildXMLMsgHeader('reversableOL2Transaction','CBS038');
+			CALL reversableOL2Transaction();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getAccount[])) THEN
+			CALL BuildXMLMsgHeader('getAccount','CBS039');
+			CALL getAccount();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceNewCA[])) THEN
+			CALL BuildXMLMsgHeader('updateMainternanceNewCA','CBS040');
+			CALL updateMainternanceNewCA();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferAccountFromCifToAnother[])) THEN
+			CALL BuildXMLMsgHeader('transferAccountFromCifToAnother','CBS041');
+			CALL transferAccountFromCifToAnother();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:cardActivation[])) THEN
+			CALL BuildXMLMsgHeader('cardActivation','CBS042');
+			CALL cardActivation();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountByCif[])) THEN
+			CALL BuildXMLMsgHeader('searchAccountByCif','CBS043');
+			CALL searchAccountByCif();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif[])) THEN
+			CALL BuildXMLMsgHeader('createCif','CBS044');
+			CALL createCif();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceNewCA[])) THEN
+			CALL BuildXMLMsgHeader('lockUpdateMainternanceNewCA','CBS045');
+			CALL lockUpdateMainternanceNewCA();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createLockForUnHoldMessage[])) THEN
+			CALL BuildXMLMsgHeader('createLockForUnHoldMessage','CBS046');
+			CALL createLockForUnHoldMessage();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchE_ContactByCif[])) THEN
+			CALL BuildXMLMsgHeader('searchE_ContactByCif','CBS047');
+			CALL searchE_ContactByCif();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerInformationByID[])) THEN
+			CALL BuildXMLMsgHeader('searchCustomerInformationByID','CBS048');
+			CALL searchCustomerInformationByID();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getFDReceiptAccount[])) THEN
+			CALL BuildXMLMsgHeader('getFDReceiptAccount','CBS049');
+			CALL getFDReceiptAccount();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessage[])) THEN
+			CALL BuildXMLMsgHeader('createAddCifGroupMainternance','CBS050');
+			CALL createAddCifGroupMainternanceMessage();
+		ELSEIF (EXISTS(InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCifMainternanceMessage[])) THEN
+			CALL BuildXMLMsgHeader('createCifMainternanceMessage','CBS051');
+			CALL createCifMainternanceMessage();
+		ELSE
+			DECLARE reasonStr CHAR;
+			SET reasonStr = 'Operator not found';
+			THROW USER EXCEPTION SEVERITY 3 MESSAGE 2373 VALUES(reasonStr);
+		END IF;
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+
+	CREATE PROCEDURE BuildXMLMsgHeader(IN operator CHARACTER,IN srv CHARACTER) BEGIN
+		SET OutputRoot.Properties.MessageType = operator;
+		SET OutputRoot.XMLNS.Data.Header.req_id = 'WCB'||CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyyMMddHHmmssSSSSSS');
+		SET OutputRoot.XMLNS.Data.Header.req_app = 'WCB';
+		SET OutputRoot.XMLNS.Data.Header.srv = srv;
+		SET OutputRoot.XMLNS.Data.Header.srv_app = 'CBS';
+		SET OutputRoot.XMLNS.Data.Header.req_time = CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'yyyy-MM-dd HH:mm:ss.SSS');
+		--KIENVT: add them the chua noi dung http
+		SET OutputRoot.XMLNS.Data.Header.req_idt = CAST(InputLocalEnvironment.Destination.HTTP.RequestIdentifier AS CHARACTER);
+	END;
+
+	CREATE PROCEDURE transferFromCASAToGL() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.hostIP = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:hostIP;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.hostName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:hostName;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.manager = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:manager;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.sequence = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:sequence;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.transDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:transDate;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.fromAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:fromAccount;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.amount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:amount;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.fromCif = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:fromCif;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.GLAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:GLAccount;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.vatFee = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:vatFee;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.serviceFee = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:serviceFee;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.remarks = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:remarks;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.fromName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:fromName;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.fromId = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:fromId;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.toAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:toAccount;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.toName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:toName;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.toId = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:toId;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.toAddress = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:toAddress;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.toIdIssueDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:toIdIssueDate;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.toIdIssuePlace = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:toIdIssuePlace;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToGL.transCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGL.tns:transCode;
+	END;
+
+	CREATE PROCEDURE getAccount() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.getAccount.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getAccount.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.getAccount.currencyCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getAccount.tns:currencyCode;
+		SET OutputRoot.XMLNS.Data.Body.getAccount.groupCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getAccount.tns:groupCode;
+	END;
+
+	CREATE PROCEDURE getFDReceiptAccount() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.getFDReceiptAccount.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getFDReceiptAccount.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.getFDReceiptAccount.currencyCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getFDReceiptAccount.tns:currencyCode;
+		SET OutputRoot.XMLNS.Data.Body.getFDReceiptAccount.groupCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getFDReceiptAccount.tns:groupCode;
+	END;
+
+	CREATE PROCEDURE createCA() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.createCA.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCA.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.createCA.hostDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCA.tns:hostDate;
+		SET OutputRoot.XMLNS.Data.Body.createCA.hostId = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCA.tns:hostId;
+		SET OutputRoot.XMLNS.Data.Body.createCA.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCA.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.createCA.currencyType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCA.tns:currencyType;
+		SET OutputRoot.XMLNS.Data.Body.createCA.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCA.tns:cifNumber;
+		SET OutputRoot.XMLNS.Data.Body.createCA.accountNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCA.tns:accountNumber;
+		SET OutputRoot.XMLNS.Data.Body.createCA.accountType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCA.tns:accountType;
+		SET OutputRoot.XMLNS.Data.Body.createCA.accountName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCA.tns:accountName;
+		SET OutputRoot.XMLNS.Data.Body.createCA.modeOfOperation = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCA.tns:modeOfOperation;
+	END;
+
+	CREATE PROCEDURE createSA() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.createSA.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createSA.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.createSA.hostDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createSA.tns:hostDate;
+		SET OutputRoot.XMLNS.Data.Body.createSA.hostId = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createSA.tns:hostId;
+		SET OutputRoot.XMLNS.Data.Body.createSA.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createSA.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.createSA.currencyType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createSA.tns:currencyType;
+		SET OutputRoot.XMLNS.Data.Body.createSA.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createSA.tns:cifNumber;
+		SET OutputRoot.XMLNS.Data.Body.createSA.accountNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createSA.tns:accountNumber;
+		SET OutputRoot.XMLNS.Data.Body.createSA.accountType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createSA.tns:accountType;
+		SET OutputRoot.XMLNS.Data.Body.createSA.accountName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createSA.tns:accountName;
+		SET OutputRoot.XMLNS.Data.Body.createSA.modeOfOperation = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createSA.tns:modeOfOperation;
+	END;
+
+	CREATE PROCEDURE createFD() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.createFD.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFD.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.createFD.hostDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFD.tns:hostDate;
+		SET OutputRoot.XMLNS.Data.Body.createFD.hostId = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFD.tns:hostId;
+		SET OutputRoot.XMLNS.Data.Body.createFD.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFD.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.createFD.currencyType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFD.tns:currencyType;
+		SET OutputRoot.XMLNS.Data.Body.createFD.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFD.tns:cifNumber;
+		SET OutputRoot.XMLNS.Data.Body.createFD.accountNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFD.tns:accountNumber;
+		SET OutputRoot.XMLNS.Data.Body.createFD.accountType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFD.tns:accountType;
+		SET OutputRoot.XMLNS.Data.Body.createFD.accountName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFD.tns:accountName;
+		SET OutputRoot.XMLNS.Data.Body.createFD.modeOfOperation = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFD.tns:modeOfOperation;
+	END;
+
+	CREATE PROCEDURE transferFromCASAToCASA() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.creditAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:creditAccount;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.creditAmount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:creditAmount;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.creditCurrency = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:creditCurrency;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.creditRate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:creditRate;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.debitAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:debitAccount;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.debitAmount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:debitAmount;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.debitCurrency = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:debitCurrency;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.debitRate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:debitRate;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.manager = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:manager;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.description = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:description;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.sequence = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:sequence;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.transDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:transDate;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.transCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:transCode;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.vatFee = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:vatFee;
+		SET OutputRoot.XMLNS.Data.Body.transferFromCASAToCASA.serviceFee = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASA.tns:serviceFee;
+	END;
+
+	CREATE PROCEDURE joinCA() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.joinCA.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinCA.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.joinCA.strteller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinCA.tns:strteller;
+		SET OutputRoot.XMLNS.Data.Body.joinCA.strBankcode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinCA.tns:strBankcode;
+		SET OutputRoot.XMLNS.Data.Body.joinCA.transDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinCA.tns:transDate;
+		SET OutputRoot.XMLNS.Data.Body.joinCA.strAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinCA.tns:strAccount;
+		SET OutputRoot.XMLNS.Data.Body.joinCA.strCifnumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinCA.tns:strCifnumber;
+		SET OutputRoot.XMLNS.Data.Body.joinCA.strNameAcount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinCA.tns:strNameAcount;
+		SET OutputRoot.XMLNS.Data.Body.joinCA.strcurrCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinCA.tns:strcurrCode;
+	END;
+
+	CREATE PROCEDURE joinSA() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.joinSA.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinSA.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.joinSA.strteller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinSA.tns:strteller;
+		SET OutputRoot.XMLNS.Data.Body.joinSA.strBankcode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinSA.tns:strBankcode;
+		SET OutputRoot.XMLNS.Data.Body.joinSA.transDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinSA.tns:transDate;
+		SET OutputRoot.XMLNS.Data.Body.joinSA.strAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinSA.tns:strAccount;
+		SET OutputRoot.XMLNS.Data.Body.joinSA.strCifnumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinSA.tns:strCifnumber;
+		SET OutputRoot.XMLNS.Data.Body.joinSA.strNameAcount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinSA.tns:strNameAcount;
+		SET OutputRoot.XMLNS.Data.Body.joinSA.strcurrCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinSA.tns:strcurrCode;
+	END;
+
+	CREATE PROCEDURE searchCustomerByCif() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerByCif.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerByCif.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerByCif.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerByCif.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerByCif.hostName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerByCif.tns:hostName;
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerByCif.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerByCif.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerByCif.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerByCif.tns:cifNumber;
+	END;
+
+	CREATE PROCEDURE searchCustomerById() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerById.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerById.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerById.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerById.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerById.hostName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerById.tns:hostName;
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerById.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerById.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerById.idNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerById.tns:idNumber;
+	END;
+
+	CREATE PROCEDURE searchE_ContactByCif() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.searchE_ContactByCif.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchE_ContactByCif.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.searchE_ContactByCif.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchE_ContactByCif.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.searchE_ContactByCif.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchE_ContactByCif.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.searchE_ContactByCif.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchE_ContactByCif.tns:cifNumber;
+	END;
+
+	CREATE PROCEDURE searchAccountByCif() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.searchAccountByCif.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountByCif.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.searchAccountByCif.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountByCif.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.searchAccountByCif.hostName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountByCif.tns:hostName;
+		SET OutputRoot.XMLNS.Data.Body.searchAccountByCif.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountByCif.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.searchAccountByCif.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountByCif.tns:cifNumber;
+	END;
+
+	CREATE PROCEDURE searchAccountMoreByCif() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.searchAccountMoreByCif.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountMoreByCif.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.searchAccountMoreByCif.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountMoreByCif.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.searchAccountMoreByCif.hostName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountMoreByCif.tns:hostName;
+		SET OutputRoot.XMLNS.Data.Body.searchAccountMoreByCif.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountMoreByCif.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.searchAccountMoreByCif.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountMoreByCif.tns:cifNumber;
+		SET OutputRoot.XMLNS.Data.Body.searchAccountMoreByCif.lastAccountType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountMoreByCif.tns:lastAccountType;
+		SET OutputRoot.XMLNS.Data.Body.searchAccountMoreByCif.lastAccountNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountMoreByCif.tns:lastAccountNumber;
+		SET OutputRoot.XMLNS.Data.Body.searchAccountMoreByCif.relationShip = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountMoreByCif.tns:relationShip;
+	END;
+
+	CREATE PROCEDURE searchCustomerInformationByID() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerInformationByID.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerInformationByID.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerInformationByID.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerInformationByID.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerInformationByID.hostName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerInformationByID.tns:hostName;
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerInformationByID.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerInformationByID.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.searchCustomerInformationByID.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerInformationByID.tns:cifNumber;
+	END;
+
+	CREATE PROCEDURE lockTransferAccountFromCifToAnother() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.lockTransferAccountFromCifToAnother.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockTransferAccountFromCifToAnother.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.lockTransferAccountFromCifToAnother.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockTransferAccountFromCifToAnother.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.lockTransferAccountFromCifToAnother.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockTransferAccountFromCifToAnother.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.lockTransferAccountFromCifToAnother.sourceCif = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockTransferAccountFromCifToAnother.tns:sourceCif;
+		SET OutputRoot.XMLNS.Data.Body.lockTransferAccountFromCifToAnother.accountToMove = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockTransferAccountFromCifToAnother.tns:accountToMove;
+	END;
+
+	CREATE PROCEDURE transferAccountFromCifToAnother() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.transferAccountFromCifToAnother.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferAccountFromCifToAnother.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.transferAccountFromCifToAnother.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferAccountFromCifToAnother.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.transferAccountFromCifToAnother.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferAccountFromCifToAnother.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.transferAccountFromCifToAnother.sourceCif = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferAccountFromCifToAnother.tns:sourceCif;
+		SET OutputRoot.XMLNS.Data.Body.transferAccountFromCifToAnother.accountToMove = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferAccountFromCifToAnother.tns:accountToMove;
+		SET OutputRoot.XMLNS.Data.Body.transferAccountFromCifToAnother.destinationCif = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferAccountFromCifToAnother.tns:destinationCif;
+		SET OutputRoot.XMLNS.Data.Body.transferAccountFromCifToAnother.destinationName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferAccountFromCifToAnother.tns:destinationName;
+	END;
+
+	CREATE PROCEDURE lockUpdateE_Contact() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.lockUpdateE_Contact.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateE_Contact.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.lockUpdateE_Contact.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateE_Contact.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.lockUpdateE_Contact.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateE_Contact.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.lockUpdateE_Contact.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateE_Contact.tns:cifNumber;
+		SET OutputRoot.XMLNS.Data.Body.lockUpdateE_Contact.sequenceNo = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateE_Contact.tns:sequenceNo;
+	END;
+
+	CREATE PROCEDURE updateE_Contact() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.updateE_Contact.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateE_Contact.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.updateE_Contact.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateE_Contact.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.updateE_Contact.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateE_Contact.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.updateE_Contact.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateE_Contact.tns:cifNumber;
+		SET OutputRoot.XMLNS.Data.Body.updateE_Contact.sequenceNo = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateE_Contact.tns:sequenceNo;
+		SET OutputRoot.XMLNS.Data.Body.updateE_Contact.eContactType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateE_Contact.tns:eContactType;
+		SET OutputRoot.XMLNS.Data.Body.updateE_Contact.newEcontact = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateE_Contact.tns:newEcontact;
+	END;
+
+	CREATE PROCEDURE addE_Contact() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.addE_Contact.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:addE_Contact.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.addE_Contact.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:addE_Contact.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.addE_Contact.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:addE_Contact.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.addE_Contact.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:addE_Contact.tns:cifNumber;
+		SET OutputRoot.XMLNS.Data.Body.addE_Contact.eContactType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:addE_Contact.tns:eContactType;
+		SET OutputRoot.XMLNS.Data.Body.addE_Contact.newEcontact = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:addE_Contact.tns:newEcontact;
+	END;
+
+	CREATE PROCEDURE createCif() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.createCif.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.createCif.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.createCif.hostName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:hostName;
+		SET OutputRoot.XMLNS.Data.Body.createCif.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.createCif.IdNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:IdNumber;
+		SET OutputRoot.XMLNS.Data.Body.createCif.IdType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:IdType;
+		SET OutputRoot.XMLNS.Data.Body.createCif.IdDateIssued = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:IdDateIssued;
+		SET OutputRoot.XMLNS.Data.Body.createCif.IdCountryIssued = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:IdCountryIssued;
+		SET OutputRoot.XMLNS.Data.Body.createCif.IdPlaceIssued = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:IdPlaceIssued;
+		SET OutputRoot.XMLNS.Data.Body.createCif.strSurname = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:strSurname;
+		SET OutputRoot.XMLNS.Data.Body.createCif.afterSurname = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:afterSurname;
+		SET OutputRoot.XMLNS.Data.Body.createCif.addressLine1 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:addressLine1;
+		SET OutputRoot.XMLNS.Data.Body.createCif.addressLine2 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:addressLine2;
+		SET OutputRoot.XMLNS.Data.Body.createCif.addressLine3 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:addressLine3;
+		SET OutputRoot.XMLNS.Data.Body.createCif.addressLine4 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:addressLine4;
+		SET OutputRoot.XMLNS.Data.Body.createCif.addressLine5 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:addressLine5;
+		SET OutputRoot.XMLNS.Data.Body.createCif.nationality = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:nationality;
+		SET OutputRoot.XMLNS.Data.Body.createCif.birthday = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:birthday;
+		SET OutputRoot.XMLNS.Data.Body.createCif.raceCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:raceCode;
+		SET OutputRoot.XMLNS.Data.Body.createCif.maritalStatus = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:maritalStatus;
+		SET OutputRoot.XMLNS.Data.Body.createCif.gender = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:gender;
+		SET OutputRoot.XMLNS.Data.Body.createCif.occupationCode_2 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:occupationCode_2;
+		SET OutputRoot.XMLNS.Data.Body.createCif.placeOfBirth = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:placeOfBirth;
+		SET OutputRoot.XMLNS.Data.Body.createCif.typeElectronicAddress1 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:typeElectronicAddress1;
+		SET OutputRoot.XMLNS.Data.Body.createCif.typeElectronicAddress2 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:typeElectronicAddress2;
+		SET OutputRoot.XMLNS.Data.Body.createCif.typeElectronicAddress3 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:typeElectronicAddress3;
+		SET OutputRoot.XMLNS.Data.Body.createCif.electronicAddress1 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:electronicAddress1;
+		SET OutputRoot.XMLNS.Data.Body.createCif.electronicAddress2 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:electronicAddress2;
+		SET OutputRoot.XMLNS.Data.Body.createCif.electronicAddress3 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:electronicAddress3;
+		SET OutputRoot.XMLNS.Data.Body.createCif.hostDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:hostDate;
+		SET OutputRoot.XMLNS.Data.Body.createCif.birthday_Full = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:birthday_Full;
+		SET OutputRoot.XMLNS.Data.Body.createCif.idDateIssued_Full = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:idDateIssued_Full;
+		SET OutputRoot.XMLNS.Data.Body.createCif.strOccupationCode_1 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:strOccupationCode_1;
+		SET OutputRoot.XMLNS.Data.Body.createCif.strProvince = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCif.tns:strProvince;
+	END;
+
+	CREATE PROCEDURE miniStatement() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.miniStatement.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:miniStatement.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.miniStatement.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:miniStatement.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.miniStatement.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:miniStatement.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.miniStatement.recordNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:miniStatement.tns:recordNumber;
+		SET OutputRoot.XMLNS.Data.Body.miniStatement.accountNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:miniStatement.tns:accountNumber;
+		SET OutputRoot.XMLNS.Data.Body.miniStatement.accountType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:miniStatement.tns:accountType;
+	END;
+
+	CREATE PROCEDURE ddMasterInquiry() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.ddMasterInquiry.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:ddMasterInquiry.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.ddMasterInquiry.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:ddMasterInquiry.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.ddMasterInquiry.hostName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:ddMasterInquiry.tns:hostName;
+		SET OutputRoot.XMLNS.Data.Body.ddMasterInquiry.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:ddMasterInquiry.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.ddMasterInquiry.accountNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:ddMasterInquiry.tns:accountNumber;
+		SET OutputRoot.XMLNS.Data.Body.ddMasterInquiry.accountType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:ddMasterInquiry.tns:accountType;
+	END;
+
+	CREATE PROCEDURE linkCard() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.linkCard.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.cardNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:cardNumber;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.accountTag = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:accountTag;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.accountType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:accountType;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.usage = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:usage;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.currency = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:currency;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.branchTag = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:branchTag;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:cifNumber;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.idNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:idNumber;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.idType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:idType;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.name = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:name;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.address = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:address;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.product = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:product;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.annualFee = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:annualFee;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.vip = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:vip;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.addressLine2 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:addressLine2;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.addressLine3 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:addressLine3;
+		SET OutputRoot.XMLNS.Data.Body.linkCard.addressLine4 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCard.tns:addressLine4;
+	END;
+
+	CREATE PROCEDURE linkMasterCard() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.accountTag = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:accountTag;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.accountType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:accountType;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.usage = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:usage;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.currency = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:currency;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.branchTag = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:branchTag;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:cifNumber;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.idNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:idNumber;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.idType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:idType;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.name = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:name;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.address = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:address;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.product = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:product;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.annualFee = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:annualFee;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.vip = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:vip;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.addressLine2 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:addressLine2;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.addressLine3 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:addressLine3;
+		SET OutputRoot.XMLNS.Data.Body.linkMasterCard.addressLine4 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCard.tns:addressLine4;
+	END;
+
+	CREATE PROCEDURE cardActivation() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.cardActivation.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:cardActivation.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.cardActivation.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:cardActivation.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.cardActivation.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:cardActivation.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.cardActivation.cardNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:cardActivation.tns:cardNumber;
+		SET OutputRoot.XMLNS.Data.Body.cardActivation.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:cardActivation.tns:cifNumber;
+		SET OutputRoot.XMLNS.Data.Body.cardActivation.idNo = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:cardActivation.tns:idNo;
+		SET OutputRoot.XMLNS.Data.Body.cardActivation.idType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:cardActivation.tns:idType;
+	END;
+
+	CREATE PROCEDURE lockUpdateMainternanceNewCA() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.lockUpdateMainternanceNewCA.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceNewCA.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.lockUpdateMainternanceNewCA.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceNewCA.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.lockUpdateMainternanceNewCA.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceNewCA.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.lockUpdateMainternanceNewCA.accountNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceNewCA.tns:accountNumber;
+	END;
+
+	CREATE PROCEDURE updateMainternanceNewCA() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceNewCA.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceNewCA.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceNewCA.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceNewCA.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceNewCA.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceNewCA.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceNewCA.accountNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceNewCA.tns:accountNumber;
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceNewCA.introducerCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceNewCA.tns:introducerCode;
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceNewCA.expense = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceNewCA.tns:expense;
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceNewCA.accountName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceNewCA.tns:accountName;
+	END;
+
+	CREATE PROCEDURE lockUpdateMainternanceCA() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.lockUpdateMainternanceCA.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceCA.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.lockUpdateMainternanceCA.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceCA.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.lockUpdateMainternanceCA.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceCA.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.lockUpdateMainternanceCA.accountNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceCA.tns:accountNumber;
+
+	END;
+
+	CREATE PROCEDURE updateMainternanceCA() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceCA.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceCA.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceCA.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceCA.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceCA.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceCA.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceCA.accountNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceCA.tns:accountNumber;
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceCA.introducerCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceCA.tns:introducerCode;
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceCA.expense = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceCA.tns:expense;
+		SET OutputRoot.XMLNS.Data.Body.updateMainternanceCA.accountName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceCA.tns:accountName;
+	END;
+
+	CREATE PROCEDURE HostMessageSending() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.HostMessageSending.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:HostMessageSending.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.HostMessageSending.message = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:HostMessageSending.tns:message;
+
+	END;
+
+	CREATE PROCEDURE TFMessageSending() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.TFMessageSending.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:TFMessageSending.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.TFMessageSending.message = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:TFMessageSending.tns:message;
+	END;
+
+	CREATE PROCEDURE getInformationByIDForIBSRegistration() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.getInformationByIDForIBSRegistration.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByIDForIBSRegistration.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.getInformationByIDForIBSRegistration.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByIDForIBSRegistration.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.getInformationByIDForIBSRegistration.hostName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByIDForIBSRegistration.tns:hostName;
+		SET OutputRoot.XMLNS.Data.Body.getInformationByIDForIBSRegistration.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByIDForIBSRegistration.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.getInformationByIDForIBSRegistration.cert_code = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByIDForIBSRegistration.tns:cert_code;
+	END;
+
+	CREATE PROCEDURE getInformationByCIFForIBSRegistration() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.getInformationByCIFForIBSRegistration.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByCIFForIBSRegistration.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.getInformationByCIFForIBSRegistration.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByCIFForIBSRegistration.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.getInformationByCIFForIBSRegistration.hostName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByCIFForIBSRegistration.tns:hostName;
+		SET OutputRoot.XMLNS.Data.Body.getInformationByCIFForIBSRegistration.bankCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByCIFForIBSRegistration.tns:bankCode;
+		SET OutputRoot.XMLNS.Data.Body.getInformationByCIFForIBSRegistration.cif_no = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByCIFForIBSRegistration.tns:cif_no;
+	END;
+
+	CREATE PROCEDURE reversableTransaction() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.reversableTransaction.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransaction.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.reversableTransaction.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransaction.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.reversableTransaction.manager = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransaction.tns:manager;
+		SET OutputRoot.XMLNS.Data.Body.reversableTransaction.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransaction.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.reversableTransaction.strFromAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransaction.tns:strFromAccount;
+		SET OutputRoot.XMLNS.Data.Body.reversableTransaction.strToAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransaction.tns:strToAccount;
+		SET OutputRoot.XMLNS.Data.Body.reversableTransaction.transDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransaction.tns:transDate;
+		SET OutputRoot.XMLNS.Data.Body.reversableTransaction.strDescription = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransaction.tns:strDescription;
+		SET OutputRoot.XMLNS.Data.Body.reversableTransaction.strTranferAmount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransaction.tns:strTranferAmount;
+		SET OutputRoot.XMLNS.Data.Body.reversableTransaction.strJournalSeq = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransaction.tns:strJournalSeq;
+		SET OutputRoot.XMLNS.Data.Body.reversableTransaction.orgJournalSeq = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransaction.tns:orgJournalSeq;
+		SET OutputRoot.XMLNS.Data.Body.reversableTransaction.strTransCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransaction.tns:strTransCode;
+	END;
+
+	CREATE PROCEDURE reversableOL2Transaction() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.hostIP = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:hostIP;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.hostName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:hostName;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.manager = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:manager;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.sequence = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:sequence;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.oldSequence = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:oldSequence;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.transDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:transDate;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.fromAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:fromAccount;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.amount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:amount;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.amountMustPay = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:amountMustPay;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.fromCif = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:fromCif;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.GLAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:GLAccount;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.vatFee = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:vatFee;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.serviceFee = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:serviceFee;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.remarks = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:remarks;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.fromName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:fromName;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.fromId = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:fromId;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.toAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:toAccount;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.toName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:toName;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.toId = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:toId;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.toAddress = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:toAddress;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.toIdIssueDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:toIdIssueDate;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.toIdIssuePlace = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:toIdIssuePlace;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.strTransCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:strTransCode;
+		SET OutputRoot.XMLNS.Data.Body.reversableOL2Transaction.refId = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2Transaction.tns:refId;
+	END;
+
+	CREATE PROCEDURE createFDReceipt() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.journalSeq = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:journalSeq;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.transDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:transDate;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.fdGroupAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:fdGroupAccount;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.depositAmt = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:depositAmt;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.effectiveDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:effectiveDate;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.fdReceipt = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:fdReceipt;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.rate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:rate;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.intPaymentToAcctno = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:intPaymentToAcctno;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.printTranferToAcctno = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:printTranferToAcctno;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.currency = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:currency;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.productCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:productCode;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.autoRenew = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:autoRenew;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.intPaymentMode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:intPaymentMode;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.fdType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:fdType;
+		SET OutputRoot.XMLNS.Data.Body.createFDReceipt.remark = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceipt.tns:remark;
+	END;
+
+	CREATE PROCEDURE loanAccountInquiry() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.loanAccountInquiry.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:loanAccountInquiry.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.loanAccountInquiry.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:loanAccountInquiry.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.loanAccountInquiry.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:loanAccountInquiry.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.loanAccountInquiry.hostName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:loanAccountInquiry.tns:hostName;
+		SET OutputRoot.XMLNS.Data.Body.loanAccountInquiry.accountNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:loanAccountInquiry.tns:accountNumber;
+	END;
+
+	CREATE PROCEDURE accountInquiry() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.accountInquiry.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:accountInquiry.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.accountInquiry.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:accountInquiry.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.accountInquiry.account = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:accountInquiry.tns:account;
+		SET OutputRoot.XMLNS.Data.Body.accountInquiry.transDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:accountInquiry.tns:transDate;
+	END;
+
+	CREATE PROCEDURE debitAdvice() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.sequence = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:sequence;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.transDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:transDate;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.manager = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:manager;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.accountNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:accountNumber;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.effectiveDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:effectiveDate;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.crAmount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:crAmount;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.glAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:glAccount;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.drAmount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:drAmount;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.buyRate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:buyRate;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.sellRate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:sellRate;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.debitCurrency = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:debitCurrency;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.glCurrency = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:glCurrency;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.remark = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:remark;
+		SET OutputRoot.XMLNS.Data.Body.debitAdvice.transcode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdvice.tns:transcode;
+	END;
+
+	CREATE PROCEDURE creditAdvice() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.sequence = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:sequence;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.transDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:transDate;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.manager = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:manager;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.accountNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:accountNumber;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.effectiveDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:effectiveDate;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.crAmount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:crAmount;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.glAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:glAccount;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.drAmount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:drAmount;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.buyRate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:buyRate;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.sellRate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:sellRate;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.debitCurrency = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:debitCurrency;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.glCurrency = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:glCurrency;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.remark = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:remark;
+		SET OutputRoot.XMLNS.Data.Body.creditAdvice.transcode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdvice.tns:transcode;
+	END;
+
+	CREATE PROCEDURE transferGLtoGL() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.refID = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:refID;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.debitGLBranch = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:debitGLBranch;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.debitGLAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:debitGLAccount;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.creditGLBranch = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:creditGLBranch;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.creditGLAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:creditGLAccount;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.amount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:amount;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.currency = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:currency;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.comments = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:comments;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.manager = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:manager;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.hostDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:hostDate;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.reconcileGL = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:reconcileGL;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.transactionOffice = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:transactionOffice;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.customerTypeCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:customerTypeCode;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.account = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:account;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.businessDeptCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:businessDeptCode;
+		SET OutputRoot.XMLNS.Data.Body.transferGLtoGL.branchCode5 = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferGLtoGL.tns:branchCode5;
+	END;
+
+	CREATE PROCEDURE changeCardService() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.changeCardService.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:changeCardService.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.changeCardService.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:changeCardService.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.changeCardService.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:changeCardService.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.changeCardService.cardNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:changeCardService.tns:cardNumber;
+		SET OutputRoot.XMLNS.Data.Body.changeCardService.serviceName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:changeCardService.tns:serviceName;
+		SET OutputRoot.XMLNS.Data.Body.changeCardService.cifNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:changeCardService.tns:cifNumber;
+	END;
+
+	CREATE PROCEDURE markHotCard() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.markHotCard.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:markHotCard.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.markHotCard.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:markHotCard.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.markHotCard.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:markHotCard.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.markHotCard.cardNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:markHotCard.tns:cardNumber;
+		SET OutputRoot.XMLNS.Data.Body.markHotCard.typeLock = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:markHotCard.tns:typeLock;
+		SET OutputRoot.XMLNS.Data.Body.markHotCard.comment = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:markHotCard.tns:comment;
+	END;
+
+	CREATE PROCEDURE reActiveCard() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.reActiveCard.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reActiveCard.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.reActiveCard.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reActiveCard.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.reActiveCard.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reActiveCard.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.reActiveCard.cardNumber = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reActiveCard.tns:cardNumber;
+	END;
+
+	CREATE PROCEDURE createHoldMessage() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.createHoldMessage.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createHoldMessage.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.createHoldMessage.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createHoldMessage.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.createHoldMessage.account = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createHoldMessage.tns:account;
+		SET OutputRoot.XMLNS.Data.Body.createHoldMessage.expiryDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createHoldMessage.tns:expiryDate;
+		SET OutputRoot.XMLNS.Data.Body.createHoldMessage.description = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createHoldMessage.tns:description;
+		SET OutputRoot.XMLNS.Data.Body.createHoldMessage.amount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createHoldMessage.tns:amount;
+		SET OutputRoot.XMLNS.Data.Body.createHoldMessage.code = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createHoldMessage.tns:code;
+	END;
+
+	CREATE PROCEDURE createLockForUnHoldMessage() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.createLockForUnHoldMessage.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createLockForUnHoldMessage.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.createLockForUnHoldMessage.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createLockForUnHoldMessage.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.createLockForUnHoldMessage.account = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createLockForUnHoldMessage.tns:account;
+		SET OutputRoot.XMLNS.Data.Body.createLockForUnHoldMessage.sequence = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createLockForUnHoldMessage.tns:sequence;
+	END;
+
+	CREATE PROCEDURE createUnHoldMessage() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.createUnHoldMessage.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessage.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.createUnHoldMessage.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessage.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.createUnHoldMessage.account = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessage.tns:account;
+		SET OutputRoot.XMLNS.Data.Body.createUnHoldMessage.description = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessage.tns:description;
+		SET OutputRoot.XMLNS.Data.Body.createUnHoldMessage.amount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessage.tns:amount;
+		SET OutputRoot.XMLNS.Data.Body.createUnHoldMessage.code = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessage.tns:code;
+		SET OutputRoot.XMLNS.Data.Body.createUnHoldMessage.sequence = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessage.tns:sequence;
+		SET OutputRoot.XMLNS.Data.Body.createUnHoldMessage.actionCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessage.tns:actionCode;
+		SET OutputRoot.XMLNS.Data.Body.createUnHoldMessage.expireDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessage.tns:expireDate;
+	END;
+
+	CREATE PROCEDURE createAddCifGroupMainternanceMessage() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.createAddCifGroupMainternance.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessage.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.createAddCifGroupMainternance.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessage.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.createAddCifGroupMainternance.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessage.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.createAddCifGroupMainternance.cifCorp = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessage.tns:cifCorp;
+		SET OutputRoot.XMLNS.Data.Body.createAddCifGroupMainternance.seq = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessage.tns:seq;
+		SET OutputRoot.XMLNS.Data.Body.createAddCifGroupMainternance.cifEmp = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessage.tns:cifEmp;
+		SET OutputRoot.XMLNS.Data.Body.createAddCifGroupMainternance.relationalEmpLev = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessage.tns:relationalEmpLev;
+		SET OutputRoot.XMLNS.Data.Body.createAddCifGroupMainternance.relationalType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessage.tns:relationalType;
+		SET OutputRoot.XMLNS.Data.Body.createAddCifGroupMainternance.relationalCorpLev = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessage.tns:relationalCorpLev;
+	END;
+
+	CREATE PROCEDURE createCifMainternanceMessage() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.createCifMainternanceMessage.cifObj = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCifMainternanceMessage.tns:cifObj;
+	END;
+
+	CREATE PROCEDURE transferFromWUToCA() BEGIN
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.channel = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:channel;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.hostIP = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:hostIP;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.hostName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:hostName;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.teller = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:teller;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.manager = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:manager;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.sequence = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:sequence;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.transDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:transDate;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.branchCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:branchCode;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.toAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:toAccount;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.crAmount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:crAmount;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.ttAmount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:ttAmount;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.toCif = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:toCif;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.WUAccount = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:WUAccount;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.vatFee = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:vatFee;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.serviceFee = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:serviceFee;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.buyRate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:buyRate;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.sendRate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:sendRate;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.ttSendRate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:ttSendRate;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.remarks = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:remarks;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.toName = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:toName;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.toId = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:toId;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.toAddress = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:toAddress;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.toIdIssueDate = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:toIdIssueDate;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.toIdIssuePlace = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:toIdIssuePlace;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.transCode = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:transCode;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.refWU = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:refWU;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.sendingCurrencyType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:sendingCurrencyType;
+		SET OutputRoot.XMLNS.Data.Body.transferFromWUToCA.receivingCurrencyType = InputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCA.tns:receivingCurrencyType;
+	END;
+
+
+END MODULE;
+
+CREATE COMPUTE MODULE TCPAdapterFlow_AS400_PostProcess
+
+	DECLARE tns NAMESPACE 'http://accounts.cnn.msb.com.vn';
+	DECLARE xsi NAMESPACE 'http://www.w3.org/2001/XMLSchema-instance';
+
+	DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+	DECLARE nsDefault NAMESPACE 'http://utils.cnn.msb.com.vn';
+
+
+	DECLARE delimChar CHARACTER '|';
+	DECLARE refArrValue REFERENCE TO Environment.Split.Array;
+
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Input is CWF, output is SOAP/XML
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.MessageType = 'Envelope';
+
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsd='http://www.w3.org/2001/XMLSchema';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance';
+
+		DECLARE srv CHARACTER InputRoot.XMLNSC.Data.Header.srv;
+
+
+		IF (srv= 'CBS001') THEN
+			CALL createHoldMessage();
+		ELSEIF (srv='CBS002') THEN
+			CALL createFD();
+		ELSEIF (srv='CBS003') THEN
+			CALL lockUpdateMainternanceCA();
+		ELSEIF (srv='CBS004') THEN
+			CALL debitAdvice();
+		ELSEIF (srv='CBS005') THEN
+			CALL linkMasterCard();
+		ELSEIF (srv='CBS006') THEN
+			CALL HostMessageSending();
+		ELSEIF (srv='CBS007') THEN
+			CALL lockUpdateE_Contact();
+		ELSEIF (srv='CBS008') THEN
+			CALL changeCardService();
+		ELSEIF (srv='CBS009') THEN
+			CALL createFDReceipt();
+		ELSEIF (srv='CBS010') THEN
+			CALL transferFromCASAToCASA();
+		ELSEIF (srv='CBS011') THEN
+			CALL lockTransferAccountFromCifToAnother();
+		ELSEIF (srv='CBS012') THEN
+			CALL createSA();
+		ELSEIF (srv='CBS013') THEN
+			CALL TFMessageSending();
+		ELSEIF (srv='CBS014') THEN
+			CALL joinSA();
+		ELSEIF (srv='CBS015') THEN
+			CALL joinCA();
+		ELSEIF (srv='CBS016') THEN
+			CALL accountInquiry();
+		ELSEIF (srv='CBS017') THEN
+			CALL markHotCard();
+		ELSEIF (srv='CBS018') THEN
+			CALL getInformationByIDForIBSRegistration();
+		ELSEIF (srv='CBS019') THEN
+			CALL searchCustomerById();
+		ELSEIF (srv='CBS020') THEN
+			CALL creditAdvice();
+		ELSEIF (srv='CBS021') THEN
+			CALL linkCard();
+		ELSEIF (srv='CBS022') THEN
+			CALL reActiveCard();
+		ELSEIF (srv='CBS023') THEN
+			CALL reversableTransaction();
+		ELSEIF (srv='CBS024') THEN
+			CALL ddMasterInquiry();
+		ELSEIF (srv='CBS025') THEN
+			CALL searchAccountMoreByCif();
+		ELSEIF (srv='CBS026') THEN
+			CALL loanAccountInquiry();
+		ELSEIF (srv='CBS027') THEN
+			CALL transferGLtoGL();
+		ELSEIF (srv='CBS028') THEN
+			CALL transferFromCASAToGL();
+		ELSEIF (srv='CBS029') THEN
+			CALL updateE_Contact();
+		ELSEIF (srv='CBS030') THEN
+			CALL updateMainternanceCA();
+		ELSEIF (srv='CBS031') THEN
+			CALL getInformationByCIFForIBSRegistration();
+		ELSEIF (srv='CBS032') THEN
+			CALL createUnHoldMessage();
+		ELSEIF (srv='CBS033') THEN
+			CALL transferFromWUToCA();
+		ELSEIF (srv='CBS034') THEN
+			CALL miniStatement();
+		ELSEIF (srv='CBS035') THEN
+			CALL searchCustomerByCif();
+		ELSEIF (srv='CBS036') THEN
+			CALL addE_Contact();
+		ELSEIF (srv='CBS037') THEN
+			CALL createCA();
+		ELSEIF (srv='CBS038') THEN
+			CALL reversableOL2Transaction();
+		ELSEIF (srv='CBS039') THEN
+			CALL getAccount();
+		ELSEIF (srv='CBS040') THEN
+			CALL updateMainternanceNewCA();
+		ELSEIF (srv='CBS041') THEN
+			CALL transferAccountFromCifToAnother();
+		ELSEIF (srv='CBS042') THEN
+			CALL cardActivation();
+		ELSEIF (srv='CBS043') THEN
+			CALL searchAccountByCif();
+		ELSEIF (srv='CBS044') THEN
+			CALL createCif();
+		ELSEIF (srv='CBS045') THEN
+			CALL lockUpdateMainternanceNewCA();
+		ELSEIF (srv='CBS046') THEN
+			CALL createLockForUnHoldMessage();
+		ELSEIF (srv='CBS047') THEN
+			CALL searchE_ContactByCif();
+		ELSEIF (srv='CBS048') THEN
+			CALL searchCustomerInformationByID();
+		ELSEIF (srv='CBS049') THEN
+			CALL getFDReceiptAccount();
+		ELSEIF (srv='CBS050') THEN
+			CALL createAddCifGroupMainternanceMessage();
+		ELSEIF (srv='CBS051') THEN
+			CALL createCifMainternanceMessage();
+		END IF;
+		-- Set the http reply identifier
+		--SET OutputLocalEnvironment.Destination.HTTP.RequestIdentifier =
+		--CAST(InputLocalEnvironment.XMLNSC.Header.HTTP.RequestIdentifier AS BLOB);
+		
+		--KIENVT: add them the chua noi dung http
+		--SET OutputRoot.XMLNS.Data.Header.req_idt = CAST(InputLocalEnvironment.XMLNSC.Header.HTTP.RequestIdentifier AS CHARACTER);
+        /*
+		DECLARE id CHARACTER CAST(InputLocalEnvironment.XMLNSC.Header.HTTP.RequestIdentifier AS CHARACTER);
+		IF (id<>InputRoot.XMLNSC.Data.Header.req_idt)THEN
+			DECLARE reasonStr CHAR;
+			SET Environment.Variables.StatusCode = -3;
+			SET reasonStr = 'RequestIdentifier Failure';
+			THROW USER EXCEPTION SEVERITY 3 MESSAGE 2372 VALUES(reasonStr);
+			RETURN TRUE;
+			--SET OutputLocalEnvironment.Destination.HTTP.RequestIdentifier = CAST(InputRoot.XMLNSC.Data.Header.req_idt AS BLOB);
+		--ELSE
+		--	SET OutputLocalEnvironment.Destination.HTTP.RequestIdentifier = CAST(InputLocalEnvironment.XMLNSC.Header.HTTP.RequestIdentifier AS BLOB);
+		END IF;--*/
+		
+		SET OutputLocalEnvironment.Destination.HTTP.RequestIdentifier = CAST(InputRoot.XMLNSC.Data.Header.req_idt AS BLOB);
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+
+	CREATE PROCEDURE Split (IN S CHARACTER, IN Env REFERENCE, IN Delim CHARACTER)
+	BEGIN
+		DECLARE P INTEGER;
+		DECLARE Idx INTEGER 1;
+
+		SET Env.Split = NULL;
+
+		REPEAT
+			SET P = POSITION(Delim IN S);
+			IF P = 0 THEN
+				SET Env.Split.Array[Idx] = S;
+			ELSE
+				SET Env.Split.Array[Idx] = LEFT(S, P - 1);
+				SET S = SUBSTRING(S FROM P + LENGTH(Delim));
+				SET Idx = Idx + 1;
+			END IF;
+			UNTIL P = 0
+		END REPEAT;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+
+	CREATE PROCEDURE BuildMsgFromReturnObject(IN in_refArrValue REFERENCE,IN in_refXMLMessage REFERENCE,IN out_refObjMessages REFERENCE)
+	BEGIN
+		DECLARE i INTEGER 1;
+		DECLARE j INTEGER 1;
+		SET i = 1;
+		SET j = CARDINALITY(in_refArrValue.Split.Array[]);
+		WHILE i <= j DO
+			SET out_refObjMessages.nsDefault:arrString.tns:string[i]= in_refArrValue.Split.Array[i];
+			SET i=i+1;
+		END WHILE;
+		IF in_refXMLMessage.errCode='0' THEN
+			SET out_refObjMessages.nsDefault:description.(XML.Attribute)xsi:nil='true';
+			SET out_refObjMessages.nsDefault:description.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+			SET out_refObjMessages.nsDefault:errCode.(XML.Attribute)xsi:nil='true';
+			SET out_refObjMessages.nsDefault:errCode.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+		ELSE
+			SET out_refObjMessages.nsDefault:description.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+			SET out_refObjMessages.nsDefault:description= in_refXMLMessage.description;
+			SET out_refObjMessages.nsDefault:errCode.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+			SET out_refObjMessages.nsDefault:errCode= in_refXMLMessage.errCode;
+		END IF;
+	END;
+
+	CREATE PROCEDURE searchAccountByCif() BEGIN
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchAccountByCifResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchAccountByCifResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchAccountByCifResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.searchAccountByCif.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE transferFromCASAToGL() BEGIN
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGLResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGLResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToGLResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.transferFromCASAToGL.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE getAccount() BEGIN
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:getAccountResponse.tns:out = InputRoot.XMLNSC.Data.Body.getAccount.out.accountNumber;
+	END;
+
+	CREATE PROCEDURE getFDReceiptAccount() BEGIN
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:getFDReceiptAccountResponse.tns:out = InputRoot.XMLNSC.Data.Body.getFDReceiptAccount.out.accountNumber;
+	END;
+
+	CREATE PROCEDURE createCA() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCAResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createCAResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createCAResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createCAResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.createCA.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE createSA() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createSAResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createSAResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createSAResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createSAResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.createSA.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE createFD() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createFDResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createFDResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createFDResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.createFD.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE transferFromCASAToCASA() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASAResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASAResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASAResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:transferFromCASAToCASAResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.transferFromCASAToCASA.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE joinCA() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinCAResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:joinCAResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:joinCAResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:joinCAResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.joinCA.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE joinSA() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:joinSAResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:joinSAResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:joinSAResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:joinSAResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.joinSA.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE searchCustomerByCif() BEGIN
+		--SET OutputRoot.XMLNS.soap:Envelope.soap:Body.tns:searchCustomerByCifResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchCustomerByCifResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchCustomerByCifResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soap:Envelope.soap:Body.tns:searchCustomerByCifResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.searchCustomerByCif.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE searchCustomerById() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerByIdResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchCustomerByIdResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchCustomerByIdResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchCustomerByIdResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.searchCustomerById.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE searchE_ContactByCif() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchE_ContactByCifResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchE_ContactByCifResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchE_ContactByCifResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchE_ContactByCifResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.searchE_ContactByCif.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+
+
+	CREATE PROCEDURE searchAccountMoreByCif() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchAccountMoreByCifResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchAccountMoreByCifResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchAccountMoreByCifResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchAccountMoreByCifResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.searchAccountMoreByCif.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE searchCustomerInformationByID() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:searchCustomerInformationByIDResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchCustomerInformationByIDResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchCustomerInformationByIDResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:searchCustomerInformationByIDResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.searchCustomerInformationByID.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE lockTransferAccountFromCifToAnother() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockTransferAccountFromCifToAnotherResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:lockTransferAccountFromCifToAnotherResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:lockTransferAccountFromCifToAnotherResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:lockTransferAccountFromCifToAnotherResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.lockTransferAccountFromCifToAnother.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE transferAccountFromCifToAnother() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferAccountFromCifToAnotherResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:transferAccountFromCifToAnotherResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:transferAccountFromCifToAnotherResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:transferAccountFromCifToAnotherResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.transferAccountFromCifToAnother.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE lockUpdateE_Contact() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateE_ContactResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:lockUpdateE_ContactResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:lockUpdateE_ContactResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:lockUpdateE_ContactResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.lockUpdateE_Contact.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE updateE_Contact() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateE_ContactResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:updateE_ContactResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:updateE_ContactResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:updateE_ContactResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.updateE_Contact.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE addE_Contact() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:addE_ContactResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:addE_ContactResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:addE_ContactResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:addE_ContactResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.addE_Contact.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE createCif() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCifResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createCifResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createCifResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createCifResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.createCif.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE miniStatement() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:miniStatementResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:miniStatementResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:miniStatementResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:miniStatementResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.miniStatement.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE ddMasterInquiry() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:ddMasterInquiryResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:ddMasterInquiryResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:ddMasterInquiryResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:ddMasterInquiryResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.ddMasterInquiry.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE linkCard() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkCardResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:linkCardResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:linkCardResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:linkCardResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.linkCard.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE linkMasterCard() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:linkMasterCardResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:linkMasterCardResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:linkMasterCardResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:linkMasterCardResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.linkMasterCard.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE cardActivation() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:cardActivationResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:cardActivationResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:cardActivationResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:cardActivationResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.cardActivation.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE lockUpdateMainternanceNewCA() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceNewCAResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceNewCAResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceNewCAResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceNewCAResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.lockUpdateMainternanceNewCA.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE updateMainternanceNewCA() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceNewCAResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:updateMainternanceNewCAResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:updateMainternanceNewCAResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:updateMainternanceNewCAResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.updateMainternanceNewCA.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE lockUpdateMainternanceCA() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceCAResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceCAResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceCAResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:lockUpdateMainternanceCAResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.lockUpdateMainternanceCA.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+
+	END;
+
+	CREATE PROCEDURE updateMainternanceCA() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:updateMainternanceCAResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:updateMainternanceCAResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:updateMainternanceCAResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:updateMainternanceCAResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.updateMainternanceCA.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE HostMessageSending() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:HostMessageSendingResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:HostMessageSendingResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:HostMessageSendingResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:HostMessageSendingResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.HostMessageSending.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE TFMessageSending() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:TFMessageSendingResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:TFMessageSendingResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:TFMessageSendingResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:TFMessageSendingResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.TFMessageSending.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE getInformationByIDForIBSRegistration() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByIDForIBSRegistrationResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:getInformationByIDForIBSRegistrationResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:getInformationByIDForIBSRegistrationResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:getInformationByIDForIBSRegistrationResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.getInformationByIDForIBSRegistration.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE getInformationByCIFForIBSRegistration() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:getInformationByCIFForIBSRegistrationResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:getInformationByCIFForIBSRegistrationResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:getInformationByCIFForIBSRegistrationResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:getInformationByCIFForIBSRegistrationResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.getInformationByCIFForIBSRegistration.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE reversableTransaction() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableTransactionResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:reversableTransactionResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:reversableTransactionResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:reversableTransactionResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.reversableTransaction.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE reversableOL2Transaction() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reversableOL2TransactionResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:reversableOL2TransactionResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:reversableOL2TransactionResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:reversableOL2TransactionResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.reversableOL2Transaction.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE createFDReceipt() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createFDReceiptResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createFDReceiptResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createFDReceiptResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createFDReceiptResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.createFDReceipt.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE loanAccountInquiry() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:loanAccountInquiryResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:loanAccountInquiryResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:loanAccountInquiryResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:loanAccountInquiryResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.loanAccountInquiry.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE accountInquiry() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:accountInquiryResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:accountInquiryResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:accountInquiryResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:accountInquiryResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.accountInquiry.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE debitAdvice() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:debitAdviceResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:debitAdviceResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:debitAdviceResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:debitAdviceResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.debitAdvice.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE creditAdvice() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:creditAdviceResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:creditAdviceResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:creditAdviceResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:creditAdviceResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.creditAdvice.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE transferGLtoGL() BEGIN
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:transferGLtoGLResponse.tns:out = InputRoot.XMLNSC.Data.Body.transferGLtoGL.out.retValue;
+	END;
+
+	CREATE PROCEDURE changeCardService() BEGIN
+		---SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:changeCardServiceResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:changeCardServiceResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:changeCardServiceResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:changeCardServiceResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.changeCardService.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE markHotCard() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:markHotCardResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:markHotCardResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:markHotCardResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:markHotCardResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.markHotCard.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE reActiveCard() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:reActiveCardResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:reActiveCardResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:reActiveCardResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:reActiveCardResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.reActiveCard.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE createHoldMessage() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createHoldMessageResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createHoldMessageResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createHoldMessageResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createHoldMessageResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.createHoldMessage.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE createLockForUnHoldMessage() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createLockForUnHoldMessageResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createLockForUnHoldMessageResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createLockForUnHoldMessageResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createLockForUnHoldMessageResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.createLockForUnHoldMessage.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE createUnHoldMessage() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessageResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessageResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessageResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createUnHoldMessageResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.createUnHoldMessage.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE createAddCifGroupMainternanceMessage() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessageResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessageResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessageResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createAddCifGroupMainternanceMessageResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.createAddCifGroupMainternanceMessage.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+	CREATE PROCEDURE createCifMainternanceMessage() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:createCifMainternanceMessageResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createCifMainternanceMessageResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createCifMainternanceMessageResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:createCifMainternanceMessageResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.createCifMainternanceMessage.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+
+	CREATE PROCEDURE transferFromWUToCA() BEGIN
+		--SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCAResponse.tns:out='';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCAResponse.(XML.NamespaceDecl)xmlns:ns1='http://accounts.cnn.msb.com.vn';
+		SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCAResponse.tns:out.nsDefault:arrString.(XML.NamespaceDecl)xmlns='http://utils.cnn.msb.com.vn';
+
+		DECLARE out_refObjectMessages REFERENCE TO OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.tns:transferFromWUToCAResponse.tns:out;
+		DECLARE in_refXMLMessage REFERENCE TO InputRoot.XMLNSC.Data.Body.transferFromWUToCA.out.Messages;
+		CALL Split(in_refXMLMessage.arrString,refArrValue,delimChar);
+		CALL BuildMsgFromReturnObject(refArrValue,in_refXMLMessage,out_refObjectMessages);
+	END;
+
+END MODULE;
+
+
+/*
+*/
+
+CREATE COMPUTE MODULE TCPAdapterFlow_HandleCommonError
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		--IF (Environment.Variables.RRMode = 'Request') THEN
+		SET OutputLocalEnvironment.Destination.HTTP.RequestIdentifier =
+		CAST(InputLocalEnvironment.XMLNSC.Header.HTTP.RequestIdentifier AS BLOB);
+		--END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+/*
+*/
+CREATE COMPUTE MODULE TCPAdapterFlow_HandleMissingStoredMsg
+CREATE FUNCTION Main() RETURNS BOOLEAN
+BEGIN
+	DECLARE reasonStr CHAR;
+	SET reasonStr = 'Failure to recover reply address in the Message Correlator for WebSphere MQ: request-response with persistence pattern';
+	THROW USER EXCEPTION SEVERITY 3 MESSAGE 2372 VALUES(reasonStr);
+	RETURN TRUE;
+END;
+END MODULE;
+/*
+*/
+
+CREATE COMPUTE MODULE TCPAdapterFlow_HandleMQGetWarning
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE reasonStr CHAR;
+		SET Environment.Variables.StatusCode = -3;
+		SET reasonStr = 'Failure to recover reply address in the Message Correlator for WebSphere MQ: request-response with persistence pattern';
+		THROW USER EXCEPTION SEVERITY 3 MESSAGE 2372 VALUES(reasonStr);
+		RETURN TRUE;
+	END;
+END MODULE;

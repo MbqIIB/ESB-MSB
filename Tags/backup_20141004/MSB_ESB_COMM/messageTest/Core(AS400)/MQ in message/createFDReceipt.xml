@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS009</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<createFDReceipt>
+			<channel>SMSBK01</channel>
+			<teller>TT110001</teller>
+			<branchCode>110</branchCode>
+			<journalSeq>1111</journalSeq>
+			<transDate>020712</transDate>
+			<fdGroupAccount>02001050900151</fdGroupAccount>
+			<depositAmt>100000000</depositAmt>
+			<effectiveDate>020712</effectiveDate>
+			<fdReceipt>02020100900169</fdReceipt>
+			<rate>100000</rate>
+			<intPaymentToAcctno></intPaymentToAcctno>
+			<printTranferToAcctno></printTranferToAcctno>
+			<currency>VND</currency>
+			<productCode>FC030DTOP</productCode>
+			<autoRenew>Y</autoRenew>
+			<intPaymentMode>N</intPaymentMode>
+			<fdType>D</fdType>
+			<remark>Mr tuan test</remark>
+		</createFDReceipt>
+	</Body>
+</Data>
+

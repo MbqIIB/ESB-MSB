@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data xmlns="http://www.w3schools.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.w3schools.com esb.xsd">
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>123abc</req_app>
+		<srv>2</srv>
+		<srv_app>xyz</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<creditAdvice>
+			<channel></channel>
+			<teller></teller>
+			<branchCode></branchCode>
+			<sequence></sequence>
+			<transDate></transDate>
+			<manager></manager>
+			<accountNumber></accountNumber>
+			<effectiveDate></effectiveDate>
+			<crAmount></crAmount>
+			<glAccount></glAccount>
+			<drAmount></drAmount>
+			<buyRate></buyRate>
+			<sellRate></sellRate>
+			<debitCurrency></debitCurrency>
+			<glCurrency></glCurrency>
+			<remark></remark>
+			<transcode></transcode>
+		</creditAdvice>
+	</Body>
+</Data>
+

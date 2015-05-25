@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS015</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<joinCA>
+			<channel>SMSBK01</channel>
+			<strteller>TT110001</strteller>
+			<strBankcode>110</strBankcode>
+			<transDate>020712</transDate>
+			<strAccount></strAccount>
+			<strCifnumber></strCifnumber>
+			<strNameAcount></strNameAcount>
+			<strcurrCode></strcurrCode>
+		</joinCA>
+	</Body>
+</Data>
+

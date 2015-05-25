@@ -1,0 +1,24 @@
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS046</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<createLockForUnHoldMessage>
+			<out>
+				<Messages>
+					<arrString>*SOKI|10.0.2.46|00053|009600||0213|000827|0200|*DSP|MBSD|*LINX|BBMBSDDINQ|00|/0000000|00000000001|00|STDATDSPV5DSPV5001IQ|BBMBSDDINQFNC||5401841212251609565131||0000|0001|0010|TT110001|10.0.2.46|26141|N|||AA|TT110001|1|00000|*END|000|BTS|RBS|DSPO7002Q|10.0.2.46|27|20||||26141|I|R|1|Y|F||||C||||TT110001
+						\DDSTOP
+						\00160255|||000000000|0000000|0000000000000000000||0000000000000000000||11001010000105|D|32|HD|*EA|0000000|0000000|0000000||.00|311212|Kienvt
+						test|.00|0000000000000000000||TT110001|10.0.2.46|160727|20712|60000.00
+					</arrString>
+					<description>System Ok</description>
+					<errCode>0</errCode>
+				</Messages>
+			</out>
+		</createLockForUnHoldMessage>
+	</Body>
+</Data>

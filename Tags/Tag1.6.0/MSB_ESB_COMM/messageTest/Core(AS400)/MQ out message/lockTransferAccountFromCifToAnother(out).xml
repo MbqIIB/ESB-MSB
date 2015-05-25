@@ -1,0 +1,23 @@
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS011</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<lockTransferAccountFromCifToAnother>
+			<out>
+				<Messages>
+					<arrString>*SOKI|192.168.163.128|00003|009600||0213|000655|0200|*DSP|MBSD|*LINX|BBMBSCFINQ|00|.MBM2001|00000000001|00|STDATDSPV5DSPV5001IQ|BBMBSCFINQFNC||5401841212041613113911||0000|0001|0010|TT110001|192.168.16|16122|N|||AB|TT110001|1|00000|*END|000|BTS|RBS|DSPO7002Q|192.168.16|27|00000||||16122|I|R|1|N|F|MBM2001|MB16122
+						: No records
+						found.||C|||||||000000000|0000000|0000000000000000000||0000000000000000000||213114|D|11001010125080|P
+					</arrString>
+					<description>MB16122 : No records found.</description>
+					<errCode>MBM2001</errCode>
+				</Messages>
+			</out>
+		</lockTransferAccountFromCifToAnother>
+	</Body>
+</Data>

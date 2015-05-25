@@ -1,0 +1,216 @@
+
+
+
+
+
+
+/**
+*
+*
+*/
+
+
+BROKER SCHEMA seatechit.esb.flows
+CREATE COMPUTE MODULE EGWOutFlow_PreProcess
+	CREATE FUNCTION Main() returnS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		DECLARE q0 NAMESPACE 'http://epaymentgw.msb.com.vn/';
+		DECLARE srv CHARACTER InputRoot.XMLNS.Data.Header.srv;
+
+		DECLARE curr_time CHAR CURRENT_TIME;
+		DECLARE curr_date CHAR CURRENT_DATE;
+
+		SET OutputLocalEnvironment.XMLNS.Messages.Request.Data = (SELECT * FROM InputRoot.XMLNS.Data);
+		SET OutputLocalEnvironment.XMLNS.Messages.Response.Data.Header = (SELECT * FROM InputRoot.XMLNS.Data.Header);
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.tllog.rcv_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.tllog.rcv_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.rcv_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.rcv_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.req_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.req_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+
+		SET OutputRoot.MQMD.Encoding = 546;
+		SET OutputRoot.MQMD.CodedCharSetId = 1208;
+		SET Environment.MQMD = InputRoot.MQMD;
+
+		SET OutputRoot.Properties.MessageType = 'Envelope';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:q0='http://epaymentgw.msb.com.vn/';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsd='http://www.w3.org/2001/XMLSchema';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance';
+
+		CASE srv
+		WHEN 'EGW001' THEN
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:queryBilling.req.msgType = InputRoot.XMLNS.Data.Body.queryBilling.msgType;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:queryBilling.req.sequenceId = InputRoot.XMLNS.Data.Body.queryBilling.sequenceId;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:queryBilling.req.customerCode = InputRoot.XMLNS.Data.Body.queryBilling.customerCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:queryBilling.req.processingCode = InputRoot.XMLNS.Data.Body.queryBilling.processingCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:queryBilling.req.requestTime = InputRoot.XMLNS.Data.Body.queryBilling.requestTime;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:queryBilling.req.payProviderCode = InputRoot.XMLNS.Data.Body.queryBilling.payProviderCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:queryBilling.req.sender = InputRoot.XMLNS.Data.Body.queryBilling.sender;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:queryBilling.req.description = InputRoot.XMLNS.Data.Body.queryBilling.description;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:queryBilling.req.providerCode = InputRoot.XMLNS.Data.Body.queryBilling.providerCode;
+		WHEN 'EGW002' THEN
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.msgType = InputRoot.XMLNS.Data.Body.payBilling.msgType;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.sequenceId = InputRoot.XMLNS.Data.Body.payBilling.sequenceId;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.customerCode = InputRoot.XMLNS.Data.Body.payBilling.customerCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.processingCode = InputRoot.XMLNS.Data.Body.payBilling.processingCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.requestTime = InputRoot.XMLNS.Data.Body.payBilling.requestTime;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.amount = InputRoot.XMLNS.Data.Body.payBilling.amount;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.amountDiscounted = InputRoot.XMLNS.Data.Body.payBilling.amountDiscounted;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.settlementDate = InputRoot.XMLNS.Data.Body.payBilling.settlementDate;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.payProviderCode = InputRoot.XMLNS.Data.Body.payBilling.payProviderCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.sender = InputRoot.XMLNS.Data.Body.payBilling.sender;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.accountNumber = InputRoot.XMLNS.Data.Body.payBilling.accountNumber;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.cifNumber = InputRoot.XMLNS.Data.Body.payBilling.cifNumber;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.description = InputRoot.XMLNS.Data.Body.payBilling.description;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.providerCode = InputRoot.XMLNS.Data.Body.payBilling.providerCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.branch = InputRoot.XMLNS.Data.Body.payBilling.branch;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.fromid = InputRoot.XMLNS.Data.Body.payBilling.fromid;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.fromName = InputRoot.XMLNS.Data.Body.payBilling.fromName;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.billCode = InputRoot.XMLNS.Data.Body.payBilling.billCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBilling.req.ccycd = InputRoot.XMLNS.Data.Body.payBilling.ccycd;
+		ELSE
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.branch = InputRoot.XMLNS.Data.Body.payBillingField.branch;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.fromid = InputRoot.XMLNS.Data.Body.payBillingField.fromid;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.fromName = InputRoot.XMLNS.Data.Body.payBillingField.fromName;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.msgType = InputRoot.XMLNS.Data.Body.payBillingField.msgType;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.sequenceId = InputRoot.XMLNS.Data.Body.payBillingField.sequenceId;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.customerCode = InputRoot.XMLNS.Data.Body.payBillingField.customerCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.processingCode = InputRoot.XMLNS.Data.Body.payBillingField.processingCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.requestTime = InputRoot.XMLNS.Data.Body.payBillingField.requestTime;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.amount = InputRoot.XMLNS.Data.Body.payBillingField.amount;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.amountDiscounted = InputRoot.XMLNS.Data.Body.payBillingField.amountDiscounted;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.settlementDate = InputRoot.XMLNS.Data.Body.payBillingField.settlementDate;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.payProviderCode = InputRoot.XMLNS.Data.Body.payBillingField.payProviderCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.sender = InputRoot.XMLNS.Data.Body.payBillingField.sender;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.description = InputRoot.XMLNS.Data.Body.payBillingField.description;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.accountNumber = InputRoot.XMLNS.Data.Body.payBillingField.accountNumber;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.cifNumber = InputRoot.XMLNS.Data.Body.payBillingField.cifNumber;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.providerCode = InputRoot.XMLNS.Data.Body.payBillingField.providerCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.billCode = InputRoot.XMLNS.Data.Body.payBillingField.billCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:payBillingField.ccycd = InputRoot.XMLNS.Data.Body.payBillingField.ccycd;
+		END CASE;
+		SET OutputLocalEnvironment.XMLNS.url_list[]=
+		(
+		SELECT a.service_url,a.service_timeout
+		FROM CacheServiceURLTable.ServiceInfoData[] as a
+		WHERE a.service_id=srv
+		);
+		SET OutputLocalEnvironment.Destination.HTTP.RequestLine.Method = 'POST';
+		SET OutputLocalEnvironment.Destination.HTTP.RequestURL = OutputLocalEnvironment.XMLNS.url_list.service_url; --SET OutputLocalEnvironment.Destination.HTTP.RequestURL = 'http://10.0.2.51:80/ePaymentGateway/InternalEGW'; --
+		--Kienvt: 2013-05-04 add them timeout
+		SET OutputLocalEnvironment.Destination.HTTP.Timeout = OutputLocalEnvironment.XMLNS.url_list.service_timeout;
+		--end 2013-05-04
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+/**
+*
+*
+*
+*/
+
+CREATE COMPUTE MODULE EGWOutFlow_PostProcess
+	CREATE FUNCTION Main() returnS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		CREATE NEXTSIBLING OF OutputRoot.Properties DOMAIN 'MQMD';
+		SET OutputRoot.MQMD = Environment.MQMD;
+		DECLARE ns2 NAMESPACE 'http://epaymentgw.msb.com.vn/';
+		DECLARE psrv CHARACTER InputLocalEnvironment.XMLNS.Messages.Request.Data.Header.srv;
+
+		DECLARE curr_time CHAR CURRENT_TIME;
+		DECLARE curr_date CHAR CURRENT_DATE;
+
+		SET OutputRoot.XMLNS.Messages = InputLocalEnvironment.XMLNS.Messages;
+		SET OutputRoot.XMLNS.Messages.Control.msglog.rsp_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputRoot.XMLNS.Messages.Control.msglog.rsp_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+
+		CASE psrv
+		WHEN 'EGW001' THEN
+			DECLARE pmsgType CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:queryBillingResponse.return.msgType;
+			DECLARE psequenceId CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:queryBillingResponse.return.sequenceId;
+			DECLARE pcustomerCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:queryBillingResponse.return.customerCode;
+			DECLARE pprocessingCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:queryBillingResponse.return.processingCode;
+			DECLARE ppayProviderCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:queryBillingResponse.return.payProviderCode;
+			DECLARE penquiryAmount CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:queryBillingResponse.return.enquiryAmount;
+			DECLARE penquiryInfo CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:queryBillingResponse.return.enquiryInfo;
+			DECLARE presponseCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:queryBillingResponse.return.responseCode;
+			DECLARE presponseDescription CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:queryBillingResponse.return.responseDescription;
+
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.queryBilling.msgType=pmsgType;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.queryBilling.sequenceId=psequenceId;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.queryBilling.customerCode=pcustomerCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.queryBilling.processingCode=pprocessingCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.queryBilling.payProviderCode=ppayProviderCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.queryBilling.enquiryAmount=penquiryAmount;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.queryBilling.enquiryInfo=penquiryInfo;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.queryBilling.responseCode=presponseCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.queryBilling.responseDescription=presponseDescription;
+		WHEN 'EGW002' THEN
+			DECLARE pmsgType CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:payBillingResponse.return.msgType;
+			DECLARE pcustomerCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:payBillingResponse.return.customerCode;
+			DECLARE pprocessingCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:payBillingResponse.return.processingCode;
+			DECLARE pamount CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:payBillingResponse.return.amount;
+			DECLARE psequenceId CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:payBillingResponse.return.sequenceId;
+			DECLARE presponseCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:payBillingResponse.return.responseCode;
+			DECLARE ppaymentId CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:payBillingResponse.return.paymentId;
+			DECLARE psettlementInfo CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:payBillingResponse.return.settlementInfo;
+			DECLARE ppayProviderCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:payBillingResponse.return.payProviderCode;
+			DECLARE pprocessSts CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:payBillingResponse.return.processSts;
+			DECLARE presponseDescription CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:payBillingResponse.return.responseDescription;
+
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.payBilling.msgType=pmsgType;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.payBilling.customerCode=pcustomerCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.payBilling.processingCode=pprocessingCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.payBilling.amount=pamount;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.payBilling.sequenceId=psequenceId;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.payBilling.responseCode=presponseCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.payBilling.paymentId=ppaymentId;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.payBilling.settlementInfo=psettlementInfo;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.payBilling.payProviderCode=ppayProviderCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.payBilling.processSts=pprocessSts;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.payBilling.responseDescription=presponseDescription;
+		ELSE
+			DECLARE preturn CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:payBillingFieldResponse.return;
+
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.payBillingField.out=preturn;
+		END CASE;
+
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

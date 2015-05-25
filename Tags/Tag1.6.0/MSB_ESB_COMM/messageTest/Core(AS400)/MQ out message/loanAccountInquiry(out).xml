@@ -1,0 +1,21 @@
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS026</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<loanAccountInquiry>
+			<out>
+				<Messages>
+					<arrString>*SOKI||00006|009600||0213|000775|0200|*DSP|MBSD|*LINX|BBMBSLNINQ|00|/0000000|00000000001|00|STDATDSPV5DSPV5001IQ|BBMBSLNINQFNC||5401841212041527573856||0000|0010|0010|TT110001||85800|N|||AA|TT110001|1|00000|*END|000|BTS||DSPO7002Q||27|110||||85800|I|R|1|N|F|||||||||||000000000|0000000|0000000000000000000||0000000000000000000||M-BUSSINESS-CLASSIC|11082010027576|L|213068||27|0000000000000000000|110|VND|.00||IP|7878HHGHH|Paid-off|NHOM
+						TD TRONG HAN</arrString>
+					<description>System Ok</description>
+					<errCode>0</errCode>
+				</Messages>
+			</out>
+		</loanAccountInquiry>
+	</Body>
+</Data>

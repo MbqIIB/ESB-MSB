@@ -1,0 +1,23 @@
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS007</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<lockUpdateE_Contact>
+			<out>
+				<Messages>
+					<arrString>*SOKI|TT110001|00002|009600||0213|000773|0200|*DSP|MBSD|*LINX|BBMBSCFINQ|00|/0000000|00000000001|00|STDATDSPV5DSPV5001IQ|BBMBSCFINQFNC||5401841212041728254071||0000|0001|0010|TT110001|192.168.16|16240|N|||AA|TT110001|1|00000|*END|000|BTS|RBS|DSPO7002Q|192.168.16|27|00000||||16240|I|R|1|Y|F||||C||||TT110001
+						\CFCONN
+						\00272578|||000000000|0000000|0000000000000000000||0000000000000000000||212868|C|3|EM|hken__xxx1235@gmail.com|||||0000000|0000000
+					</arrString>
+					<description>System Ok</description>
+					<errCode>0</errCode>
+				</Messages>
+			</out>
+		</lockUpdateE_Contact>
+	</Body>
+</Data>

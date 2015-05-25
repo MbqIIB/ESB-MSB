@@ -1,0 +1,226 @@
+
+
+Importing file: C:\Documents and Settings\mqmb\Desktop\AS400.wsdl
+
+BIP0224W The message set has no XML Wire Format layer defined. Only the logical information will appear in the model.
+Copying source WSDL AS400.wsdl to AS400.wsdl.
+
+The following is a list of WS-I warning messages found when importing:
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 26, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 49, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 66, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 96, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 111, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 143, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 161, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 180, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 211, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 242, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 256, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 274, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 297, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 312, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 333, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 354, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 371, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 393, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 412, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 430, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 448, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 478, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 511, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 528, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 553, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 572, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 593, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 611, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 680, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 700, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 720, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 738, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 760, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 801, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 820, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 838, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 857, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 880, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 920, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 956, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 976, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 996, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 1014, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 1061, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 1078, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 1095, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 1112, Column: 1
+XSD: Type reference 'http://utils.cnn.msb.com.vn#Messages' is unresolved, Line: 1130, Column: 1
+
+
+The WSDL import will proceed with bindings AS400HttpBinding.
+Creating wsdl schema document for file:///C:/Documents and Settings/mqmb/Desktop/AS400.wsdl.
+Parsing wsdl binding {http://accounts.cnn.msb.com.vn}AS400HttpBinding.
+Parsing wsdl binding input createHoldMessage.
+Parsing wsdl binding output createHoldMessage.
+Parsing wsdl binding input createFD.
+Parsing wsdl binding output createFD.
+Parsing wsdl binding input lockUpdateMainternanceCA.
+Parsing wsdl binding output lockUpdateMainternanceCA.
+Parsing wsdl binding input debitAdvice.
+Parsing wsdl binding output debitAdvice.
+Parsing wsdl binding input HostMessageSending.
+Parsing wsdl binding output HostMessageSending.
+Parsing wsdl binding input linkMasterCard.
+Parsing wsdl binding output linkMasterCard.
+Parsing wsdl binding input lockUpdateE_Contact.
+Parsing wsdl binding output lockUpdateE_Contact.
+Parsing wsdl binding input changeCardService.
+Parsing wsdl binding output changeCardService.
+Parsing wsdl binding input createFDReceipt.
+Parsing wsdl binding output createFDReceipt.
+Parsing wsdl binding input transferFromCASAToCASA.
+Parsing wsdl binding output transferFromCASAToCASA.
+Parsing wsdl binding input createCifMainternanceMessage.
+Parsing wsdl binding output createCifMainternanceMessage.
+Parsing wsdl binding input lockTransferAccountFromCifToAnother.
+Parsing wsdl binding output lockTransferAccountFromCifToAnother.
+Parsing wsdl binding input createSA.
+Parsing wsdl binding output createSA.
+Parsing wsdl binding input TFMessageSending.
+Parsing wsdl binding output TFMessageSending.
+Parsing wsdl binding input joinSA.
+Parsing wsdl binding output joinSA.
+Parsing wsdl binding input joinCA.
+Parsing wsdl binding output joinCA.
+Parsing wsdl binding input accountInquiry.
+Parsing wsdl binding output accountInquiry.
+Parsing wsdl binding input createAddCifGroupMainternanceMessage.
+Parsing wsdl binding output createAddCifGroupMainternanceMessage.
+Parsing wsdl binding input markHotCard.
+Parsing wsdl binding output markHotCard.
+Parsing wsdl binding input getInformationByIDForIBSRegistration.
+Parsing wsdl binding output getInformationByIDForIBSRegistration.
+Parsing wsdl binding input searchCustomerById.
+Parsing wsdl binding output searchCustomerById.
+Parsing wsdl binding input creditAdvice.
+Parsing wsdl binding output creditAdvice.
+Parsing wsdl binding input linkCard.
+Parsing wsdl binding output linkCard.
+Parsing wsdl binding input reActiveCard.
+Parsing wsdl binding output reActiveCard.
+Parsing wsdl binding input reversableTransaction.
+Parsing wsdl binding output reversableTransaction.
+Parsing wsdl binding input ddMasterInquiry.
+Parsing wsdl binding output ddMasterInquiry.
+Parsing wsdl binding input searchAccountMoreByCif.
+Parsing wsdl binding output searchAccountMoreByCif.
+Parsing wsdl binding input loanAccountInquiry.
+Parsing wsdl binding output loanAccountInquiry.
+Parsing wsdl binding input transferGLtoGL.
+Parsing wsdl binding output transferGLtoGL.
+Parsing wsdl binding input transferFromCASAToGL.
+Parsing wsdl binding output transferFromCASAToGL.
+Parsing wsdl binding input updateE_Contact.
+Parsing wsdl binding output updateE_Contact.
+Parsing wsdl binding input updateMainternanceCA.
+Parsing wsdl binding output updateMainternanceCA.
+Parsing wsdl binding input getInformationByCIFForIBSRegistration.
+Parsing wsdl binding output getInformationByCIFForIBSRegistration.
+Parsing wsdl binding input createUnHoldMessage.
+Parsing wsdl binding output createUnHoldMessage.
+Parsing wsdl binding input transferFromWUToCA.
+Parsing wsdl binding output transferFromWUToCA.
+Parsing wsdl binding input miniStatement.
+Parsing wsdl binding output miniStatement.
+Parsing wsdl binding input searchCustomerByCif.
+Parsing wsdl binding output searchCustomerByCif.
+Parsing wsdl binding input addE_Contact.
+Parsing wsdl binding output addE_Contact.
+Parsing wsdl binding input createCA.
+Parsing wsdl binding output createCA.
+Parsing wsdl binding input reversableOL2Transaction.
+Parsing wsdl binding output reversableOL2Transaction.
+Parsing wsdl binding input getAccount.
+Parsing wsdl binding output getAccount.
+Parsing wsdl binding input updateMainternanceNewCA.
+Parsing wsdl binding output updateMainternanceNewCA.
+Parsing wsdl binding input transferAccountFromCifToAnother.
+Parsing wsdl binding output transferAccountFromCifToAnother.
+Parsing wsdl binding input cardActivation.
+Parsing wsdl binding output cardActivation.
+Parsing wsdl binding input searchAccountByCif.
+Parsing wsdl binding output searchAccountByCif.
+Parsing wsdl binding input createCif.
+Parsing wsdl binding output createCif.
+Parsing wsdl binding input lockUpdateMainternanceNewCA.
+Parsing wsdl binding output lockUpdateMainternanceNewCA.
+Parsing wsdl binding input createLockForUnHoldMessage.
+Parsing wsdl binding output createLockForUnHoldMessage.
+Parsing wsdl binding input searchE_ContactByCif.
+Parsing wsdl binding output searchE_ContactByCif.
+Parsing wsdl binding input searchCustomerInformationByID.
+Parsing wsdl binding output searchCustomerInformationByID.
+Parsing wsdl binding input getFDReceiptAccount.
+Parsing wsdl binding output getFDReceiptAccount.
+Processing doc style for operation createHoldMessage.
+Processing doc style for operation createFD.
+Processing doc style for operation lockUpdateMainternanceCA.
+Processing doc style for operation debitAdvice.
+Processing doc style for operation HostMessageSending.
+Processing doc style for operation linkMasterCard.
+Processing doc style for operation lockUpdateE_Contact.
+Processing doc style for operation changeCardService.
+Processing doc style for operation createFDReceipt.
+Processing doc style for operation transferFromCASAToCASA.
+Processing doc style for operation createCifMainternanceMessage.
+Processing doc style for operation lockTransferAccountFromCifToAnother.
+Processing doc style for operation createSA.
+Processing doc style for operation TFMessageSending.
+Processing doc style for operation joinSA.
+Processing doc style for operation joinCA.
+Processing doc style for operation accountInquiry.
+Processing doc style for operation createAddCifGroupMainternanceMessage.
+Processing doc style for operation markHotCard.
+Processing doc style for operation getInformationByIDForIBSRegistration.
+Processing doc style for operation searchCustomerById.
+Processing doc style for operation creditAdvice.
+Processing doc style for operation linkCard.
+Processing doc style for operation reActiveCard.
+Processing doc style for operation reversableTransaction.
+Processing doc style for operation ddMasterInquiry.
+Processing doc style for operation searchAccountMoreByCif.
+Processing doc style for operation loanAccountInquiry.
+Processing doc style for operation transferGLtoGL.
+Processing doc style for operation transferFromCASAToGL.
+Processing doc style for operation updateE_Contact.
+Processing doc style for operation updateMainternanceCA.
+Processing doc style for operation getInformationByCIFForIBSRegistration.
+Processing doc style for operation createUnHoldMessage.
+Processing doc style for operation transferFromWUToCA.
+Processing doc style for operation miniStatement.
+Processing doc style for operation searchCustomerByCif.
+Processing doc style for operation addE_Contact.
+Processing doc style for operation createCA.
+Processing doc style for operation reversableOL2Transaction.
+Processing doc style for operation getAccount.
+Processing doc style for operation updateMainternanceNewCA.
+Processing doc style for operation transferAccountFromCifToAnother.
+Processing doc style for operation cardActivation.
+Processing doc style for operation searchAccountByCif.
+Processing doc style for operation createCif.
+Processing doc style for operation lockUpdateMainternanceNewCA.
+Processing doc style for operation createLockForUnHoldMessage.
+Processing doc style for operation searchE_ContactByCif.
+Processing doc style for operation searchCustomerInformationByID.
+Processing doc style for operation getFDReceiptAccount.
+Populating WSDL schema Core_MessageSet/vn/com/msb/cnn/accounts/AS400.mxsd.
+Creating file Core_MessageSet/vn/com/msb/cnn/accounts/AS400.mxsd in the workspace.
+Creating file Core_MessageSet/vn/com/msb/cnn/accounts/AS400_InlineSchema1.mxsd in the workspace.
+Creating file Core_MessageSet/vn/com/msb/cnn/utils/AS400_InlineSchema2.mxsd in the workspace.
+
+Elapsed time processing this message definition file: 3.625 seconds
+Number of warnings for this message definition file: 1
+
+
+Number of files processed: 1
+
+

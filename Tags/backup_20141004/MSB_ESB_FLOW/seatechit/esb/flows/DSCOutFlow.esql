@@ -1,0 +1,149 @@
+
+
+
+
+
+
+/**
+*
+*
+*/
+
+
+BROKER SCHEMA seatechit.esb.flows
+CREATE COMPUTE MODULE DSCOutFlow_PreProcess
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		DECLARE q0 NAMESPACE 'http://caldiscount.msb.com.vn/';
+		DECLARE srv CHARACTER InputRoot.XMLNS.Data.Header.srv;
+
+		DECLARE curr_time CHAR CURRENT_TIME;
+		DECLARE curr_date CHAR CURRENT_DATE;
+
+		SET OutputLocalEnvironment.XMLNS.Messages.Request.Data = (SELECT * FROM InputRoot.XMLNS.Data);
+		SET OutputLocalEnvironment.XMLNS.Messages.Response.Data.Header = (SELECT * FROM InputRoot.XMLNS.Data.Header);
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.tllog.rcv_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.tllog.rcv_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.rcv_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.rcv_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.req_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.req_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+
+		SET OutputRoot.MQMD.Encoding = 546;
+		SET OutputRoot.MQMD.CodedCharSetId = 1208;
+		SET Environment.MQMD = InputRoot.MQMD;
+
+		SET OutputRoot.Properties.MessageType = 'Envelope';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:q0='http://caldiscount.msb.com.vn/';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsd='http://www.w3.org/2001/XMLSchema';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance';
+
+		CASE srv
+		WHEN 'DSC001' THEN
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calDistcountTrans = InputRoot.XMLNS.Data.Body.calDistcountTrans;
+		WHEN 'DSC002' THEN
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calDistcountProvider = InputRoot.XMLNS.Data.Body.calDistcountProvider;
+		WHEN 'DSC003' THEN
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calDistcountTransObj.discountParams = InputRoot.XMLNS.Data.Body.calDistcountTransObj.discountParams;
+		ELSE
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calDistcountProviderObj.discountParamsProvider = InputRoot.XMLNS.Data.Body.calDistcountProviderObj.discountParamsProvider;
+		END CASE;
+
+		SET OutputLocalEnvironment.XMLNS.url_list[]=
+		(
+		SELECT a.service_url,a.service_timeout
+		FROM CacheServiceURLTable.ServiceInfoData[] as a
+		WHERE a.service_id=srv
+		);
+		SET OutputLocalEnvironment.Destination.HTTP.RequestLine.Method = 'POST';
+		SET OutputLocalEnvironment.Destination.HTTP.RequestURL = OutputLocalEnvironment.XMLNS.url_list.service_url; --SET OutputLocalEnvironment.Destination.HTTP.RequestURL = 'http://10.0.2.51/calculateFee/calculatediscount'; --
+		--Kienvt: 2013-05-04 add them timeout
+		SET OutputLocalEnvironment.Destination.HTTP.Timeout = OutputLocalEnvironment.XMLNS.url_list.service_timeout;
+		--end 2013-05-04
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+/**
+*
+*
+*
+*/
+
+CREATE COMPUTE MODULE DSCOutFlow_PostProcess
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		CREATE NEXTSIBLING OF OutputRoot.Properties DOMAIN 'MQMD';
+		SET OutputRoot.MQMD = Environment.MQMD;
+		-- DECLARE ns1 NAMESPACE 'http://sms.cnn.msb.com.vn';
+		DECLARE ns2 NAMESPACE 'http://caldiscount.msb.com.vn/';
+		DECLARE psrv CHARACTER InputLocalEnvironment.XMLNS.Messages.Request.Data.Header.srv;
+
+		DECLARE curr_time CHAR CURRENT_TIME;
+		DECLARE curr_date CHAR CURRENT_DATE;
+
+		SET OutputRoot.XMLNS.Messages = InputLocalEnvironment.XMLNS.Messages;
+		SET OutputRoot.XMLNS.Messages.Control.msglog.rsp_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputRoot.XMLNS.Messages.Control.msglog.rsp_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+
+		CASE psrv
+		WHEN 'DSC001' THEN
+			-- tam thoi chua lam
+			DECLARE preturn CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:checkOtpResponse.return;
+
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.checkOtp.out=preturn;
+		WHEN 'DSC002' THEN
+
+			DECLARE preturn CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calDistcountProviderResponse.return;
+
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calDistcountProviderResponse
+			=InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calDistcountProviderResponse.return;
+		WHEN 'DSC003' THEN
+			-- tam thoi chua lam
+			DECLARE preturn CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:getPassCodeResponse.return;
+
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.getPassCode.out=preturn;
+		ELSE
+			DECLARE preturn CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calDistcountProviderObjResponse.return;
+
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calDistcountProviderObjResponse
+			=InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calDistcountProviderObjResponse.return;
+		END CASE;
+
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

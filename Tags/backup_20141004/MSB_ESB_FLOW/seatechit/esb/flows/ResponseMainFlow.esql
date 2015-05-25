@@ -1,0 +1,81 @@
+
+/**
+*
+*
+*
+*
+*/
+BROKER SCHEMA seatechit.esb.flows
+--
+--
+--
+CREATE COMPUTE MODULE ResponseMainFlow_PreProcess
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE curr_time CHAR CURRENT_TIME;
+		DECLARE curr_date CHAR CURRENT_DATE;
+		CALL CopyMessageHeaders();
+		CALL CopyEntireMessage();
+		CALL SetMessageExpiry();
+		SET OutputRoot.XMLNSC.Messages.Control.tllog.rsp_date=SUBSTRING(curr_date FROM 7 FOR 10);
+		SET OutputRoot.XMLNSC.Messages.Control.tllog.rsp_time=SUBSTRING(curr_time FROM 7 FOR 8);
+		RETURN TRUE;
+	END;
+
+
+	CREATE PROCEDURE SetMessageExpiry() BEGIN
+		SET OutputRoot.MQMD.Expiry = 1000*60*5;
+		--tu dong clear sau 5 phut
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot=InputRoot;
+	END;
+END MODULE;
+--
+--
+--
+CREATE COMPUTE MODULE ResponseMainFlow_PostProcess
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyMessageHeaders();
+		CALL CopyEntireMessage();
+
+		DECLARE srv CHARACTER InputRoot.XMLNSC.Messages.Response.Data.Header.req_app;
+
+		IF srv='WCB' THEN
+			SET OutputDestinationList.Destination.MQDestinationList.DestinationData[1].queueName = 'ESB.WSS.CBS';
+		ELSEIF srv='WRS' THEN
+			SET OutputDestinationList.Destination.MQDestinationList.DestinationData[1].queueName = 'ESB.WSS.RSA';
+		ELSE
+			SET OutputDestinationList.Destination.MQDestinationList.DestinationData[1].queueName = 'ESB.OUTBOX';
+		END IF;
+
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot.XMLNSC.Data = (SELECT * FROM InputRoot.XMLNSC.Messages.Response.Data);
+	END;
+END MODULE;

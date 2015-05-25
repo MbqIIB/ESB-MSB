@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS032</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<createUnHoldMessage>
+			<channel>SMSBK01</channel>
+			<teller>TT110001</teller>
+			<account>11001010000105</account>
+			<description></description>
+			<amount>3000000</amount>
+			<code>*EA</code>
+			<sequence>32</sequence>
+			<actionCode>C</actionCode>
+			<expireDate>311212</expireDate>
+		</createUnHoldMessage>
+	</Body>
+</Data>
+

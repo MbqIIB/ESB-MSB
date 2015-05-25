@@ -1,0 +1,190 @@
+
+
+
+
+/**
+* Post process for IBS Flow
+* @author: DatLT
+*/
+BROKER SCHEMA seatechit.esb.flows
+CREATE COMPUTE MODULE FEEOutFlow_PreProcess
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+
+		DECLARE q0 NAMESPACE 'http://calfee.msb.com.vn/';
+		DECLARE srv CHARACTER InputRoot.XMLNSC.Data.Header.srv;
+
+
+		DECLARE curr_time CHAR CURRENT_TIME;
+		DECLARE curr_date CHAR CURRENT_DATE;
+
+		SET OutputLocalEnvironment.XMLNS.Messages.Request.Data = (SELECT * FROM InputRoot.XMLNSC.Data);
+		SET OutputLocalEnvironment.XMLNS.Messages.Response.Data.Header = (SELECT * FROM InputRoot.XMLNSC.Data.Header);
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.tllog.rcv_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.tllog.rcv_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.rcv_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.rcv_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.req_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputLocalEnvironment.XMLNS.Messages.Control.msglog.req_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+
+		SET OutputRoot.MQMD.Encoding = 546;
+		SET OutputRoot.MQMD.CodedCharSetId = 1208;
+		SET Environment.MQMD = InputRoot.MQMD;
+
+		SET OutputRoot.Properties.MessageType = 'Envelope';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:q0='http://calfee.msb.com.vn/';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsd='http://www.w3.org/2001/XMLSchema';
+		SET OutputRoot.XMLNS.soapenv:Envelope.(XML.NamespaceDecl)xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance';
+
+		If srv = 'FEE002' then
+			/*
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.amount = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.amount;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.bankType = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.bankType;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.branchCode = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.branchCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.businessType = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.businessType;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.channel = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.channel;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.currencyCode = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.currencyCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.customerType = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.customerType;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.feeCode = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.feeCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.fromAcc = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.fromAcc;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.fromOrgBranchCode = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.fromOrgBranchCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.micNumber = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.micNumber;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.officeCode = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.officeCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.productType = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.productType;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.toAcc = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.toAcc;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.toBranchCode = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.toBranchCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.toOrgBranchCode = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.toOrgBranchCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.transID = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.transID;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams.transType = InputRoot.XMLNS.Data.Body.calFeeObj.feeParams.transType;
+			*/
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFeeObj.feeParams = InputRoot.XMLNSC.Data.Body.calFeeObj.feeParams;
+		ELSE
+			/*
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.feeCode = InputRoot.XMLNS.Data.Body.calFee.feeCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.transID = InputRoot.XMLNS.Data.Body.calFee.transID;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.branchCode = InputRoot.XMLNS.Data.Body.calFee.branchCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.toBranchCode = InputRoot.XMLNS.Data.Body.calFee.toBranchCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.transType = InputRoot.XMLNS.Data.Body.calFee.transType;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.fromAcc = InputRoot.XMLNS.Data.Body.calFee.fromAcc;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.toAcc = InputRoot.XMLNS.Data.Body.calFee.toAcc;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.fromOrgBranchCode = InputRoot.XMLNS.Data.Body.calFee.fromOrgBranchCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.toOrgBranchCode = InputRoot.XMLNS.Data.Body.calFee.toOrgBranchCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.amount = InputRoot.XMLNS.Data.Body.calFee.amount;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.currencyCode = InputRoot.XMLNS.Data.Body.calFee.currencyCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.customerType = InputRoot.XMLNS.Data.Body.calFee.customerType;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.productType = InputRoot.XMLNS.Data.Body.calFee.productType;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.businessType = InputRoot.XMLNS.Data.Body.calFee.businessType;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.officeCode = InputRoot.XMLNS.Data.Body.calFee.officeCode;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.micNumber = InputRoot.XMLNS.Data.Body.calFee.micNumber;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.channel = InputRoot.XMLNS.Data.Body.calFee.channel;
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee.bankType = InputRoot.XMLNS.Data.Body.calFee.bankType;
+			*/
+			SET OutputRoot.XMLNS.soapenv:Envelope.soapenv:Body.q0:calFee = InputRoot.XMLNSC.Data.Body.calFee;
+		END IF;
+
+		SET OutputLocalEnvironment.XMLNS.url_list[]=
+		(
+		SELECT a.service_url,a.service_timeout
+		FROM CacheServiceURLTable.ServiceInfoData[] as a
+		WHERE a.service_id=srv
+		);
+		SET OutputLocalEnvironment.Destination.HTTP.RequestLine.Method = 'POST';
+		SET OutputLocalEnvironment.Destination.HTTP.RequestURL = OutputLocalEnvironment.XMLNS.url_list.service_url; --SET OutputLocalEnvironment.Destination.HTTP.RequestURL = 'http://10.0.2.51:80/calculateFee/calculatefee'; --
+		--Kienvt: 2013-05-04 add them timeout
+		SET OutputLocalEnvironment.Destination.HTTP.Timeout = OutputLocalEnvironment.XMLNS.url_list.service_timeout;
+		--end 2013-05-04
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+/**
+* Post process for IBS Flow
+* @author: DatLT
+*/
+
+CREATE COMPUTE MODULE FEEOutFlow_PostProcess
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		CREATE NEXTSIBLING OF OutputRoot.Properties DOMAIN 'MQMD';
+		SET OutputRoot.MQMD = Environment.MQMD;
+		-- DECLARE ns1 NAMESPACE 'http://sms.cnn.msb.com.vn';
+		DECLARE ns2 NAMESPACE 'http://calfee.msb.com.vn/';
+		DECLARE psrv CHARACTER InputLocalEnvironment.XMLNS.Messages.Request.Data.Header.srv;
+
+		DECLARE curr_time CHAR CURRENT_TIME;
+		DECLARE curr_date CHAR CURRENT_DATE;
+
+		SET OutputRoot.XMLNS.Messages = InputLocalEnvironment.XMLNS.Messages;
+		SET OutputRoot.XMLNS.Messages.Control.msglog.rsp_date=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'dd/MM/yyyy');
+		SET OutputRoot.XMLNS.Messages.Control.msglog.rsp_time=CAST(CURRENT_TIMESTAMP AS CHARACTER FORMAT 'HH:mm:ss');
+
+		If psrv ='FEE002' then
+			/*
+			DECLARE pamount CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeObjResponse.return.amount;
+			DECLARE pcurrencyCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeObjResponse.return.currencyCode;
+			DECLARE pdescription CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeObjResponse.return.description;
+			DECLARE pfeeAmount CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeObjResponse.return.feeAmount;
+			DECLARE pfeeCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeObjResponse.return.feeCode;
+			DECLARE presponseCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeObjResponse.return.responseCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFeeObj.amount=pamount;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFeeObj.currencyCode=pcurrencyCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFeeObj.description=pdescription;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFeeObj.feeAmount=pfeeAmount;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFeeObj.feeCode=pfeeCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFeeObj.responseCode=presponseCode;
+			*/
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFeeObj.feeRes=InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeObjResponse.return;
+		Else
+			/*
+			DECLARE pamount CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeResponse.return.amount;
+			DECLARE pcurrencyCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeResponse.return.currencyCode;
+			DECLARE pdescription CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeResponse.return.description;
+			DECLARE pfeeAmount CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeResponse.return.feeAmount;
+			DECLARE pfeeCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeResponse.return.feeCode;
+			DECLARE presponseCode CHARACTER InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeResponse.return.responseCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFee.amount=pamount;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFee.currencyCode=pcurrencyCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFee.description=pdescription;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFee.feeAmount=pfeeAmount;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFee.feeCode=pfeeCode;
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFee.responseCode=presponseCode;
+			*/
+			SET OutputRoot.XMLNS.Messages.Response.Data.Body.calFee.feeRes=InputRoot.XMLNS.soap:Envelope.soap:Body.ns2:calFeeResponse.return;
+		End if;
+
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

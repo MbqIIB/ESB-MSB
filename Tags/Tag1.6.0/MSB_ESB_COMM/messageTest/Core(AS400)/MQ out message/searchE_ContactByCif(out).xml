@@ -1,0 +1,24 @@
+<Data>
+	<Header>
+		<req_id>1234</req_id>
+		<req_app>IBS</req_app>
+		<srv>CBS047</srv>
+		<srv_app>CBS</srv_app>
+		<req_time>2012-10-22 11:56:15.1234</req_time>
+	</Header>
+	<Body>
+		<searchE_ContactByCif>
+			<out>
+				<Messages>
+					<arrString>*SOKI|192.168.163.128|00002|009600||0213|001551|0200|*DSP|MBSD|*LINX|BBMBSCFINQ|00|/0000000|00000000001|00|STDATDSPV5DSPV5001IQ|BBMBSCFINQFNC||5401841212041725484069||0000|0008|0010|TT110001|192.168.16|15242|N|||AA|TT110001|1|00000|*END|000|BTS|RBS|DSPO7002Q|192.168.16|27|110||||15242|I|R|4|N|F|||||||||||000000000|0000000|0000000000000000000||0000000000000000000||212868|C|1|MP|0982989812|N||||21011|94131|LE
+						ANH TUAN||LE ANH TUAN|2|HP||||||0000000|0000000|LE ANH TUAN||LE
+						ANH TUAN|3|EM|hken__xxx1235@gmail.com|||||0000000|0000000|LE ANH
+						TUAN||LE ANH TUAN|4|EM|tuanla@msb.com.vn|N||||21011|94116|LE ANH
+						TUAN||LE ANH TUAN</arrString>
+					<description>System Ok</description>
+					<errCode>0</errCode>
+				</Messages>
+			</out>
+		</searchE_ContactByCif>
+	</Body>
+</Data>

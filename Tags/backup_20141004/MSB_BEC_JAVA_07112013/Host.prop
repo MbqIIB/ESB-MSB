@@ -1,0 +1,26 @@
+
+MQ.IP    						= 10.0.2.215
+MQ.QUEUE_MANAGER_NAME           = MSB_UAT
+MQ.QUEUE_NAME                   = ESB.INBOX
+MQ.PORT			    			= 1415
+MQ.CHANNEL			    		= SYSTEM.DEF.SVRCONN
+THREAD_SIZE						= 100
+MESSAGE_SIZE					= 100
+TOTAL_TYPE_MESSAGE				= 3
+#FD
+MESSAGE_XML_1						=*LINX|192.168.1.1||||213|42|0200||ABCS|*LINX|||||||BBHTLMONEYFNC|||||||EBANKING01|ebank|3080||||3843|*MOSA||192.168.1.1|||||T9999|||EBANKING01|11111|N||||3080|041112||VD|vt|EBANKING02||0|1|N|N|N|N|N|N|N||||||02010100051316|||||||||||||||||||||||||VND||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+#CA
+MESSAGE_XML_2						=*LINX|192.168.1.1||||213|42|0200||ABCS|*LINX|||||||BBHTLMONEYFNC|||||||EBANKING01|ebank|3080||||3843|*MOSA||192.168.1.1|||||T9999|||EBANKING01|11111|N||||3080|041112||VD|vt|EBANKING02||0|1|N|N|N|N|N|N|N||||||03010106359310|||||||||||||||||||||||||VND||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+#*LINX|10.1.100.21||||213|42|0200||ABCS|*LINX|||||||BBHTLNOMONFNC|||||||DT110004|vt|1080||||3843|*MOSA||10.1.100.21|||||T9999|||DT110004|0004|N||||1080|031112||VD|vt||110|0|1|N|N|N|N|N|N|N|11001010125080||||||||||||||||||||||||||||||VND||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+#CIF
+MESSAGE_XML_3						=*LINX|10.1.100.49||||213||0200|*DSP|MBSD|*LINX||||01|||BBMBSCFINQFNC|||||1|10|DT110004|kienvt|16106|N||||DT110004|1||*END||BTS|RBS||kienvt|27|110||||16106|I|R|1|N|F|||||||||||||||213068||213068||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+#MESSAGE_XML_4						=<Data><Header><req_id>1234</req_id><req_app>123abc</req_app><srv>TRC002</srv><srv_app>TRC</srv_app><req_time>2012-10-22 11:56:15.1234</req_time></Header><Body><getOtp><transactionID>34123343534234234</transactionID><length>6</length></getOtp></Body></Data>
+#MESSAGE_XML_5						=<Data><Header><req_id>20130102134817690001</req_id><req_app>IB</req_app><srv>OTP002</srv><srv_app>OTP</srv_app><req_time>Wed Jan 02 13:48:17 GMT+07:00 2013</req_time></Header><Body><getOtp><transactionID>1112222</transactionID></getOtp></Body></Data>
+#MESSAGE_XML_6						=<Data><Header><req_id>1234</req_id><req_app>IBS</req_app><srv>CBS016</srv><srv_app>CBS</srv_app><req_time>2012-10-22 11:56:15.1234</req_time></Header><Body><accountInquiry><channel>SMSBK01</channel><teller>TT110001</teller><account>11001010000105</account><transDate>020712</transDate></accountInquiry></Body></Data>
+#MESSAGE_XML_7						=<Data><Header><req_id>20130307102348053007</req_id><req_app>IB</req_app><srv>RSA001</srv><srv_app>RSA</srv_app><req_time>Thu Mar 07 10:23:48 GMT+07:00 2013</req_time></Header><Body><Assign><userId>kienvt82</userId><sn>000210296466</sn></Assign></Body></Data>
+#MESSAGE_XML_8						=<Data><Header><req_id>1234</req_id><req_app>123abc</req_app><srv>SMS002</srv><srv_app>SMS</srv_app><req_time>2012-10-22 11:56:15.1234</req_time></Header><Body><regSMSBanking><cifNumber>839240</cifNumber><accountNumber>11001010944142</accountNumber><serviceType>1</serviceType><alert>33</alert><phoneNumber>0982989812</phoneNumber><branchCode>11000</branchCode><appReg>ABC</appReg></regSMSBanking></Body></Data>
+#MESSAGE_XML_9						=<Data><Header><req_id>20130307102053496004</req_id><req_app>IB</req_app><srv>RSA003</srv><srv_app>RSA</srv_app><req_time>Thu Mar 07 10:20:53 GMT+07:00 2013</req_time></Header><Body><CreateUser><userId>kienvt81</userId><pwd>TangLuong_88</pwd><fname>anh</fname><lname>nguyen tuan</lname><tknSN>000210296466</tknSN></CreateUser></Body></Data>
+#MESSAGE_XML_10						=<Data><Header><req_id>20130307101852345001</req_id><req_app>IB</req_app><srv>RSA002</srv><srv_app>RSA</srv_app><req_time>Thu Mar 07 10:18:52 GMT+07:00 2013</req_time></Header><Body><checkOTP><userId>kienvt82</userId><otp>349936</otp></checkOTP></Body></Data>
+LOG4J_PROPFILE_PATH					=log4j.xml
+settings.debugmsg =1
